@@ -2,20 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Views.Dashboard;
+package Views.CustomerManagement;
 
 /**
  *
  * @author KC
  */
-public class DashBoardView extends javax.swing.JFrame {
+public class CustomersView extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashBoardView.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CustomersView.class.getName());
 
     /**
-     * Creates new form DashBoard
+     * Creates new form CustomersView
      */
-    public DashBoardView() {
+    public CustomersView() {
         initComponents();
     }
 
@@ -66,7 +66,7 @@ public class DashBoardView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new DashBoardView().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new CustomersView().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
