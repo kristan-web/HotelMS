@@ -3,18 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Views.ServiceManagement;
+//Import this file
+import Views.BaseFrame;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Lance
- */
-public class serviceMenuView extends javax.swing.JFrame {
-    
+//Change the extends to BaseFrame
+public class serviceMenuView extends BaseFrame{
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(serviceMenuView.class.getName());
-
-    /**
-     * Creates new form serviceMenuView
-     */
+    
     public serviceMenuView() {
         initComponents();
     }
@@ -33,14 +29,14 @@ public class serviceMenuView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        AddServicePanel = new javax.swing.JPanel();
+        AddServiceTrigger = new javax.swing.JLabel();
+        EditServicePanel = new javax.swing.JPanel();
+        EditServiceTrigger = new javax.swing.JLabel();
+        RemoveServicePanel = new javax.swing.JPanel();
+        RemoveServiceTrigger = new javax.swing.JLabel();
+        DashboardPanel = new javax.swing.JPanel();
+        DashboardTrigger = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
@@ -78,51 +74,92 @@ public class serviceMenuView extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.GridLayout(4, 1));
 
-        jPanel5.setBackground(new java.awt.Color(153, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel5.setFocusCycleRoot(true);
-        jPanel5.setLayout(new java.awt.BorderLayout());
+        AddServicePanel.setBackground(new java.awt.Color(153, 255, 255));
+        AddServicePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        AddServicePanel.setFocusCycleRoot(true);
+        AddServicePanel.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setBackground(new java.awt.Color(153, 204, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ADD SERVICE");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel5.add(jLabel1, java.awt.BorderLayout.CENTER);
+        AddServiceTrigger.setBackground(new java.awt.Color(153, 255, 255));
+        AddServiceTrigger.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AddServiceTrigger.setText("ADD SERVICE");
+        AddServiceTrigger.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddServiceTrigger.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AddServiceTriggerMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AddServiceTriggerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AddServiceTriggerMouseExited(evt);
+            }
+        });
+        AddServicePanel.add(AddServiceTrigger, java.awt.BorderLayout.CENTER);
 
-        jPanel4.add(jPanel5);
+        jPanel4.add(AddServicePanel);
 
-        jPanel6.setBackground(new java.awt.Color(153, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel6.setLayout(new java.awt.BorderLayout());
+        EditServicePanel.setBackground(new java.awt.Color(153, 255, 255));
+        EditServicePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        EditServicePanel.setLayout(new java.awt.BorderLayout());
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("EDIT SERVICE");
-        jPanel6.add(jLabel2, java.awt.BorderLayout.CENTER);
+        EditServiceTrigger.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        EditServiceTrigger.setText("EDIT SERVICE");
+        EditServiceTrigger.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditServiceTriggerMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EditServiceTriggerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EditServiceTriggerMouseExited(evt);
+            }
+        });
+        EditServicePanel.add(EditServiceTrigger, java.awt.BorderLayout.CENTER);
 
-        jPanel4.add(jPanel6);
+        jPanel4.add(EditServicePanel);
 
-        jPanel7.setBackground(new java.awt.Color(153, 255, 255));
-        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel7.setLayout(new java.awt.BorderLayout());
+        RemoveServicePanel.setBackground(new java.awt.Color(153, 255, 255));
+        RemoveServicePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        RemoveServicePanel.setLayout(new java.awt.BorderLayout());
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("REMOVE SERVICE");
-        jPanel7.add(jLabel3, java.awt.BorderLayout.CENTER);
+        RemoveServiceTrigger.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        RemoveServiceTrigger.setText("REMOVE SERVICE");
+        RemoveServiceTrigger.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RemoveServiceTriggerMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                RemoveServiceTriggerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                RemoveServiceTriggerMouseExited(evt);
+            }
+        });
+        RemoveServicePanel.add(RemoveServiceTrigger, java.awt.BorderLayout.CENTER);
 
-        jPanel4.add(jPanel7);
+        jPanel4.add(RemoveServicePanel);
 
-        jPanel8.setBackground(new java.awt.Color(153, 255, 255));
-        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel8.setLayout(new java.awt.BorderLayout());
+        DashboardPanel.setBackground(new java.awt.Color(153, 255, 255));
+        DashboardPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        DashboardPanel.setLayout(new java.awt.BorderLayout());
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("DASHBOARD");
-        jLabel4.setToolTipText("");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel8.add(jLabel4, java.awt.BorderLayout.CENTER);
+        DashboardTrigger.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DashboardTrigger.setText("DASHBOARD");
+        DashboardTrigger.setToolTipText("");
+        DashboardTrigger.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        DashboardTrigger.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        DashboardTrigger.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DashboardTriggerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                DashboardTriggerMouseExited(evt);
+            }
+        });
+        DashboardPanel.add(DashboardTrigger, java.awt.BorderLayout.CENTER);
 
-        jPanel4.add(jPanel8);
+        jPanel4.add(DashboardPanel);
 
         jPanel3.setLayout(new java.awt.BorderLayout());
 
@@ -207,7 +244,7 @@ public class serviceMenuView extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -222,6 +259,74 @@ public class serviceMenuView extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void AddServiceTriggerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddServiceTriggerMouseClicked
+        // --------------Add this when switching views ----------------
+        addServiceView service = new addServiceView();
+        service.setExtendedState(this.getExtendedState()); // copy state
+        service.setVisible(true);
+        this.dispose();
+        // ------------------------------------------------------------
+    }//GEN-LAST:event_AddServiceTriggerMouseClicked
+
+    private void RemoveServiceTriggerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RemoveServiceTriggerMouseClicked
+        int choice = JOptionPane.showConfirmDialog(this, "Are you sure you would like to delete this service?");
+        
+        if(choice == JOptionPane.YES_OPTION){
+            System.out.println("Service Deleted");
+        }
+        else if(choice == JOptionPane.NO_OPTION){
+            System.out.println("Deletion Cancelled");
+        }
+        else if(choice == JOptionPane.CANCEL_OPTION){
+            System.out.println("Option Cancelled");
+        }
+        
+        else if(choice == JOptionPane.CLOSED_OPTION){
+            System.out.println("Closed Option");
+        }
+    }//GEN-LAST:event_RemoveServiceTriggerMouseClicked
+
+    private void EditServiceTriggerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditServiceTriggerMouseClicked
+        // --------------Add this when switching views ----------------
+        editServiceView service = new editServiceView();
+        service.setExtendedState(this.getExtendedState()); // copy state
+        service.setVisible(true);
+        this.dispose();
+        // ------------------------------------------------------------
+    }//GEN-LAST:event_EditServiceTriggerMouseClicked
+
+    private void AddServiceTriggerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddServiceTriggerMouseEntered
+        AddServicePanel.setBackground(new java.awt.Color(153,204,255));
+    }//GEN-LAST:event_AddServiceTriggerMouseEntered
+
+    private void AddServiceTriggerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddServiceTriggerMouseExited
+        AddServicePanel.setBackground(new java.awt.Color(153,255,255));
+    }//GEN-LAST:event_AddServiceTriggerMouseExited
+
+    private void EditServiceTriggerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditServiceTriggerMouseEntered
+        EditServicePanel.setBackground(new java.awt.Color(153,204,255));
+    }//GEN-LAST:event_EditServiceTriggerMouseEntered
+
+    private void EditServiceTriggerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditServiceTriggerMouseExited
+        EditServicePanel.setBackground(new java.awt.Color(153,255,255));
+    }//GEN-LAST:event_EditServiceTriggerMouseExited
+
+    private void RemoveServiceTriggerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RemoveServiceTriggerMouseEntered
+        RemoveServicePanel.setBackground(new java.awt.Color(153,204,255));
+    }//GEN-LAST:event_RemoveServiceTriggerMouseEntered
+
+    private void RemoveServiceTriggerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RemoveServiceTriggerMouseExited
+        RemoveServicePanel.setBackground(new java.awt.Color(153,255,255));
+    }//GEN-LAST:event_RemoveServiceTriggerMouseExited
+
+    private void DashboardTriggerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardTriggerMouseEntered
+        DashboardPanel.setBackground(new java.awt.Color(153,204,255));
+    }//GEN-LAST:event_DashboardTriggerMouseEntered
+
+    private void DashboardTriggerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardTriggerMouseExited
+        DashboardPanel.setBackground(new java.awt.Color(153,255,255));
+    }//GEN-LAST:event_DashboardTriggerMouseExited
 
     /**
      * @param args the command line arguments
@@ -249,12 +354,16 @@ public class serviceMenuView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AddServicePanel;
+    private javax.swing.JLabel AddServiceTrigger;
+    private javax.swing.JPanel DashboardPanel;
+    private javax.swing.JLabel DashboardTrigger;
+    private javax.swing.JPanel EditServicePanel;
+    private javax.swing.JLabel EditServiceTrigger;
+    private javax.swing.JPanel RemoveServicePanel;
+    private javax.swing.JLabel RemoveServiceTrigger;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel13;
@@ -262,10 +371,6 @@ public class serviceMenuView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
