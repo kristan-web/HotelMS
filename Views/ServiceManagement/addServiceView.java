@@ -3,12 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Views.ServiceManagement;
-import Views.BaseFrame;
-import javax.swing.JOptionPane;
 
-public class addServiceView extends BaseFrame {
+/**
+ *
+ * @author Lance
+ */
+public class addServiceView extends javax.swing.JFrame {
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(addServiceView.class.getName());
 
+    /**
+     * Creates new form addServiceView
+     */
     public addServiceView() {
         initComponents();
     }
@@ -22,230 +28,74 @@ public class addServiceView extends BaseFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel15 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel17 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel18 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel19 = new javax.swing.JPanel();
         jTextField3 = new javax.swing.JTextField();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jPanel20 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel21 = new javax.swing.JPanel();
-        jTextField4 = new javax.swing.JTextField();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
-
-        jPanel2.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
-
-        jPanel5.setLayout(new java.awt.GridLayout(4, 0));
-
-        jPanel6.setLayout(new java.awt.GridLayout(2, 0));
-
-        jPanel14.setLayout(new java.awt.BorderLayout());
-
-        jLabel1.setText("  Service Name");
-        jPanel14.add(jLabel1, java.awt.BorderLayout.CENTER);
-
-        jPanel6.add(jPanel14);
-
-        jPanel15.setLayout(new java.awt.BorderLayout());
+        setMaximumSize(new java.awt.Dimension(32767, 32767));
+        setResizable(false);
 
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
-        jPanel15.add(jTextField1, java.awt.BorderLayout.CENTER);
 
-        jPanel6.add(jPanel15);
+        jLabel1.setText("Service Name");
 
-        jPanel5.add(jPanel6);
+        jLabel2.setText("Service Duration");
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+        jLabel3.setText("Service Duration");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField3)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addContainerGap(583, Short.MAX_VALUE))
+                    .addComponent(jTextField2)
+                    .addComponent(jTextField1)))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 92, Short.MAX_VALUE)
-        );
-
-        jPanel5.add(jPanel7);
-
-        jPanel8.setLayout(new java.awt.GridLayout(2, 0));
-
-        jPanel16.setLayout(new java.awt.BorderLayout());
-
-        jLabel2.setText("  Price ");
-        jPanel16.add(jLabel2, java.awt.BorderLayout.CENTER);
-
-        jPanel8.add(jPanel16);
-
-        jPanel17.setLayout(new java.awt.BorderLayout());
-        jPanel17.add(jTextField2, java.awt.BorderLayout.CENTER);
-
-        jPanel8.add(jPanel17);
-
-        jPanel5.add(jPanel8);
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 92, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
-        jPanel5.add(jPanel9);
-
-        jPanel2.add(jPanel5);
-
-        jPanel4.setLayout(new java.awt.GridLayout(4, 0));
-
-        jPanel10.setLayout(new java.awt.GridLayout(2, 0));
-
-        jPanel18.setLayout(new java.awt.BorderLayout());
-
-        jLabel3.setText("  Duration (mins.)");
-        jPanel18.add(jLabel3, java.awt.BorderLayout.CENTER);
-
-        jPanel10.add(jPanel18);
-
-        jPanel19.setLayout(new java.awt.BorderLayout());
-        jPanel19.add(jTextField3, java.awt.BorderLayout.CENTER);
-
-        jPanel10.add(jPanel19);
-
-        jPanel4.add(jPanel10);
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 92, Short.MAX_VALUE)
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        jPanel4.add(jPanel11);
-
-        jPanel12.setLayout(new java.awt.GridLayout(2, 0));
-
-        jPanel20.setLayout(new java.awt.BorderLayout());
-
-        jLabel4.setText("  Status");
-        jPanel20.add(jLabel4, java.awt.BorderLayout.CENTER);
-
-        jPanel12.add(jPanel20);
-
-        jPanel21.setLayout(new java.awt.BorderLayout());
-        jPanel21.add(jTextField4, java.awt.BorderLayout.CENTER);
-
-        jPanel12.add(jPanel21);
-
-        jPanel4.add(jPanel12);
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 92, Short.MAX_VALUE)
-        );
-
-        jPanel4.add(jPanel13);
-
-        jPanel2.add(jPanel4);
-
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
-
-        jPanel3.setLayout(new java.awt.GridLayout(1, 0, 0, 5));
-
-        jButton1.setBackground(new java.awt.Color(0, 153, 102));
-        jButton1.setForeground(new java.awt.Color(255, 255, 204));
-        jButton1.setText("ADD SERVICE");
-        jButton1.setPreferredSize(new java.awt.Dimension(75, 70));
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        jPanel3.add(jButton1);
-
-        jButton2.setBackground(new java.awt.Color(153, 153, 153));
-        jButton2.setForeground(new java.awt.Color(255, 255, 204));
-        jButton2.setText("CANCEL");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
-        jPanel3.add(jButton2);
-
-        getContentPane().add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        int choice = JOptionPane.showConfirmDialog(this, "Are you sure you would like to cancel this process?");
-        
-        if(choice == JOptionPane.OK_OPTION){
-            // --------------Add this when switching views ----------------
-            serviceMenuView service = new serviceMenuView();
-            service.setExtendedState(this.getExtendedState()); // copy state
-            service.setVisible(true);
-            this.dispose();
-            // ------------------------------------------------------------
-        }
-        else if(choice == JOptionPane.CANCEL_OPTION){
-            System.out.println("Exit cancelled");
-        }
-        
-        else if(choice == JOptionPane.CLOSED_OPTION){
-            System.out.println("Closed option");
-        }
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -277,36 +127,12 @@ public class addServiceView extends BaseFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
