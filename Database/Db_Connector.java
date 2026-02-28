@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Db_Connector {
-    private static final String DB_HOST = "jdbc:mysql://localhost:3306/HotelMS";
+    private static final String DB_HOST = "jdbc:mysql://localhost:3306/hotelreservationsystem";
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "";
     
