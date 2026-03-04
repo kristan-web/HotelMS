@@ -27,54 +27,255 @@ public class RoomsViews extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        Footer = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        Header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        Body = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel24 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel25 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel26 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel27 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel28 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel29 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel30 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel31 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel32 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel33 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel34 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel35 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jPanel36 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jPanel37 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel38 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 500));
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        Footer.setBackground(new java.awt.Color(204, 204, 255));
+        Footer.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("RoomsView");
-        jLabel1.setPreferredSize(new java.awt.Dimension(100, 100));
+        jPanel1.setPreferredSize(new java.awt.Dimension(200, 45));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(309, 309, 309)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(351, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(337, Short.MAX_VALUE))
-        );
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setText("Book");
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel2, new java.awt.GridBagConstraints());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        Footer.add(jPanel1, gridBagConstraints);
+
+        getContentPane().add(Footer, java.awt.BorderLayout.SOUTH);
+
+        Header.setBackground(new java.awt.Color(204, 204, 204));
+        Header.setPreferredSize(new java.awt.Dimension(800, 60));
+        Header.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setText("Rooms");
+        jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        Header.add(jLabel1, new java.awt.GridBagConstraints());
+
+        getContentPane().add(Header, java.awt.BorderLayout.NORTH);
+        Header.getAccessibleContext().setAccessibleName("");
+        Header.getAccessibleContext().setAccessibleDescription("");
+
+        Body.setBackground(new java.awt.Color(204, 255, 255));
+        Body.setLayout(new java.awt.GridBagLayout());
+
+        jPanel3.setBackground(new java.awt.Color(255, 102, 153));
+        jPanel3.setPreferredSize(new java.awt.Dimension(500, 300));
+        jPanel3.setLayout(new java.awt.GridLayout(5, 5));
+
+        jPanel24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel24.setLayout(new java.awt.GridBagLayout());
+
+        jLabel3.setText("Room 1001");
+        jPanel24.add(jLabel3, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel24);
+
+        jPanel25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel25.setLayout(new java.awt.GridBagLayout());
+
+        jLabel4.setText("Room 1002");
+        jPanel25.add(jLabel4, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel25);
+
+        jPanel26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel26.setLayout(new java.awt.GridBagLayout());
+
+        jLabel5.setText("Room 1003");
+        jPanel26.add(jLabel5, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel26);
+
+        jPanel27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel27.setLayout(new java.awt.GridBagLayout());
+
+        jLabel6.setText("Room 1004");
+        jPanel27.add(jLabel6, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel27);
+
+        jPanel28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel28.setLayout(new java.awt.GridBagLayout());
+
+        jLabel7.setText("Room 1005");
+        jPanel28.add(jLabel7, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel28);
+
+        jPanel29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel29.setLayout(new java.awt.GridBagLayout());
+
+        jLabel8.setText("Room 1006");
+        jPanel29.add(jLabel8, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel29);
+
+        jPanel30.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel30.setLayout(new java.awt.GridBagLayout());
+
+        jLabel9.setText("Room 1007");
+        jPanel30.add(jLabel9, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel30);
+
+        jPanel31.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel31.setLayout(new java.awt.GridBagLayout());
+
+        jLabel10.setText("1008");
+        jPanel31.add(jLabel10, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel31);
+
+        jPanel32.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel32.setLayout(new java.awt.GridBagLayout());
+
+        jLabel11.setText("Room 1009");
+        jPanel32.add(jLabel11, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel32);
+
+        jPanel33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel33.setLayout(new java.awt.GridBagLayout());
+
+        jLabel12.setText("Room 1010");
+        jPanel33.add(jLabel12, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel33);
+
+        jPanel34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel34.setLayout(new java.awt.GridBagLayout());
+
+        jLabel13.setText("Room 2001");
+        jPanel34.add(jLabel13, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel34);
+
+        jPanel35.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel35.setLayout(new java.awt.GridBagLayout());
+
+        jLabel14.setText("Room 2002");
+        jPanel35.add(jLabel14, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel35);
+
+        jPanel36.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel36.setLayout(new java.awt.GridBagLayout());
+
+        jLabel15.setText("Room 2003");
+        jPanel36.add(jLabel15, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel36);
+
+        jPanel37.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel37.setLayout(new java.awt.GridBagLayout());
+
+        jLabel16.setText("Room 2004");
+        jPanel37.add(jLabel16, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel37);
+
+        jPanel38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel38.setLayout(new java.awt.GridBagLayout());
+
+        jLabel17.setText("Room 2005");
+        jPanel38.add(jLabel17, new java.awt.GridBagConstraints());
+
+        jPanel3.add(jPanel38);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
+        Body.add(jPanel3, gridBagConstraints);
+
+        getContentPane().add(Body, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Body;
+    private javax.swing.JPanel Footer;
+    private javax.swing.JPanel Header;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel29;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel30;
+    private javax.swing.JPanel jPanel31;
+    private javax.swing.JPanel jPanel32;
+    private javax.swing.JPanel jPanel33;
+    private javax.swing.JPanel jPanel34;
+    private javax.swing.JPanel jPanel35;
+    private javax.swing.JPanel jPanel36;
+    private javax.swing.JPanel jPanel37;
+    private javax.swing.JPanel jPanel38;
     // End of variables declaration//GEN-END:variables
 }

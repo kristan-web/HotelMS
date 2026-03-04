@@ -29,6 +29,16 @@ public class BookingView extends BaseFrame{
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        Rooms = new javax.swing.JDialog();
+        Menu = new javax.swing.JPanel();
+        Body = new javax.swing.JPanel();
+        jToolBar1 = new javax.swing.JToolBar();
+        South = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        Header = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        popupMenu1 = new java.awt.PopupMenu();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         MainPanel = new javax.swing.JPanel();
         HeaderPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -51,17 +61,71 @@ public class BookingView extends BaseFrame{
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+
+        Rooms.setMaximumSize(new java.awt.Dimension(1920, 1080));
+        Rooms.setMinimumSize(new java.awt.Dimension(800, 500));
+        Rooms.setPreferredSize(new java.awt.Dimension(800, 500));
+
+        Menu.setBackground(new java.awt.Color(204, 204, 255));
+        Menu.setPreferredSize(new java.awt.Dimension(100, 500));
+
+        javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
+        Menu.setLayout(MenuLayout);
+        MenuLayout.setHorizontalGroup(
+            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        MenuLayout.setVerticalGroup(
+            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 414, Short.MAX_VALUE)
+        );
+
+        Rooms.getContentPane().add(Menu, java.awt.BorderLayout.WEST);
+        Menu.getAccessibleContext().setAccessibleDescription("");
+
+        Body.setBackground(new java.awt.Color(255, 204, 204));
+        Body.setLayout(new java.awt.GridBagLayout());
+
+        jToolBar1.setRollover(true);
+        Body.add(jToolBar1, new java.awt.GridBagConstraints());
+
+        Rooms.getContentPane().add(Body, java.awt.BorderLayout.CENTER);
+
+        South.setBackground(new java.awt.Color(255, 153, 153));
+        South.setMaximumSize(new java.awt.Dimension(1920, 1080));
+        South.setMinimumSize(new java.awt.Dimension(800, 500));
+
+        jButton1.setText("jButton1");
+        jButton1.setMaximumSize(new java.awt.Dimension(200, 200));
+        jButton1.setMinimumSize(new java.awt.Dimension(100, 50));
+        jButton1.setPreferredSize(new java.awt.Dimension(100, 50));
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        South.add(jButton1);
+
+        Rooms.getContentPane().add(South, java.awt.BorderLayout.SOUTH);
+
+        Header.setBackground(new java.awt.Color(204, 255, 255));
+        Header.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
+
+        jLabel9.setText("Rooms");
+        Header.add(jLabel9);
+
+        Rooms.getContentPane().add(Header, java.awt.BorderLayout.NORTH);
+
+        popupMenu1.setLabel("popupMenu1");
+        popupMenu1.addActionListener(this::popupMenu1ActionPerformed);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1920, 1080));
         setMinimumSize(new java.awt.Dimension(800, 500));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         MainPanel.setBackground(new java.awt.Color(153, 153, 153));
         MainPanel.setForeground(new java.awt.Color(204, 255, 255));
+        MainPanel.setMaximumSize(new java.awt.Dimension(1920, 1080));
+        MainPanel.setMinimumSize(new java.awt.Dimension(800, 500));
+        MainPanel.setPreferredSize(new java.awt.Dimension(800, 500));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("Reservation Menu");
@@ -262,18 +326,18 @@ public class BookingView extends BaseFrame{
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        jPanel4.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel4.setMinimumSize(new java.awt.Dimension(200, 30));
+        jPanel4.setPreferredSize(new java.awt.Dimension(200, 30));
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        jLabel10.setText("jLabel10");
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
+        jPanel4.add(jLabel10, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout BookingInformationLayout = new javax.swing.GroupLayout(BookingInformation);
         BookingInformation.setLayout(BookingInformationLayout);
@@ -281,13 +345,14 @@ public class BookingView extends BaseFrame{
             BookingInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BookingInformationLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(BookingInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
-                    .addGroup(BookingInformationLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(BookingInformationLayout.createSequentialGroup()
+                .addGap(168, 168, 168)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(219, 219, 219))
         );
         BookingInformationLayout.setVerticalGroup(
             BookingInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,9 +361,9 @@ public class BookingView extends BaseFrame{
                 .addGroup(BookingInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(170, 170, 170)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
@@ -329,10 +394,23 @@ public class BookingView extends BaseFrame{
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         getContentPane().add(MainPanel, gridBagConstraints);
-        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void popupMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_popupMenu1ActionPerformed
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        RoomsViews rooms = new RoomsViews();
+        rooms.setVisible(true);
+        rooms.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jLabel10MouseClicked
 
     /**
      * @param args the command line arguments
@@ -342,11 +420,19 @@ public class BookingView extends BaseFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Body;
     private javax.swing.JPanel BookingInformation;
+    private javax.swing.JPanel Header;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JPanel MainPanel;
+    private javax.swing.JPanel Menu;
     private javax.swing.JPanel MenuPanel;
+    private javax.swing.JDialog Rooms;
+    private javax.swing.JPanel South;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -354,22 +440,19 @@ public class BookingView extends BaseFrame{
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JToolBar jToolBar1;
+    private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
 }
