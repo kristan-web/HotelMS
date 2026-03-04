@@ -80,7 +80,7 @@ public class AddCustomerView extends javax.swing.JDialog {
         jTextField1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(48, 24, 29));
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField1.setText("jTextField1");
+        jTextField1.setSelectionColor(new java.awt.Color(210, 90, 119));
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(48, 24, 29));
@@ -89,7 +89,7 @@ public class AddCustomerView extends javax.swing.JDialog {
         jTextField2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(48, 24, 29));
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField2.setText("jTextField1");
+        jTextField2.setSelectionColor(new java.awt.Color(210, 90, 119));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(48, 24, 29));
@@ -99,7 +99,7 @@ public class AddCustomerView extends javax.swing.JDialog {
         jTextField3.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(48, 24, 29));
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField3.setText("jTextField1");
+        jTextField3.setSelectionColor(new java.awt.Color(210, 90, 119));
 
         jButton1.setBackground(new java.awt.Color(190, 52, 85));
         jButton1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
@@ -120,7 +120,7 @@ public class AddCustomerView extends javax.swing.JDialog {
         jTextField4.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jTextField4.setForeground(new java.awt.Color(48, 24, 29));
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField4.setText("jTextField1");
+        jTextField4.setSelectionColor(new java.awt.Color(210, 90, 119));
         jTextField4.addActionListener(this::jTextField4ActionPerformed);
 
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
