@@ -93,18 +93,19 @@ public class EditCustomerView extends javax.swing.JDialog {
 
         jTextField3.setBackground(new java.awt.Color(255, 239, 241));
         jTextField3.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(48, 24, 29));
+        jTextField3.setForeground(new java.awt.Color(47, 32, 56));
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField3.setText("jTextField1");
+        jTextField3.setSelectionColor(new java.awt.Color(241, 206, 215));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 224, 227));
         jLabel5.setText("Email Address: *");
 
         jTextField2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(48, 24, 29));
+        jTextField2.setForeground(new java.awt.Color(47, 32, 56));
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField2.setText("jTextField1");
+        jTextField2.setSelectionColor(new java.awt.Color(241, 206, 215));
+        jTextField2.addActionListener(this::jTextField2ActionPerformed);
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 224, 227));
@@ -112,9 +113,10 @@ public class EditCustomerView extends javax.swing.JDialog {
 
         jTextField4.setBackground(new java.awt.Color(255, 239, 241));
         jTextField4.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(48, 24, 29));
+        jTextField4.setForeground(new java.awt.Color(47, 32, 56));
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField4.setText("jTextField1");
+        jTextField4.setDisabledTextColor(new java.awt.Color(255, 224, 227));
+        jTextField4.setSelectionColor(new java.awt.Color(241, 206, 215));
         jTextField4.addActionListener(this::jTextField4ActionPerformed);
 
         jLabel3.setBackground(new java.awt.Color(255, 224, 227));
@@ -128,9 +130,10 @@ public class EditCustomerView extends javax.swing.JDialog {
 
         jTextField1.setBackground(new java.awt.Color(255, 239, 241));
         jTextField1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(48, 24, 29));
+        jTextField1.setForeground(new java.awt.Color(47, 32, 56));
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField1.setText("jTextField1");
+        jTextField1.setDisabledTextColor(new java.awt.Color(255, 224, 227));
+        jTextField1.setSelectionColor(new java.awt.Color(241, 206, 215));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -147,12 +150,9 @@ public class EditCustomerView extends javax.swing.JDialog {
                             .addComponent(jLabel5))
                         .addGap(18, 26, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(161, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(22, Short.MAX_VALUE))))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(22, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -166,7 +166,7 @@ public class EditCustomerView extends javax.swing.JDialog {
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addComponent(jLabel6)))
-                        .addContainerGap())))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,6 +224,10 @@ public class EditCustomerView extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments

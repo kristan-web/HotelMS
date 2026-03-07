@@ -57,7 +57,7 @@ public class CustomersView extends javax.swing.JFrame {
 
         jTextField1.setBackground(new java.awt.Color(246, 238, 238));
         jTextField1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        jTextField1.setText("fuck you");
+        jTextField1.setSelectionColor(new java.awt.Color(210, 90, 119));
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
 
         jTable2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
@@ -102,7 +102,7 @@ public class CustomersView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
