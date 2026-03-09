@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Views.CustomerManagement;
+import javax.swing.table.DefaultTableModel;
+import renderer.ActionRenderer;
+import renderer.ActionEditor;    
 
 /**
  *
@@ -16,7 +19,31 @@ public class CustomersView extends javax.swing.JFrame {
      * Creates new form EditCustomerView
      */
     public CustomersView() {
-        initComponents();
+        initComponents(); // NetBeans GUI builder code — DO NOT modify
+
+        setupActionColumn(); // attach buttons safely
+
+        // Optional: add sample rows
+        DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
+        model.addRow(new Object[]{"1", "John", "Doe", "john@example.com", ""});
+        model.addRow(new Object[]{"2", "Jane", "Smith", "jane@example.com", ""});
+    }
+
+    /**
+     * Attach renderer and editor to the last column to make buttons clickable
+     */
+    private void setupActionColumn() {
+        if (tblCustomers.getColumnCount() > 0) {
+            int actionCol = tblCustomers.getColumnCount() - 1;
+
+            // Set custom renderer (displays buttons)
+            tblCustomers.getColumnModel().getColumn(actionCol)
+                    .setCellRenderer(new ActionRenderer());
+
+            // Set custom editor (makes buttons clickable)
+            tblCustomers.getColumnModel().getColumn(actionCol)
+                    .setCellEditor(new ActionEditor(tblCustomers));
+        }
     }
 
     /**
@@ -35,7 +62,7 @@ public class CustomersView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblCustomers = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,8 +87,8 @@ public class CustomersView extends javax.swing.JFrame {
         jTextField1.setSelectionColor(new java.awt.Color(210, 90, 119));
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
 
-        jTable2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblCustomers.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
+        tblCustomers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -77,15 +104,22 @@ public class CustomersView extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jTable2.setFillsViewportHeight(true);
-        jTable2.setRowHeight(40);
-        jTable2.setShowGrid(true);
-        jScrollPane2.setViewportView(jTable2);
+        tblCustomers.setFillsViewportHeight(true);
+        tblCustomers.setRowHeight(40);
+        tblCustomers.setShowGrid(true);
+        jScrollPane2.setViewportView(tblCustomers);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -105,7 +139,7 @@ public class CustomersView extends javax.swing.JFrame {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
@@ -205,7 +239,7 @@ public class CustomersView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblCustomers;
     // End of variables declaration//GEN-END:variables
 }
