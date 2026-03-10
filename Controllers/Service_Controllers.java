@@ -43,6 +43,10 @@ public class Service_Controllers {
             JOptionPane.showMessageDialog(null, "Price and Duration must be numbers.");
             return false;
         }
+        catch(Exception e){
+             JOptionPane.showMessageDialog(null, "Invalid input.");
+            return false;
+        }
     }
     
     public List<Services> fetchAllServices(){
@@ -76,16 +80,24 @@ public class Service_Controllers {
     }
     
     public boolean UpdateSelectedService(String sid, String sname, String sprice, String sduration, String sstatus){
-        if(sid.isEmpty() || sname.isEmpty() || sprice.isEmpty() || sduration.isEmpty() || sstatus.isEmpty()){
+        if(sid.trim().isEmpty() || sname.trim().isEmpty() || sprice.trim().isEmpty() 
+        || sduration.trim().isEmpty() || sstatus.trim().isEmpty())
+        {
             JOptionPane.showMessageDialog(null, "All fields should be filled.");
             return false;
         }
         
-        int serviceID = Integer.parseInt(sid);
-        double price = Double.parseDouble(sprice);
-        int duration = Integer.parseInt(sduration);
-        
-        return dao.UpdateServiceToDatabase(serviceID, sname, price, duration, sstatus);
+        try{
+           int serviceID = Integer.parseInt(sid);
+           double price = Double.parseDouble(sprice);
+           int duration = Integer.parseInt(sduration); 
+            
+           return dao.UpdateServiceToDatabase(serviceID, sname, price, duration, sstatus);
+        }
+        catch(Exception e){
+           JOptionPane.showMessageDialog(null, "Price and Duration must be numbers.");
+           return false; 
+        }
     }
     
     public boolean DeleteServiceByID(int service_id){
