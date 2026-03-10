@@ -30,7 +30,7 @@ CREATE TABLE Customer (
     last_name VARCHAR(155) NOT NULL,
     phone_number VARCHAR(155),
     email VARCHAR(155) NOT NULL UNIQUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('Active', 'Inactive') DEFAULT 'ACTIVE',
     is_deleted BOOLEAN DEFAULT FALSE
 );
 

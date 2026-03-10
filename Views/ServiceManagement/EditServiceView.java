@@ -219,14 +219,6 @@ public class EditServiceView extends javax.swing.JDialog {
     }//GEN-LAST:event_ServiceDurationFieldActionPerformed
 
     private void UpdateServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateServiceButtonActionPerformed
-        /*
-            CREATE VARIABLES TO STORE TEXT FIELD VALUES
-            CALL THE CONTROLLER
-            PASS THE ARGUMENTS
-            IF CONTROLLER RETURNS TRUE, DIALOG UPDATE SUCCESS
-            ELSE UPDATE FAILED
-        */
-        
         String service_id, service_name, service_duration, service_price, service_status;
         service_id = ServiceIDField.getText();
         service_name = ServiceNameField.getText();
