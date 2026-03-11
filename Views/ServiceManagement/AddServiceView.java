@@ -1,24 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package Views.ServiceManagement;
-import Controllers.*;
+import Controllers.ServiceControllers;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Daphne
- */
 public class AddServiceView extends javax.swing.JDialog {
-    private static Service_Controllers control = new Service_Controllers();
+    private static ServiceControllers control = new ServiceControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddServiceView.class.getName());
 
-    /**
-     * Creates new form AddCustomerView
-     */
-    public AddServiceView(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public AddServiceView() {
         initComponents();
     }
     
@@ -209,7 +197,7 @@ public class AddServiceView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CancelAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelAddButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_CancelAddButtonActionPerformed
 
     private void ServiceNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceNameFieldActionPerformed
@@ -217,33 +205,19 @@ public class AddServiceView extends javax.swing.JDialog {
     }//GEN-LAST:event_ServiceNameFieldActionPerformed
 
     private void AddServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddServiceButtonActionPerformed
-        Service_Controllers service = new Service_Controllers();
-
         String serv_name, serv_status, serv_price, serv_duration;
         
-        serv_name = ServiceNameField.getText();
-        serv_price = ServicePriceField.getText();
-        serv_duration = ServiceDurationField.getText();
-        serv_status = ServiceStatusField.getSelectedItem().toString();
+        serv_name = ServiceNameField.getText().trim();
+        serv_price = ServicePriceField.getText().trim();
+        serv_duration = ServiceDurationField.getText().trim();
+        serv_status = ServiceStatusField.getSelectedItem().toString().trim();
         
-        if(service.AddServiceToDatabase(serv_name, serv_duration, serv_price, serv_status)){
-            JOptionPane.showMessageDialog(this, "Service Added Successfully");
-            ServiceNameField.setText("");
-            ServicePriceField.setText("");
-            ServiceDurationField.setText("");
-            ServiceView.getInstance().loadServicesToTable();
-            this.dispose();
-        }
-        else{
-            ServiceNameField.setText("");
-            ServicePriceField.setText("");
-            ServiceDurationField.setText("");
-        }
+        String message = control.AddServiceProcess(serv_name, serv_duration, serv_price, serv_status);
+        JOptionPane.showMessageDialog(this, message);
+        ServiceView.getInstance().loadServicesToTable();
+        this.dispose();
     }//GEN-LAST:event_AddServiceButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -266,7 +240,7 @@ public class AddServiceView extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                AddServiceView dialog = new AddServiceView(new javax.swing.JFrame(), true);
+                AddServiceView dialog = new AddServiceView();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

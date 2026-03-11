@@ -1,23 +1,17 @@
 package Views.ServiceManagement;
-import Controllers.*;
 import java.util.List;
 import Model.*;
+import Controllers.ServiceControllers;
 import renderer.ServicesRenderer.*;
 import javax.swing.event.*;
 
 public class ServiceView extends javax.swing.JFrame {
     public static ServiceView instance;
-    private static final Service_Controllers control = new Service_Controllers();
+    private static final ServiceControllers control = new ServiceControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ServiceView.class.getName());
     
     public final void loadServicesToTable() {
-    /*
-        CREATES A LIST
-        CALLS CONTROL FUNCTION TO FETCH ALL SERVICES
-        ADD ALL SERVICES INSIDE THE LIST
-        STARTS LOOP TO DISPLAY VALUES INSIDE THE TABLE
-    */
-    List<Services> services = control.fetchAllServices();
+    List<Services> services = control.ListOfAllServices();
     
     javax.swing.table.DefaultTableModel model = 
         (javax.swing.table.DefaultTableModel) tblServices.getModel();
@@ -43,7 +37,7 @@ public class ServiceView extends javax.swing.JFrame {
         ADD ALL SERVICES INSIDE THE LIST
         STARTS LOOP TO DISPLAY VALUES INSIDE THE TABLE
     */
-        List<Services> services = control.DynamicSearchTable(text);
+        List<Services> services = control.ListOfAllServices(text);
 
         javax.swing.table.DefaultTableModel model = 
             (javax.swing.table.DefaultTableModel) tblServices.getModel();
@@ -263,11 +257,7 @@ public class ServiceView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddServiceButtonActionPerformed
-        /*
-            INSTANTIATE ADD SERVICE VIEW
-            SET VISIBLE TO TRUE
-        */
-        AddServiceView dialog = new AddServiceView(this, true);
+        AddServiceView dialog = new AddServiceView();
         dialog.setLocationRelativeTo(this);
         dialog.setVisible(true);
     }//GEN-LAST:event_AddServiceButtonActionPerformed

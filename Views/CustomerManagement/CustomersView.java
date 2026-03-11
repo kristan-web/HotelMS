@@ -2,17 +2,17 @@ package Views.CustomerManagement;
 import renderer.CutomerRenderer.*;
 import java.util.List;
 import Model.Customers;
-import Controllers.Customer_Controllers;
+import Controllers.CustomerControllers;
 import javax.swing.event.*;
 //import javax.swing.event.*;
 
 public class CustomersView extends javax.swing.JFrame {   
     public static CustomersView instance;
-    public static Customer_Controllers control = new Customer_Controllers();
+    public static CustomerControllers control = new CustomerControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CustomersView.class.getName());
     
     public final void LoadCustomerDetails(){     
-        List<Customers> customerList = control.GetAllCustomerDetails(); 
+        List<Customers> customerList = control.ListOfAllCustomers(); 
         
         
         javax.swing.table.DefaultTableModel model = 
@@ -33,7 +33,7 @@ public class CustomersView extends javax.swing.JFrame {
     }
     
     public final void LoadCustomerDetails(String searchfield){     
-        List<Customers> customerList = control.GetAllCustomerDetails(searchfield); 
+        List<Customers> customerList = control.ListOfAllCustomers(searchfield); 
         
         
         javax.swing.table.DefaultTableModel model = 

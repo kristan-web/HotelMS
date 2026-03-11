@@ -1,29 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package Views.ServiceManagement;
 import Model.Services;
-import Controllers.Service_Controllers;
+import Controllers.ServiceControllers;
 import javax.swing.JOptionPane;
-/**
- *
- * @author Daphne
- */
+
 public class EditServiceView extends javax.swing.JDialog {
-    private static Service_Controllers control = new Service_Controllers();
+    private static final ServiceControllers control = new ServiceControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditServiceView.class.getName());
 
     /**
      * Creates new form EditCustomerView
+     * @param service
      */
     
-    public void loadServiceData(Services s) {
-        ServiceIDField.setText(String.valueOf(s.getServiceID()));
-        ServiceNameField.setText(s.getServiceName());
-        ServicePriceField.setText(String.valueOf(s.getPrice()));
-        ServiceDurationField.setText(String.valueOf(s.getDurationMinutes()));
-        ServiceStatusField.setSelectedItem(s.getStatus());
+    public void loadServiceData(Services service) {
+        ServiceIDField.setText(String.valueOf(service.getServiceID()));
+        ServiceNameField.setText(service.getServiceName());
+        ServicePriceField.setText(String.valueOf(service.getPrice()));
+        ServiceDurationField.setText(String.valueOf(service.getDurationMinutes()));
+        ServiceStatusField.setSelectedItem(service.getStatus());
     }
     
     public EditServiceView() {
@@ -220,19 +214,16 @@ public class EditServiceView extends javax.swing.JDialog {
 
     private void UpdateServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateServiceButtonActionPerformed
         String service_id, service_name, service_duration, service_price, service_status;
-        service_id = ServiceIDField.getText();
-        service_name = ServiceNameField.getText();
+        service_id = ServiceIDField.getText().trim();
+        service_name = ServiceNameField.getText().trim();
         service_duration = ServiceDurationField.getText();
-        service_price = ServicePriceField.getText();
+        service_price = ServicePriceField.getText().trim();
         service_status = (String) ServiceStatusField.getSelectedItem();
         
-        if(control.UpdateSelectedService(service_id, service_name, service_price, service_duration, service_status)){
-            JOptionPane.showMessageDialog(null, "Update Success");
-            ServiceView.getInstance().loadServicesToTable();
-            this.dispose();
-        }
-        
-        
+        String message = control.UpdateServiceDetails(service_id, service_name, service_price, service_duration, service_status);
+        JOptionPane.showMessageDialog(null, message);
+        ServiceView.getInstance().loadServicesToTable();
+        this.dispose(); 
     }//GEN-LAST:event_UpdateServiceButtonActionPerformed
 
     private void CancelUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelUpdateButtonActionPerformed

@@ -3,14 +3,14 @@ import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.net.URL;
-import Controllers.Service_Controllers;
+import Controllers.ServiceControllers;
 import Views.ServiceManagement.ServiceView;
 
 public class ServicesActionEditor extends AbstractCellEditor implements TableCellEditor {
-    private static Service_Controllers control = new Service_Controllers();
-    private JPanel panel = new JPanel();
-    private JButton updateButton = new JButton();
-    private JButton deleteButton = new JButton();
+    private static final ServiceControllers control = new ServiceControllers();
+    private final JPanel panel = new JPanel();
+    private final JButton updateButton = new JButton();
+    private final JButton deleteButton = new JButton();
 
     public ServicesActionEditor(JTable table) {
         // FETCH ICONS FROM THE LIBRARY
@@ -56,12 +56,10 @@ public class ServicesActionEditor extends AbstractCellEditor implements TableCel
             );
             
             if(choice == JOptionPane.YES_OPTION){
-                if(control.DeleteServiceByID(serviceID)){
-                    ServiceView.getInstance().loadServicesToTable();
-                    JOptionPane.showMessageDialog(null, "Service deleted successfully");
-                }
+                String message = control.DeleteServiceByID(serviceID);
+                JOptionPane.showMessageDialog(null, message);
+                ServiceView.getInstance().loadServicesToTable();
             }
-            
         });
     }
 

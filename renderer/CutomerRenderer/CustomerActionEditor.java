@@ -3,11 +3,11 @@ import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.net.URL;
-import Controllers.Customer_Controllers;
+import Controllers.CustomerControllers;
 import Views.CustomerManagement.CustomersView;
 
 public class CustomerActionEditor extends AbstractCellEditor implements TableCellEditor {
-    private static Customer_Controllers control = new Customer_Controllers();
+    private static CustomerControllers control = new CustomerControllers();
     private JPanel panel = new JPanel();
     private JButton updateButton = new JButton();
     private JButton deleteButton = new JButton();
@@ -56,7 +56,7 @@ public class CustomerActionEditor extends AbstractCellEditor implements TableCel
             );
             
             if(choice == JOptionPane.YES_OPTION){
-                String message = control.DeleteServiceByID(customerID);
+                String message = control.DeleteCustomerByID(customerID);
                 JOptionPane.showMessageDialog(null, message);
                 CustomersView.getInstance().LoadCustomerDetails();
             }

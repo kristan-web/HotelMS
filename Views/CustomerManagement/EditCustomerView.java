@@ -1,11 +1,10 @@
 package Views.CustomerManagement;
 import Model.Customers;
-import Controllers.Customer_Controllers;
+import Controllers.CustomerControllers;
 import javax.swing.JOptionPane;
-import Views.CustomerManagement.CustomersView;
 
 public class EditCustomerView extends javax.swing.JDialog {
-    public static Customer_Controllers control = new Customer_Controllers();
+    public static CustomerControllers control = new CustomerControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditCustomerView.class.getName());
     
     public void loadCustomerData(Customers c) {
@@ -210,7 +209,7 @@ public class EditCustomerView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CancelCustomerUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelCustomerUpdateActionPerformed
-        
+        this.dispose();
     }//GEN-LAST:event_CancelCustomerUpdateActionPerformed
 
     private void FirstNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstNameFieldActionPerformed

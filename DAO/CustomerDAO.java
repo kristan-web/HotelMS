@@ -4,9 +4,62 @@ import java.util.List;
 import java.util.ArrayList;
 import java.sql.*;
 import Database.Db_Connector;
-public class CustomerDAO {
+
+abstract class CustomerDAOTemplate{
     
-    public List<Customers> FetchAllCustomerFromDB(){
+    abstract String AddCustomerQuery(String first_name, String last_name, 
+    String phone_number, String email, String status);
+    
+    //Returns a list of customers for table display.
+    abstract List<Customers> ListOfAllCustomersQuery();
+    
+    //Method overloading, returns a list of customers that matches the searchbar.
+    abstract List<Customers> ListOfAllCustomersQuery(String searchfield);
+    
+    //Returns an object that contains customer details.
+    abstract Customers GetCustomerDetailsQuery(int customer_id);
+    
+    //Updates customer details. Returns string for JOptionPane message.
+    abstract String UpdateCustomerQuery(int customer_id, String fname, 
+                                             String lname, String email, String phone, 
+                                             String status);
+    
+    //Deletes customer details. Returns string for JOptionPane message.
+    abstract String DeleteCustomerQuery(int customerID);
+
+}
+
+
+
+public class CustomerDAO extends CustomerDAOTemplate{
+    @Override
+    public String AddCustomerQuery(String first_name, String last_name, 
+    String phone_number, String email, String status){
+        try(Connection dbconn = Db_Connector.getCOnnection()){
+            if(dbconn == null) return "Can't connect to the database";
+            
+            String query = "INSERT INTO Customer(first_name, last_name, phone_number, "
+            + "email, status) VALUES (?, ?, ?, ?, ?)";
+            
+            try(PreparedStatement pst = dbconn.prepareStatement(query)){
+                pst.setString(1, first_name);
+                pst.setString(2, last_name);
+                pst.setString(3, phone_number);
+                pst.setString(4, email);
+                pst.setString(5, status);
+                
+                int RowsAffected = pst.executeUpdate();
+                
+                if(RowsAffected > 0) return "Service added successfully.";
+            }
+        }
+        catch(SQLException e){
+            return "Failed to add customer to the database";
+        }
+        return "Failed to add customer to the database";
+    }
+    
+    public List<Customers> ListOfAllCustomersQuery(){
         List<Customers> cstmr = new ArrayList<>();
         try(Connection dbconn = Db_Connector.getCOnnection()){
             if(dbconn == null) return null;
@@ -38,7 +91,7 @@ public class CustomerDAO {
         return cstmr;
     }
     
-    public List<Customers> FetchAllCustomerFromDB(String searchfield){
+    public List<Customers> ListOfAllCustomersQuery(String searchfield){
         List<Customers> cstmr = new ArrayList<>();
         try(Connection dbconn = Db_Connector.getCOnnection()){
             if(dbconn == null) return null;
@@ -71,7 +124,7 @@ public class CustomerDAO {
         return cstmr;
     }
     
-    public Customers GetCustomerDetailsFromDB(int customer_id){
+    public Customers GetCustomerDetailsQuery(int customer_id){
         Customers cstmr = new Customers();
         try(Connection dbconn = Db_Connector.getCOnnection()){
             if(dbconn == null) return null;
@@ -98,7 +151,7 @@ public class CustomerDAO {
         return cstmr;
     }
     
-    public String UpdateCustomerInDatabase(int customer_id, String fname, String lname, String email, String phone, String status){
+    public String UpdateCustomerQuery(int customer_id, String fname, String lname, String email, String phone, String status){
         /*
             CONNECT TO DATABASE
             QUERY
@@ -133,7 +186,7 @@ public class CustomerDAO {
         return "Failed to update customer details.";
     }
     
-    public String DeleteServiceToDatabase(int customerID){
+    public String DeleteCustomerQuery(int customerID){
         try(Connection dbconn = Db_Connector.getCOnnection()){
             if(dbconn == null) return "Can't connect to database.";
             

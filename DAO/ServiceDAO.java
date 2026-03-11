@@ -4,18 +4,35 @@ import java.sql.*;
 import Model.*;
 import java.util.ArrayList;
 import java.util.List;
-public class ServiceDAO {
+
+abstract class ServiceDAOTemplate{
+    //Returns a string for JOptionPane, adds a service to the database.
+    abstract String AddServiceQuery(Services service);
     
-    public boolean AddServiceQuery(Services service){
-        /*
-            CONNECT TO DATABASE
-            CREATE A QUERY
-            PASS THE SERVICES MODEL ATTRIBUTES TO QUERY VALUES
-            CHECK IF THERE ARE ROWS AFFECTED
-            IF ROWS AFFECTED > 1 RETURN TRUE
-        */
+    //Returns a list of all services for table display.
+    abstract List<Services> ListOfAllServicesQuery();
+    
+    //Returns a list of all services that matches the search bar.
+    abstract List<Services> ListOfAllServicesQuery(String searchfield);
+    
+    //Returns an object that contains service details.
+    abstract Services GetServiceDetailsByID(int serviceID);
+    
+    //Returns a string for JOptionPane, updates a service to the database.
+    abstract String UpdateServiceQuery(int service_id, String service_name, double service_price, 
+    int service_duration, String service_status);
+    
+    //Returns a string for JOptionPane, deletes a service to the database.
+    abstract String DeleteServiceQuery(int service_id);
+            
+    
+}
+public class ServiceDAO extends ServiceDAOTemplate{
+    
+    @Override
+    public String AddServiceQuery(Services service){
         try(Connection dbconn = Db_Connector.getCOnnection()){
-            if(dbconn == null) return false;
+            if(dbconn == null) return "Can't connect to the database";
             
             String query = "INSERT INTO Services (service_name, price, duration_minutes, status) "
                     + "VALUES (?, ?, ?, ?)";
@@ -28,29 +45,26 @@ public class ServiceDAO {
                 
                 int rowsAffected = pst.executeUpdate();
                 
-                return rowsAffected > 0;
+                if(rowsAffected > 0) return "Service added successfully.";
             }
         }
         catch(SQLException e){
             e.printStackTrace();
-            return false;
+            return "Failed to add service.";
         
         }
+        catch(Exception e){
+            return "Failed to add service.";
+        }
+        return "Failed to add service.";
     }
     
-    public List<Services> getAllServices(){
-        /*
-            CREATES A LIST
-            CONNECT TO DATABASE
-            EXECUTE SELECT QUERY
-            WHILE RS.NEXT() IS TRUE, INSTANTIATE A SERVICE MODEL AND ADD TO THE LIST
-            AFTER THE LOOP, RETURN THE LIST
-            
-        */
+    @Override
+    public List<Services> ListOfAllServicesQuery(){
         List<Services> servicesList = new ArrayList<>();
         
         try(Connection dbconn = Db_Connector.getCOnnection()){
-            if (dbconn == null) return servicesList;
+            if (dbconn == null) return null;
             
             String query = "SELECT * from Services WHERE is_deleted = false";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
@@ -71,20 +85,25 @@ public class ServiceDAO {
         }
         catch(SQLException e){
             e.printStackTrace();
+            return null;
+        }
+        catch(Exception e){
+            return null;
         }
         
         return servicesList;
     }
     
-    public List<Services> getAllServices(String text){
+    @Override
+    public List<Services> ListOfAllServicesQuery(String searchfield){
         List<Services> servicesList = new ArrayList<>();
         
         try(Connection dbconn = Db_Connector.getCOnnection()){
-            if (dbconn == null) return servicesList;
+            if (dbconn == null) return null;
             
             String query = "SELECT * from Services WHERE service_name LIKE ? AND is_deleted = false";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
-                pst.setString(1, "%" + text + "%");
+                pst.setString(1, "%" + searchfield + "%");
                 
                 ResultSet rs = pst.executeQuery();
                 
@@ -103,55 +122,53 @@ public class ServiceDAO {
         }
         catch(SQLException e){
             e.printStackTrace();
+            return null;
+        }
+        catch(Exception e){
+            return null;
         }
         
         return servicesList;
     }
     
+    @Override
     public Services GetServiceDetailsByID(int serviceID){
-        Services s = null;
-        /*
-            CONNECT TO DATABASE
-            SELECT QUERY
-            PASS THE DETAILS TO SERVICES MODEL
-            RETURN THE MODEL
-        */
+        Services service = null;
         
         try(Connection dbconn = Db_Connector.getCOnnection()){
+            if(dbconn == null) return null;
+            
             String query = "SELECT * FROM Services WHERE service_id = ?";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setInt(1, serviceID);
                 ResultSet rs = pst.executeQuery();
                 while(rs.next()){
-                    s = new Services();
-                    s.setServiceID(rs.getInt("service_id"));
-                    s.setServiceName(rs.getString("service_name"));
-                    s.setPrice(rs.getDouble("price"));
-                    s.setDurationMinutes(rs.getInt("duration_minutes"));
-                    s.setStatus(rs.getString("status"));
+                    service = new Services();
+                    service.setServiceID(rs.getInt("service_id"));
+                    service.setServiceName(rs.getString("service_name"));
+                    service.setPrice(rs.getDouble("price"));
+                    service.setDurationMinutes(rs.getInt("duration_minutes"));
+                    service.setStatus(rs.getString("status"));
                 }
             }
         }
         catch(SQLException e){
             e.printStackTrace();
+            return null;
+        }
+        catch(Exception e){
+            return null;
         }
         
-        return s;
+        return service;
     }
     
-    public boolean UpdateServiceToDatabase(int service_id, String service_name, double service_price, 
+    @Override
+    public String UpdateServiceQuery(int service_id, String service_name, double service_price, 
     int service_duration, String service_status)
-    {
-        /*
-            CONNECT TO DATABASE
-            QUERY
-            PREPARE STATEMENT
-            EXECUTE QUERY
-            RETURN TRUE OR FALSE
-        */
-        
+    {        
         try(Connection dbconn = Db_Connector.getCOnnection()){
-           if(dbconn == null) return false;
+           if(dbconn == null) return "Can't connect to the database";
            
            String query = "UPDATE Services SET service_name = ?, duration_minutes = ?, price = ?, status = ? "
            + "WHERE service_id = ?";
@@ -165,38 +182,40 @@ public class ServiceDAO {
                
                int RowsAffected = pst.executeUpdate();
                
-               return RowsAffected > 0;
+               if(RowsAffected > 0) return "Service updated successfully.";
            }
         }
         catch(SQLException e){
             e.printStackTrace();
-            return false;
+            return "Failed to update service details";
         }
+        catch(Exception e){
+            return "Failed to update service details";
+        }
+        return "Failed to update service details";
     }
     
-    public boolean DeleteServiceToDatabase(int service_id){
-        /*
-            CONNECT TO DATABASE
-            QUERY
-            PREPARE STATEMENT
-            RETURNED ROWS
-            IF ROWS > 0 RETURN TRUE
-            ELSE FALSE
-        */
-        
+    @Override
+    public String DeleteServiceQuery(int service_id){       
         try(Connection dbconn = Db_Connector.getCOnnection()){
+            if(dbconn == null) return "Can't connect to the database";
+            
             String query = "UPDATE Services SET is_deleted = true WHERE service_id = ?";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setInt(1, service_id);
                 
                 int RowsAffected = pst.executeUpdate();
                 
-                return RowsAffected > 0;
+                if(RowsAffected > 0) return "Service deleted successfully";
             }
         }
         catch(SQLException e){
             e.printStackTrace();
-            return false;
+            return "Failed to update service details";
         }
+        catch(Exception e){
+            return "Failed to update service details";
+        }
+        return "Failed to update service details";
     }
 }
