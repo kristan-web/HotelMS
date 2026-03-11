@@ -22,6 +22,7 @@ public class EditServiceView extends javax.swing.JDialog {
     
     public EditServiceView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

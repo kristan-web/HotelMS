@@ -4,7 +4,6 @@ import java.util.List;
 import Model.Customers;
 import Controllers.CustomerControllers;
 import javax.swing.event.*;
-//import javax.swing.event.*;
 
 public class CustomersView extends javax.swing.JFrame {   
     public static CustomersView instance;

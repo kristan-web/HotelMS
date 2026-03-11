@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package Views.CustomerManagement;
 import Controllers.CustomerControllers;
 import javax.swing.JOptionPane;
-import Views.CustomerManagement.CustomersView;
-/**
- *
- * @author Daphne
- */
+
 public class AddCustomerView extends javax.swing.JDialog {
     private static final CustomerControllers control = new CustomerControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddCustomerView.class.getName());

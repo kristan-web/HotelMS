@@ -15,6 +15,10 @@ abstract class ServiceControllersTemplate {
     //Returns a list of services that matches the search bar.
     abstract List<Services> ListOfAllServices(String searchfield);
     
+    abstract List<Services> ListOfAllDeletedServices();
+    
+    abstract List<Services> ListOfAllDeletedServices(String seachfield);
+    
     //Fetch a single object from the database and pass the values to a dialog.
     abstract void GetServiceDetailsByID(int serviceID);
     
@@ -24,6 +28,10 @@ abstract class ServiceControllersTemplate {
     
     //Returns a string for JOptionPane, updates a service to the database.
     abstract String DeleteServiceByID(int service_id);
+    
+    //Restores a service by passing serviceID as argument
+    abstract String RestoreServiceByID(String service_id);
+    
 }
 
 
@@ -115,5 +123,26 @@ public class ServiceControllers extends ServiceControllersTemplate{
     @Override
     public String DeleteServiceByID(int service_id){
         return dao.DeleteServiceQuery(service_id);
+    }
+    
+    public List<Services> ListOfAllDeletedServices(){
+        return dao.ListOfAllDeletedServicesQuery();
+    }
+    
+    public List<Services> ListOfAllDeletedServices(String seachfield){
+        return dao.ListOfAllDeletedServicesQuery(seachfield);
+    }
+    
+    public String RestoreServiceByID(String service_id){
+        try{
+            int serviceID = Integer.parseInt(service_id);
+            
+            String message = dao.RestoreServiceByIDQuery(serviceID);
+            
+            return message;
+        }
+        catch(Exception e){
+            return "Failed to restore service.";
+        }
     }
 }

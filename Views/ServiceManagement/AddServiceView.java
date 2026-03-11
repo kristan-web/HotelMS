@@ -8,6 +8,7 @@ public class AddServiceView extends javax.swing.JDialog {
 
     public AddServiceView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
     public void setServiceData(String name, String price, String duration, String status) {
