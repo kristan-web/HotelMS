@@ -1,18 +1,22 @@
-package Views.CustomerManagement;
-import Controllers.CustomerControllers;
+package Views.ServiceManagement;
+import Controllers.ServiceControllers;
 import javax.swing.JOptionPane;
 
-public class AddCustomerView extends javax.swing.JDialog {
-    private static final CustomerControllers control = new CustomerControllers();
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddCustomerView.class.getName());
+public class AddServiceView extends javax.swing.JDialog {
+    private static ServiceControllers control = new ServiceControllers();
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddServiceView.class.getName());
 
-    /**
-     * Creates new form AddCustomerView
-     */
-    public AddCustomerView(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public AddServiceView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
+    
+    public void setServiceData(String name, String price, String duration, String status) {
+    ServiceNameField.setText(name);       // your JTextField for service name
+    ServicePriceField.setText(price);     // your JTextField for price
+    ServiceDurationField.setText(duration); // your JTextField for duration
+    ServiceStatusField.setSelectedItem(status); // your JComboBox for status
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,17 +31,15 @@ public class AddCustomerView extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        LastNameField = new javax.swing.JTextField();
+        ServicePriceField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        PhoneField = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        EmailField = new javax.swing.JTextField();
-        SaveCustomerButton = new javax.swing.JButton();
-        CancelButton = new javax.swing.JButton();
+        ServiceDurationField = new javax.swing.JTextField();
+        AddServiceButton = new javax.swing.JButton();
+        CancelAddButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        FirstNameField = new javax.swing.JTextField();
+        ServiceNameField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        StatusField = new javax.swing.JComboBox<>();
+        ServiceStatusField = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -47,7 +49,7 @@ public class AddCustomerView extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 224, 227));
-        jLabel1.setText("Add New Customer");
+        jLabel1.setText("Add New Service");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -68,62 +70,52 @@ public class AddCustomerView extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(48, 24, 29));
-        jLabel3.setText("First Name: *");
+        jLabel3.setText("Service Name");
 
-        LastNameField.setBackground(new java.awt.Color(255, 239, 241));
-        LastNameField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        LastNameField.setForeground(new java.awt.Color(48, 24, 29));
-        LastNameField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        LastNameField.setSelectionColor(new java.awt.Color(210, 90, 119));
+        ServicePriceField.setBackground(new java.awt.Color(255, 239, 241));
+        ServicePriceField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
+        ServicePriceField.setForeground(new java.awt.Color(48, 24, 29));
+        ServicePriceField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        ServicePriceField.setSelectionColor(new java.awt.Color(210, 90, 119));
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(48, 24, 29));
-        jLabel4.setText("Contact Number: *");
+        jLabel4.setText("Service Duration (in mins.): *");
 
-        PhoneField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        PhoneField.setForeground(new java.awt.Color(48, 24, 29));
-        PhoneField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        PhoneField.setSelectionColor(new java.awt.Color(210, 90, 119));
+        ServiceDurationField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
+        ServiceDurationField.setForeground(new java.awt.Color(48, 24, 29));
+        ServiceDurationField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        ServiceDurationField.setSelectionColor(new java.awt.Color(210, 90, 119));
 
-        jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(48, 24, 29));
-        jLabel5.setText("Email Address: *");
+        AddServiceButton.setBackground(new java.awt.Color(190, 52, 85));
+        AddServiceButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
+        AddServiceButton.setForeground(new java.awt.Color(255, 224, 227));
+        AddServiceButton.setText("Save");
+        AddServiceButton.addActionListener(this::AddServiceButtonActionPerformed);
 
-        EmailField.setBackground(new java.awt.Color(255, 239, 241));
-        EmailField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        EmailField.setForeground(new java.awt.Color(48, 24, 29));
-        EmailField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        EmailField.setSelectionColor(new java.awt.Color(210, 90, 119));
-
-        SaveCustomerButton.setBackground(new java.awt.Color(190, 52, 85));
-        SaveCustomerButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        SaveCustomerButton.setForeground(new java.awt.Color(255, 224, 227));
-        SaveCustomerButton.setText("Save");
-        SaveCustomerButton.addActionListener(this::SaveCustomerButtonActionPerformed);
-
-        CancelButton.setBackground(new java.awt.Color(255, 239, 241));
-        CancelButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        CancelButton.setForeground(new java.awt.Color(190, 52, 85));
-        CancelButton.setText("Cancel");
-        CancelButton.addActionListener(this::CancelButtonActionPerformed);
+        CancelAddButton.setBackground(new java.awt.Color(255, 239, 241));
+        CancelAddButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
+        CancelAddButton.setForeground(new java.awt.Color(190, 52, 85));
+        CancelAddButton.setText("Cancel");
+        CancelAddButton.addActionListener(this::CancelAddButtonActionPerformed);
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(48, 24, 29));
-        jLabel7.setText("Last Name: *");
+        jLabel7.setText("Service Price: *");
 
-        FirstNameField.setBackground(new java.awt.Color(255, 239, 241));
-        FirstNameField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        FirstNameField.setForeground(new java.awt.Color(48, 24, 29));
-        FirstNameField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        FirstNameField.setSelectionColor(new java.awt.Color(210, 90, 119));
-        FirstNameField.addActionListener(this::FirstNameFieldActionPerformed);
+        ServiceNameField.setBackground(new java.awt.Color(255, 239, 241));
+        ServiceNameField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
+        ServiceNameField.setForeground(new java.awt.Color(48, 24, 29));
+        ServiceNameField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        ServiceNameField.setSelectionColor(new java.awt.Color(210, 90, 119));
+        ServiceNameField.addActionListener(this::ServiceNameFieldActionPerformed);
 
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(48, 24, 29));
         jLabel6.setText("Status: *");
 
-        StatusField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        StatusField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
+        ServiceStatusField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
+        ServiceStatusField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive", "Maintenance" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,19 +126,18 @@ public class AddCustomerView extends javax.swing.JDialog {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(SaveCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AddServiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CancelAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(StatusField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PhoneField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(EmailField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ServiceStatusField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ServiceDurationField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(FirstNameField)
+                                        .addComponent(ServiceNameField)
                                         .addGap(18, 18, 18))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -155,11 +146,10 @@ public class AddCustomerView extends javax.swing.JDialog {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(148, 148, 148))
-                                    .addComponent(LastNameField)))
+                                    .addComponent(ServicePriceField)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(20, 20, 20))))
@@ -174,65 +164,61 @@ public class AddCustomerView extends javax.swing.JDialog {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FirstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                    .addComponent(ServicePriceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ServiceNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addComponent(ServiceDurationField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(StatusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addComponent(ServiceStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SaveCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(CancelAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddServiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
+    private void CancelAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelAddButtonActionPerformed
         this.dispose();
-    }//GEN-LAST:event_CancelButtonActionPerformed
+    }//GEN-LAST:event_CancelAddButtonActionPerformed
 
-    private void FirstNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstNameFieldActionPerformed
+    private void ServiceNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceNameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_FirstNameFieldActionPerformed
+    }//GEN-LAST:event_ServiceNameFieldActionPerformed
 
-    private void SaveCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveCustomerButtonActionPerformed
-        String firstname = FirstNameField.getText().trim();
-        String lastname = LastNameField.getText().trim();
-        String phone = PhoneField.getText().trim();
-        String email = EmailField.getText().trim();
-        String status = StatusField.getSelectedItem().toString().trim();
-       
-        String message = control.AddCustomerProcess(firstname, lastname, phone, email, status);
+    private void AddServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddServiceButtonActionPerformed
+        String serv_name, serv_status, serv_price, serv_duration;
+        
+        serv_name = ServiceNameField.getText().trim();
+        serv_price = ServicePriceField.getText().trim();
+        serv_duration = ServiceDurationField.getText().trim();
+        serv_status = ServiceStatusField.getSelectedItem().toString().trim();
+        
+        String message = control.AddServiceProcess(serv_name, serv_duration, serv_price, serv_status);
         JOptionPane.showMessageDialog(this, message);
-        CustomersView.getInstance().LoadCustomerDetails();
+        ServiceView.getInstance().loadServicesToTable();
         this.dispose();
-    }//GEN-LAST:event_SaveCustomerButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
+    }//GEN-LAST:event_AddServiceButtonActionPerformed
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -255,7 +241,7 @@ public class AddCustomerView extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                AddCustomerView dialog = new AddCustomerView(new javax.swing.JFrame(), true);
+                AddServiceView dialog = new AddServiceView();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -268,17 +254,15 @@ public class AddCustomerView extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CancelButton;
-    private javax.swing.JTextField EmailField;
-    private javax.swing.JTextField FirstNameField;
-    private javax.swing.JTextField LastNameField;
-    private javax.swing.JTextField PhoneField;
-    private javax.swing.JButton SaveCustomerButton;
-    private javax.swing.JComboBox<String> StatusField;
+    private javax.swing.JButton AddServiceButton;
+    private javax.swing.JButton CancelAddButton;
+    private javax.swing.JTextField ServiceDurationField;
+    private javax.swing.JTextField ServiceNameField;
+    private javax.swing.JTextField ServicePriceField;
+    private javax.swing.JComboBox<String> ServiceStatusField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;

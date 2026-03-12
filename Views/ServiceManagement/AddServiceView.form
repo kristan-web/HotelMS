@@ -23,12 +23,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -48,20 +51,19 @@
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="SaveCustomerButton" min="-2" pref="80" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="CancelButton" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="AddServiceButton" min="-2" pref="80" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                          <Component id="CancelAddButton" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="StatusField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="PhoneField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="EmailField" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ServiceStatusField" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ServiceDurationField" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="FirstNameField" max="32767" attributes="0"/>
+                                          <Component id="ServiceNameField" max="32767" attributes="0"/>
                                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
@@ -74,13 +76,12 @@
                                           <Component id="jLabel7" max="32767" attributes="0"/>
                                           <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="LastNameField" max="32767" attributes="0"/>
+                                      <Component id="ServicePriceField" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -103,27 +104,23 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="LastNameField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="FirstNameField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ServicePriceField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ServiceNameField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="PhoneField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="EmailField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="ServiceDurationField" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="StatusField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="ServiceStatusField" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="SaveCustomerButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="CancelButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="CancelAddButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="AddServiceButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -165,7 +162,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="e3" green="e0" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Add New Customer"/>
+                <Property name="text" type="java.lang.String" value="Add New Service"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -178,10 +175,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="1d" green="18" red="30" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="First Name: *"/>
+            <Property name="text" type="java.lang.String" value="Service Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="LastNameField">
+        <Component class="javax.swing.JTextField" name="ServicePriceField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f1" green="ef" red="ff" type="rgb"/>
@@ -206,10 +203,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="1d" green="18" red="30" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Contact Number: *"/>
+            <Property name="text" type="java.lang.String" value="Service Duration (in mins.): *"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="PhoneField">
+        <Component class="javax.swing.JTextField" name="ServiceDurationField">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Yu Gothic UI Semilight" size="14" style="0"/>
@@ -223,35 +220,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Yu Gothic UI Semilight" size="14" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="1d" green="18" red="30" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Email Address: *"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="EmailField">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f1" green="ef" red="ff" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Yu Gothic UI Semilight" size="14" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="1d" green="18" red="30" type="rgb"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="77" green="5a" red="d2" type="rgb"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="SaveCustomerButton">
+        <Component class="javax.swing.JButton" name="AddServiceButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="55" green="34" red="be" type="rgb"/>
@@ -265,10 +234,10 @@
             <Property name="text" type="java.lang.String" value="Save"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveCustomerButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddServiceButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="CancelButton">
+        <Component class="javax.swing.JButton" name="CancelAddButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f1" green="ef" red="ff" type="rgb"/>
@@ -282,7 +251,7 @@
             <Property name="text" type="java.lang.String" value="Cancel"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CancelButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CancelAddButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
@@ -293,10 +262,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="1d" green="18" red="30" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Last Name: *"/>
+            <Property name="text" type="java.lang.String" value="Service Price: *"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="FirstNameField">
+        <Component class="javax.swing.JTextField" name="ServiceNameField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f1" green="ef" red="ff" type="rgb"/>
@@ -313,7 +282,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FirstNameFieldActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ServiceNameFieldActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -327,15 +296,16 @@
             <Property name="text" type="java.lang.String" value="Status: *"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="StatusField">
+        <Component class="javax.swing.JComboBox" name="ServiceStatusField">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Yu Gothic UI Semilight" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
+              <StringArray count="3">
                 <StringItem index="0" value="Active"/>
                 <StringItem index="1" value="Inactive"/>
+                <StringItem index="2" value="Maintenance"/>
               </StringArray>
             </Property>
           </Properties>
