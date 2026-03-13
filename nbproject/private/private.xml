@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/ServiceManagement/AddServiceView.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/ServiceManagement/DeletedServicesView.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/ServiceManagement/EditServiceView.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/ServiceManagement/ServiceView.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/renderer/CustomerRenderer/CustomerActionRenderer.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/ReservationManagement/BookingView.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/renderer/CustomerRenderer/CustomerActionEditor.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/CustomerManagement/CustomersView.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/CustomerManagement/AddCustomerView.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/CustomerManagement/EditCustomerView.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/DAO/ReservationManagement/GuestDAO.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Model/ReservationManagement/Guest.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Model/Customers.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Database/Db_Connector.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Controllers/ReservationManagement/GuestControllers.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/DAO/CustomerDAO.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Controllers/CustomerControllers.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Controllers/User_Controllers.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/DAO/ServiceDAO.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Controllers/ReservationManagement/ReservationController.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/DAO/ReservationManagement/ReservationDAO.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Model/ReservationManagement/Reservation.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Model/ReservationManagement/Room.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/ReservationManagement/MainFrame.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/ReservationManagement/ReservationPanel.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/ReservationManagement/GuestPanel.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/ReservationManagement/RoomPanel.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Views/ReservationManagement/DatePicker.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/Controllers/ReservationManagement/RoomController.java</file>
+            <file>file:/C:/Users/KC/Desktop/JavaApplication17/src/DAO/ReservationManagement/RoomDAO.java</file>
+        </group>
+    </open-files>
+</project-private>
