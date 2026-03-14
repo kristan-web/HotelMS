@@ -257,10 +257,9 @@ public class DeletedServicesView extends javax.swing.JFrame {
                 try{
                     int selectedRow = tblServices.getSelectedRow();
                     String serviceID = tblServices.getValueAt(selectedRow, 0).toString();
-                    
-                    if(control.RestoreServiceByID(serviceID)){
-                        DeletedServicesView.getInstance().loadServicesToTable();
-                    }
+                    String message = control.RestoreServiceByID(serviceID);
+                    JOptionPane.showMessageDialog(this, message);
+                    DeletedServicesView.getInstance().loadServicesToTable();
                 }
                 catch(Exception e){
                     JOptionPane.showMessageDialog(this, "No service is selected to be restored");

@@ -2,8 +2,6 @@ package Views.AccountManagement;
 import Controllers.UserControllers;
 import javax.swing.JOptionPane;
 import java.awt.*;
-import Model.Users;
-        
 public class AdminRegistrationView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminRegistrationView.class.getName());
@@ -306,19 +304,24 @@ public class AdminRegistrationView extends javax.swing.JFrame {
     }//GEN-LAST:event_PhoneFieldActionPerformed
 
     private void RegisterAdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterAdminButtonActionPerformed
-        Users user = new Users();
+        String firstName = FirstNameField.getText().trim();
+        String lastName = LastNameField.getText().trim();
+        String email = EmailField.getText().trim();
+        String phone= PhoneField.getText().trim();
+        String password = new String(PasswordField.getPassword());
+        String confpass = new String(ConfPassField.getPassword());
         
-        user.setFirst_name(FirstNameField.getText().trim());
-        user.setLast_name(LastNameField.getText().trim());
-        user.setEmail(EmailField.getText().trim());
-        user.setPhone(PhoneField.getText().trim());
-        user.setPassword(new String(PasswordField.getPassword()));
-        user.setConfpass(new String(ConfPassField.getPassword()));
+        String message = control.ValidateAdminRegistration(firstName, lastName, email, phone, password, confpass);
         
-        if(control.ValidateAndRegisterAdminAccount(user)){
-            AdminLoginView dialog = new AdminLoginView();
-            dialog.setVisible(true);
-            this.dispose();
+        JOptionPane.showMessageDialog(null, message);
+        
+        if(message.equals("Admin registration success.")){
+            FirstNameField.setText("");
+            LastNameField.setText("");
+            EmailField.setText("");
+            PhoneField.setText("");
+            PasswordField.setText("");
+            ConfPassField.setText("");
         }
     }//GEN-LAST:event_RegisterAdminButtonActionPerformed
 

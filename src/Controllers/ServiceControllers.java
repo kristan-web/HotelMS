@@ -1,27 +1,36 @@
 package Controllers;
 import java.util.List;
 import Model.Services;
+import Views.ServiceManagement.*;
 import DAO.ServiceDAO;
-import javax.swing.JOptionPane;
 
 abstract class ServiceControllersTemplate {
-    abstract boolean AddServiceProcess(Services service);
-
+    //Returns a string for JOptionPane, adds a service to the database.
+    abstract String AddServiceProcess(String service_name, 
+    String service_duration, String service_price, String service_status);
+    
+    //Returns a list of services for table display.
     abstract List<Services> ListOfAllServices();
     
+    //Returns a list of services that matches the search bar.
     abstract List<Services> ListOfAllServices(String searchfield);
     
     abstract List<Services> ListOfAllDeletedServices();
     
     abstract List<Services> ListOfAllDeletedServices(String seachfield);
     
-    abstract Services GetServiceDetailsByID(int serviceID);
-
-    abstract boolean UpdateServiceDetails(Services service);
-
-    abstract boolean DeleteServiceByID(int service_id);
-
-    abstract boolean RestoreServiceByID(String service_id);
+    //Fetch a single object from the database and pass the values to a dialog.
+    abstract void GetServiceDetailsByID(int serviceID);
+    
+    //Returns a string for JOptionPane, updates a service to the database.
+    abstract String UpdateServiceDetails(String sid, String sname, 
+    String sprice, String sduration, String sstatus);
+    
+    //Returns a string for JOptionPane, updates a service to the database.
+    abstract String DeleteServiceByID(int service_id);
+    
+    //Restores a service by passing serviceID as argument
+    abstract String RestoreServiceByID(String service_id);
     
 }
 
@@ -30,32 +39,36 @@ abstract class ServiceControllersTemplate {
 
 public class ServiceControllers extends ServiceControllersTemplate{
     private static final ServiceDAO dao = new ServiceDAO();
+    private static final Services service = new Services();
    
     @Override
-    public boolean AddServiceProcess(Services service){
-        if(service.getServiceName().isEmpty() || service.getDurationMinutes().isEmpty() || service.getPrice().isEmpty()){
-            JOptionPane.showMessageDialog(null, "All fields should be filled.");
-            return false;
+    public String AddServiceProcess(String service_name, 
+    String service_duration, String service_price, String service_status)
+    {
+        if(service_name.isEmpty() || service_duration.isEmpty() || service_price.isEmpty()){
+            return "All fields are required";
+
         }
 
         try{
-            double price = Double.parseDouble(service.getPrice());
-            int duration = Integer.parseInt(service.getDurationMinutes());
+            double price = Double.parseDouble(service_price);
+            int duration = Integer.parseInt(service_duration);
+
+            service.setServiceName(service_name);
+            service.setDurationMinutes(duration);
+            service.setPrice(price);
+            service.setStatus(service_status);
             
-            if(dao.AddServiceQuery(service)){
-                JOptionPane.showMessageDialog(null, "Service added successfully!");
-                return true;
-            }
+            String message = dao.AddServiceQuery(service); 
             
-            return false;
+            
+            return message;
         }
         catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Failed to add service.");
-            return false;
+            return "Price and Duration must be numbers";
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Failed to add service.");
-            return false;
+            return "Failed to add service to the database";
         }
     }
     
@@ -70,79 +83,66 @@ public class ServiceControllers extends ServiceControllersTemplate{
     }
     
     @Override
+    public void GetServiceDetailsByID(int serviceID){
+        Services s;
+        s = dao.GetServiceDetailsByID(serviceID);
+        
+        if(s != null){
+            EditServiceView dialog = new EditServiceView();
+            dialog.loadServiceData(s);
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        }
+    }
+    
+    @Override
+    public String UpdateServiceDetails(String sid, String sname, 
+    String sprice, String sduration, String sstatus)
+    {
+        if(sid.trim().isEmpty() || sname.trim().isEmpty() || sprice.trim().isEmpty() 
+        || sduration.trim().isEmpty() || sstatus.trim().isEmpty())
+        {
+            return "All fields should be filled.";
+        }
+        
+        try{
+           int serviceID = Integer.parseInt(sid);
+           double price = Double.parseDouble(sprice);
+           int duration = Integer.parseInt(sduration); 
+            
+           String message = dao.UpdateServiceQuery(serviceID,sname, price, duration, sstatus);
+           
+           
+           return message;
+        }
+        catch(Exception e){
+           return "Failed to update service details."; 
+        }
+    }
+    
+    @Override
+    public String DeleteServiceByID(int service_id){
+        return dao.DeleteServiceQuery(service_id);
+    }
+    
     public List<Services> ListOfAllDeletedServices(){
         return dao.ListOfAllDeletedServicesQuery();
     }
     
-    @Override
     public List<Services> ListOfAllDeletedServices(String seachfield){
         return dao.ListOfAllDeletedServicesQuery(seachfield);
     }
     
-    @Override
-    public Services GetServiceDetailsByID(int serviceID){
-        Services service = dao.GetServiceDetailsByID(serviceID);
-        
-        if(service == null){
-            JOptionPane.showMessageDialog(null, "Failed to get service details.");
-            return service;
-        }
-        
-        return service;
-    }
-    
-    @Override
-    public boolean UpdateServiceDetails(Services service){        
-        if(service.getServiceID().isEmpty() || service.getServiceName().isEmpty() 
-        || service.getDurationMinutes().isEmpty() || service.getPrice().isEmpty() || service.getStatus().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null, "All fields should be filled.");
-            return false;
-        }
-        
-        try{
-           int serviceID = Integer.parseInt(service.getServiceID());
-           double price = Double.parseDouble(service.getPrice());
-           int duration = Integer.parseInt(service.getDurationMinutes()); 
-            
-           if(dao.UpdateServiceQuery(service)){
-               JOptionPane.showMessageDialog(null, "Service updated successfully!");
-               return true;
-           }
-           
-           return false;
-        }
-        catch(Exception e){
-           JOptionPane.showMessageDialog(null, "Failed to update service details.");
-           return false; 
-        }
-    }
-    
-    @Override
-    public boolean DeleteServiceByID(int service_id){
-        if(dao.DeleteServiceQuery(service_id)){
-            JOptionPane.showMessageDialog(null, "Service is deleted.");
-            return true;
-        }
-        
-        return false;
-    }
-    
-    
-    @Override
-    public boolean RestoreServiceByID(String service_id){
+    public String RestoreServiceByID(String service_id){
         try{
             int serviceID = Integer.parseInt(service_id);
-            if(dao.RestoreServiceByIDQuery(serviceID)){
-                JOptionPane.showMessageDialog(null, "Service is restored.");
-                return true;
-            }
             
-            return false;
+            String message = dao.RestoreServiceByIDQuery(serviceID);
+            
+            return message;
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Failed to restore service.");
-            return false;
+            return "Failed to restore service.";
         }
     }
 }

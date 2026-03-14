@@ -1,7 +1,6 @@
 package Views.CustomerManagement;
 import Controllers.CustomerControllers;
 import javax.swing.JOptionPane;
-import Model.Customers;
 
 public class AddCustomerView extends javax.swing.JDialog {
     private static final CustomerControllers control = new CustomerControllers();
@@ -219,18 +218,16 @@ public class AddCustomerView extends javax.swing.JDialog {
     }//GEN-LAST:event_FirstNameFieldActionPerformed
 
     private void SaveCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveCustomerButtonActionPerformed
-        Customers customer = new Customers();
-        
-        customer.setFirst_name(FirstNameField.getText().trim());
-        customer.setLast_name(LastNameField.getText().trim());
-        customer.setPhone_number(PhoneField.getText().trim());
-        customer.setEmail(EmailField.getText().trim());
-        customer.setStatus(StatusField.getSelectedItem().toString().trim());
+        String firstname = FirstNameField.getText().trim();
+        String lastname = LastNameField.getText().trim();
+        String phone = PhoneField.getText().trim();
+        String email = EmailField.getText().trim();
+        String status = StatusField.getSelectedItem().toString().trim();
        
-        if(control.AddCustomerProcess(customer)){
-            CustomersView.getInstance().LoadCustomerDetails();
-            this.dispose();
-        }
+        String message = control.AddCustomerProcess(firstname, lastname, phone, email, status);
+        JOptionPane.showMessageDialog(this, message);
+        CustomersView.getInstance().LoadCustomerDetails();
+        this.dispose();
     }//GEN-LAST:event_SaveCustomerButtonActionPerformed
 
     /**

@@ -1,11 +1,10 @@
-package renderer.CustomerRenderer;
+package renderer.CutomerRenderer;
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.net.URL;
 import Controllers.CustomerControllers;
-import Views.CustomerManagement.*;
-import Model.Customers;
+import Views.CustomerManagement.CustomersView;
 
 public class CustomerActionEditor extends AbstractCellEditor implements TableCellEditor {
     private static CustomerControllers control = new CustomerControllers();
@@ -40,11 +39,8 @@ public class CustomerActionEditor extends AbstractCellEditor implements TableCel
             fireEditingStopped();
             
             int ServiceID = Integer.parseInt(table.getValueAt(row, 0).toString()); 
-            Customers customer = control.GetCustomerDetailsByID(ServiceID);
+            control.GetCustomerDetailsByID(ServiceID);
             
-            EditCustomerView dialog = new EditCustomerView();
-            dialog.loadCustomerData(customer);
-            dialog.setVisible(true);
         });
 
         deleteButton.addActionListener(e -> {
@@ -60,9 +56,9 @@ public class CustomerActionEditor extends AbstractCellEditor implements TableCel
             );
             
             if(choice == JOptionPane.YES_OPTION){
-                if(control.DeleteCustomerByID(customerID)){
-                    CustomersView.getInstance().LoadCustomerDetails();
-                }
+                String message = control.DeleteCustomerByID(customerID);
+                JOptionPane.showMessageDialog(null, message);
+                CustomersView.getInstance().LoadCustomerDetails();
             }
         });
     }
