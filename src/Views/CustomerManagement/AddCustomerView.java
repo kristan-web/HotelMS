@@ -9,9 +9,9 @@ public class AddCustomerView extends javax.swing.JDialog {
     /**
      * Creates new form AddCustomerView
      */
-    public AddCustomerView(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public AddCustomerView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -255,7 +255,7 @@ public class AddCustomerView extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                AddCustomerView dialog = new AddCustomerView(new javax.swing.JFrame(), true);
+                AddCustomerView dialog = new AddCustomerView();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
