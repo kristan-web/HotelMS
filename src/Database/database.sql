@@ -7,7 +7,7 @@ CREATE TABLE Users (
     first_name VARCHAR(155) NOT NULL,
     last_name VARCHAR(155) NOT NULL,
     password VARCHAR(155) NOT NULL,
-    phone BIGINT NOT NULL,
+    phone VARCHAR(155) NOT NULL,
     email VARCHAR(155) NOT NULL UNIQUE,
     role ENUM('Admin', 'Staff') DEFAULT 'Staff',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

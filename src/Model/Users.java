@@ -6,13 +6,22 @@ public class Users {
     private String password;
     private String email;
     private String role;
-    private long phone;
+    private String phone;
+    private String confpass;
 
-    public long getPhone() {
+    public String getConfpass() {
+        return confpass;
+    }
+
+    public void setConfpass(String confpass) {
+        this.confpass = confpass;
+    }
+
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -64,14 +73,3 @@ public class Users {
         this.role = role;
     }
 }
-
-/*
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(155) NOT NULL,
-    last_name VARCHAR(155) NOT NULL,
-    password VARCHAR(155) NOT NULL,
-    email VARCHAR(155) NOT NULL UNIQUE,
-    role ENUM('Admin', 'Staff') DEFAULT 'Staff',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    is_deleted BOOLEAN DEFAULT FALSE
-*/

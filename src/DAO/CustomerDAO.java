@@ -4,37 +4,27 @@ import java.util.List;
 import java.util.ArrayList;
 import java.sql.*;
 import Database.Db_Connector;
+import javax.swing.JOptionPane;
 
 abstract class CustomerDAOTemplate{
+  
+    abstract boolean AddCustomerQuery(Customers customer);
     
-    abstract String AddCustomerQuery(String first_name, String last_name, 
-    String phone_number, String email, String status);
-    
-    //Returns a list of customers for table display.
     abstract List<Customers> ListOfAllCustomersQuery();
-    
-    //Method overloading, returns a list of customers that matches the searchbar.
+
     abstract List<Customers> ListOfAllCustomersQuery(String searchfield);
-    
-    //Returns an object that contains customer details.
+
     abstract Customers GetCustomerDetailsQuery(int customer_id);
     
-    //Updates customer details. Returns string for JOptionPane message.
-    abstract String UpdateCustomerQuery(int customer_id, String fname, 
-                                             String lname, String email, String phone, 
-                                             String status);
-    
-    //Deletes customer details. Returns string for JOptionPane message.
-    abstract String DeleteCustomerQuery(int customerID);
-    
-    //Query that returns a list of all deleted customers.
+    abstract boolean UpdateCustomerQuery(Customers customer);
+
+    abstract boolean DeleteCustomerQuery(int customerID);
+
     abstract List<Customers> ListOfAllDeletedCustomersQuery();
-    
-    //Query that returns a list of all deleted customers that matches search bar.
+
     abstract List<Customers> ListOfAllDeletedCustomersQuery(String searchfield);
-    
-    //
-    abstract String RestoreCustomerByIDQuery(int customerID);
+
+    abstract boolean RestoreCustomerByIDQuery(int customerID);
 
 }
 
@@ -42,35 +32,38 @@ abstract class CustomerDAOTemplate{
 
 public class CustomerDAO extends CustomerDAOTemplate{
     @Override
-    public String AddCustomerQuery(String first_name, String last_name, 
-    String phone_number, String email, String status){
+    public boolean AddCustomerQuery(Customers customer){
         try(Connection dbconn = Db_Connector.getCOnnection()){
-            if(dbconn == null) return "Can't connect to the database";
+            if(dbconn == null) return false;
             
             String query = "INSERT INTO Customer(first_name, last_name, phone_number, "
             + "email, status) VALUES (?, ?, ?, ?, ?)";
             
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
-                pst.setString(1, first_name);
-                pst.setString(2, last_name);
-                pst.setString(3, phone_number);
-                pst.setString(4, email);
-                pst.setString(5, status);
+                pst.setString(1, customer.getFirst_name());
+                pst.setString(2, customer.getLast_name());
+                pst.setString(3, customer.getPhone_number());
+                pst.setString(4, customer.getEmail());
+                pst.setString(5, customer.getStatus());
                 
                 int RowsAffected = pst.executeUpdate();
                 
-                if(RowsAffected > 0) return "Service added successfully.";
+                if(RowsAffected > 0) return true;
             }
             catch(Exception e){
-                return "Failed to add customer to the databae.";
+                JOptionPane.showMessageDialog(null, "Failed to add customer to database.");
+                return false;
             }
         }
         catch(SQLException e){
-            return "Failed to add customer to the database";
+            JOptionPane.showMessageDialog(null, "Failed to add customer to database.");
+            return false;
         }
-        return "Failed to add customer to the database";
+        JOptionPane.showMessageDialog(null, "Failed to add customer to database.");
+        return false;
     }
     
+    @Override
     public List<Customers> ListOfAllCustomersQuery(){
         List<Customers> cstmr = new ArrayList<>();
         try(Connection dbconn = Db_Connector.getCOnnection()){
@@ -83,7 +76,7 @@ public class CustomerDAO extends CustomerDAOTemplate{
                 while(rs.next()){
                     Customers customer = new Customers();
                     
-                    customer.setCustomer_id(rs.getInt("customer_id"));
+                    customer.setCustomer_id(rs.getString("customer_id"));
                     customer.setFirst_name(rs.getString("first_name"));
                     customer.setLast_name(rs.getString("last_name"));
                     customer.setEmail(rs.getString("email"));
@@ -106,6 +99,7 @@ public class CustomerDAO extends CustomerDAOTemplate{
         return cstmr;
     }
     
+    @Override
     public List<Customers> ListOfAllCustomersQuery(String searchfield){
         List<Customers> cstmr = new ArrayList<>();
         try(Connection dbconn = Db_Connector.getCOnnection()){
@@ -119,7 +113,7 @@ public class CustomerDAO extends CustomerDAOTemplate{
                 while(rs.next()){
                     Customers customer = new Customers();
                     
-                    customer.setCustomer_id(rs.getInt("customer_id"));
+                    customer.setCustomer_id(rs.getString("customer_id"));
                     customer.setFirst_name(rs.getString("first_name"));
                     customer.setLast_name(rs.getString("last_name"));
                     customer.setEmail(rs.getString("email"));
@@ -142,6 +136,7 @@ public class CustomerDAO extends CustomerDAOTemplate{
         return cstmr;
     }
     
+    @Override
     public Customers GetCustomerDetailsQuery(int customer_id){
         Customers cstmr = new Customers();
         try(Connection dbconn = Db_Connector.getCOnnection()){
@@ -153,7 +148,7 @@ public class CustomerDAO extends CustomerDAOTemplate{
                 ResultSet rs = pst.executeQuery();
                 
                 while(rs.next()){
-                    cstmr.setCustomer_id(rs.getInt("customer_id"));
+                    cstmr.setCustomer_id(rs.getString("customer_id"));
                     cstmr.setFirst_name(rs.getString("first_name"));
                     cstmr.setLast_name(rs.getString("last_name"));
                     cstmr.setPhone_number(rs.getString("phone_number"));
@@ -172,58 +167,67 @@ public class CustomerDAO extends CustomerDAOTemplate{
         return cstmr;
     }
     
-    public String UpdateCustomerQuery(int customer_id, String fname, String lname, String email, String phone, String status){        
+    @Override
+    public boolean UpdateCustomerQuery(Customers customer){
         try(Connection dbconn = Db_Connector.getCOnnection()){
             String query = "UPDATE Customer SET first_name = ?, last_name = ?, "
             + "phone_number = ?, email = ?, status = ? WHERE customer_id = ?";
             
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
-                pst.setString(1, fname);
-                pst.setString(2, lname);
-                pst.setString(3, phone);
-                pst.setString(4, email);
-                pst.setString(5, status);
-                pst.setInt(6, customer_id);
+                pst.setString(1, customer.getFirst_name());
+                pst.setString(2, customer.getLast_name());
+                pst.setString(3, customer.getPhone_number());
+                pst.setString(4, customer.getEmail());
+                pst.setString(5, customer.getStatus());
+                pst.setInt(6, Integer.parseInt(customer.getCustomer_id()));
                 
                 int AffectedRow = pst.executeUpdate();
                 
-                if(AffectedRow > 0) return "Update Success";
+                if(AffectedRow > 0) return true;
             }
             catch(Exception e){
-                return "Failed to update customer details.";
+                JOptionPane.showMessageDialog(null, "Failed to update customer details.");
+                return false;
             }
         }
         catch(SQLException e){
-            return "Failed to update customer details.";
+            JOptionPane.showMessageDialog(null, "Failed to update customer details.");
+            return false;
         }
         
-        return "Failed to update customer details.";
+        
+        JOptionPane.showMessageDialog(null, "Failed to update customer details.");
+        return false;
     }
     
-    public String DeleteCustomerQuery(int customerID){
+    @Override
+    public boolean DeleteCustomerQuery(int customerID){
         try(Connection dbconn = Db_Connector.getCOnnection()){
-            if(dbconn == null) return "Can't connect to database.";
+            if(dbconn == null) return false;
             
-            String query = "UPDATE Customer SET is_deleted = true, status = Inactive WHERE customer_id = ?";
+            String query = "UPDATE Customer SET is_deleted = true, status = 'Inactive' WHERE customer_id = ?";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setInt(1, customerID);
                 
                 int AffectedRows = pst.executeUpdate();
                 
-                if(AffectedRows > 0) return "Delete Success.";
+                if(AffectedRows > 0) return true;
             }
             catch(Exception e){
-                return "Failed to delete from databae.";
+                JOptionPane.showMessageDialog(null, "Failed to delete from database.");
+                return false;
             }
         }
         catch(SQLException e){
-            e.printStackTrace();
-            return "Failed to delete from database";
+            JOptionPane.showMessageDialog(null, "Failed to delete from database.");
+            return false;
         }
         catch(Exception e){
-            return "Failed to delete from database";
+            JOptionPane.showMessageDialog(null, "Failed to delete from database.");
+            return false;
         }
-        return "Failed to delete from database";
+        JOptionPane.showMessageDialog(null, "Failed to delete from database.");
+        return false;
     }
     
     @Override
@@ -239,7 +243,7 @@ public class CustomerDAO extends CustomerDAOTemplate{
                 while(rs.next()){
                     Customers customer = new Customers();
                     
-                    customer.setCustomer_id(rs.getInt("customer_id"));
+                    customer.setCustomer_id(rs.getString("customer_id"));
                     customer.setFirst_name(rs.getString("first_name"));
                     customer.setLast_name(rs.getString("last_name"));
                     customer.setEmail(rs.getString("email"));
@@ -278,7 +282,7 @@ public class CustomerDAO extends CustomerDAOTemplate{
                 while(rs.next()){
                     Customers customer = new Customers();
                     
-                    customer.setCustomer_id(rs.getInt("customer_id"));
+                    customer.setCustomer_id(rs.getString("customer_id"));
                     customer.setFirst_name(rs.getString("first_name"));
                     customer.setLast_name(rs.getString("lastt_name"));
                     customer.setEmail(rs.getString("email"));
@@ -304,29 +308,36 @@ public class CustomerDAO extends CustomerDAOTemplate{
     }
     
     @Override
-    public String RestoreCustomerByIDQuery(int customerID){
+    public boolean RestoreCustomerByIDQuery(int customerID){
         try(Connection dbconn = Db_Connector.getCOnnection()){
-            if(dbconn == null) return "Can't connect to the database";
+            if(dbconn == null){ 
+                JOptionPane.showMessageDialog(null, "Failed to restore customer");
+                return false;
+            }
             
-            String query = "UPDATE Customer SET is_deleted = false WHERE customer_id = ?";
+            String query = "UPDATE Customer SET is_deleted = false, status = 'Active' WHERE customer_id = ?";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setInt(1, customerID);
                 
                 int RowsAffected = pst.executeUpdate();
                 
-                if(RowsAffected > 0) return "Customer restored successfully";
+                if(RowsAffected > 0) return true;
             }
             catch(Exception e){
-                return "Failed to update customer details.";
+                JOptionPane.showMessageDialog(null, "Failed to restore customer");
+                return false;
             }
         }
         catch(SQLException e){
             e.printStackTrace();
-            return "Failed to update customer details";
+            JOptionPane.showMessageDialog(null, "Failed to restore customer");
+            return false;
         }
         catch(Exception e){
-            return "Failed to update customer details";
+            JOptionPane.showMessageDialog(null, "Failed to restore customer");
+            return false;
         }
-        return "Failed to update customer details";
+        JOptionPane.showMessageDialog(null, "Failed to restore customer");
+        return false;
     }
 }

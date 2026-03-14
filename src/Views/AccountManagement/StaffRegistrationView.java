@@ -2,6 +2,7 @@ package Views.AccountManagement;
 import java.awt.*;
 import Controllers.UserControllers;
 import javax.swing.JOptionPane;
+import Model.Users;
  
 public class StaffRegistrationView extends javax.swing.JFrame {
     private static final UserControllers control = new UserControllers();
@@ -278,23 +279,19 @@ public class StaffRegistrationView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void StaffRegistrationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffRegistrationButtonActionPerformed
-        String firstName = FirstNameField.getText().trim();
-        String lastName = LastNameField.getText().trim();
-        String email = EmailField.getText().trim();
-        String phone = PhoneField.getText().trim();
-        String password = new String(PasswordField.getPassword());
-        String confPass = new String(ConfPassField.getPassword());
+        Users user = new Users();
         
-        String message = control.ValidateStaffRegistration(firstName, lastName, email, phone, password, confPass);
-        JOptionPane.showMessageDialog(null, message);
+        user.setFirst_name(FirstNameField.getText().trim());
+        user.setLast_name(LastNameField.getText().trim());
+        user.setEmail(EmailField.getText().trim());
+        user.setPhone(PhoneField.getText().trim());
+        user.setPassword(new String(PasswordField.getPassword()));
+        user.setConfpass(new String(ConfPassField.getPassword()));
         
-        if(message.equals("Staff registration success.")){
-            FirstNameField.setText("");
-            LastNameField.setText("");
-            EmailField.setText("");
-            PhoneField.setText("");
-            PasswordField.setText("");
-            ConfPassField.setText("");
+        if(control.ValidateAndRegisterStaffAccount(user)){
+            StaffLoginView dialog = new StaffLoginView();
+            dialog.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_StaffRegistrationButtonActionPerformed
 

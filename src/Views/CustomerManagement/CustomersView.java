@@ -1,5 +1,5 @@
 package Views.CustomerManagement;
-import renderer.CutomerRenderer.*;
+import renderer.CustomerRenderer.*;
 import java.util.List;
 import Model.Customers;
 import Controllers.CustomerControllers;

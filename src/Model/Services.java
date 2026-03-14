@@ -2,17 +2,17 @@ package Model;
 
 public class Services {
     //Attributes
-    private int serviceID;
+    private String serviceID;
     private String serviceName;
-    private double price;
-    private int durationMinutes;
+    private String price;
+    private String durationMinutes;
     private String status;
 
-    public int getServiceID() {
+    public String getServiceID() {
         return serviceID;
     }
 
-    public void setServiceID(int serviceID) {
+    public void setServiceID(String serviceID) {
         this.serviceID = serviceID;
     }
 
@@ -24,19 +24,19 @@ public class Services {
         this.serviceName = serviceName;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public int getDurationMinutes() {
+    public String getDurationMinutes() {
         return durationMinutes;
     }
 
-    public void setDurationMinutes(int durationMinutes) {
+    public void setDurationMinutes(String durationMinutes) {
         this.durationMinutes = durationMinutes;
     }
 
@@ -47,6 +47,5 @@ public class Services {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
+
 }
