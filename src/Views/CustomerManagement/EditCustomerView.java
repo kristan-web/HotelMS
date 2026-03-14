@@ -217,18 +217,18 @@ public class EditCustomerView extends javax.swing.JDialog {
     }//GEN-LAST:event_FirstNameFieldActionPerformed
 
     private void UpdateCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerButtonActionPerformed
-        Customers customer = new Customers();
-        customer.setCustomer_id(CustomerIDField.getText().trim());
-        customer.setFirst_name(FirstNameField.getText().trim());
-        customer.setLast_name(LastNameField.getText().trim());
-        customer.setEmail(EmailField.getText().trim());
-        customer.setPhone_number(PhoneField.getText().trim());
-        customer.setStatus(StatusField.getSelectedItem().toString().trim());
+        String cstID = CustomerIDField.getText().trim();
+        String cstfName = FirstNameField.getText().trim();
+        String cstlName = LastNameField.getText().trim();
+        String cstEmail = EmailField.getText().trim();
+        String cstPhone = PhoneField.getText().trim();
+        String cstStatus = StatusField.getSelectedItem().toString().trim();
         
-        if(control.UpdateCustomerDetails(customer)){
-            CustomersView.getInstance().LoadCustomerDetails();
-            this.dispose();
-        }
+        String message = control.UpdateCustomerDetails(cstID, cstfName, cstlName, cstEmail, cstPhone, cstStatus);
+        
+        JOptionPane.showMessageDialog(this, message);
+        CustomersView.getInstance().LoadCustomerDetails();
+        this.dispose();
     }//GEN-LAST:event_UpdateCustomerButtonActionPerformed
 
     private void EmailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailFieldActionPerformed

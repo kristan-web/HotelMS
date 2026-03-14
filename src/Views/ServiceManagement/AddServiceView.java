@@ -1,7 +1,6 @@
 package Views.ServiceManagement;
 import Controllers.ServiceControllers;
 import javax.swing.JOptionPane;
-import Model.Services;
 
 public class AddServiceView extends javax.swing.JDialog {
     private static ServiceControllers control = new ServiceControllers();
@@ -207,17 +206,17 @@ public class AddServiceView extends javax.swing.JDialog {
     }//GEN-LAST:event_ServiceNameFieldActionPerformed
 
     private void AddServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddServiceButtonActionPerformed
-        Services service = new Services();
+        String serv_name, serv_status, serv_price, serv_duration;
         
-        service.setServiceName(ServiceNameField.getText().trim());
-        service.setPrice(ServicePriceField.getText().trim());
-        service.setDurationMinutes(ServiceDurationField.getText().trim());
-        service.setStatus(ServiceStatusField.getSelectedItem().toString().trim());
+        serv_name = ServiceNameField.getText().trim();
+        serv_price = ServicePriceField.getText().trim();
+        serv_duration = ServiceDurationField.getText().trim();
+        serv_status = ServiceStatusField.getSelectedItem().toString().trim();
         
-        if(control.AddServiceProcess(service)){
-            ServiceView.getInstance().loadServicesToTable();;
-            this.dispose();
-        }
+        String message = control.AddServiceProcess(serv_name, serv_duration, serv_price, serv_status);
+        JOptionPane.showMessageDialog(this, message);
+        ServiceView.getInstance().loadServicesToTable();
+        this.dispose();
     }//GEN-LAST:event_AddServiceButtonActionPerformed
     
     public static void main(String args[]) {

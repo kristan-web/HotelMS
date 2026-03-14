@@ -2,22 +2,39 @@ package DAO;
 import Model.Users;
 import Database.Db_Connector;
 import java.sql.*;
-import javax.swing.JOptionPane;
 
 abstract class UserDAOTemplate {
+    //Returns a string for JOptionPane message.
+    //Insert model details to users table in database.
+    abstract String RegisterAdminQuery(Users user);
     
-    abstract boolean RegisterAdminQuery(Users user);
+    //Returns a string for JOptionPane message.
+    //Insert model details to users table in database.
+    abstract String RegisterStaffQuery(Users user);
     
-    abstract boolean RegisterStaffQuery(Users user);
-   
-    abstract boolean ChangeUserPasswordThroughEmailQuery(String email, String hashedPass);
-
+    //
+    abstract String ChangeUserPasswordThroughEmailQuery(String email, String hashedPass);
+    
+    //
     abstract boolean CheckAllUsersIfEmailIsPresentQuery(String email);
-
+    
+    //
     abstract Users AuthenticateStaffLoginQuery(String email);
-
-    abstract Users AuthenticateAdminLoginQuery(String email);    
+    
+    //
+    abstract Users AuthenticateAdminLoginQuery(String email);
+        
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -25,12 +42,9 @@ abstract class UserDAOTemplate {
 
 public class UserDAO extends UserDAOTemplate{
     @Override
-    public boolean RegisterAdminQuery(Users user){
+    public String RegisterAdminQuery(Users user){
         try(Connection dbconn = Db_Connector.getCOnnection()){
-            if(dbconn == null){
-                JOptionPane.showMessageDialog(null, "Failed to connect to database");
-                return false;
-            }
+            if(dbconn == null) return "Failed to connect to database";
             
             String query = "INSERT INTO USERS (first_name, last_name, password, phone, email, role)"
                     + "VALUES (?, ?, ?, ?, ?, ?)";
@@ -38,39 +52,32 @@ public class UserDAO extends UserDAOTemplate{
                 pst.setString(1, user.getFirst_name());
                 pst.setString(2, user.getLast_name());
                 pst.setString(3, user.getPassword());
-                pst.setString(4, user.getPhone());
+                pst.setLong(4, user.getPhone());
                 pst.setString(5, user.getEmail());
                 pst.setString(6, "Admin");
                 
                 int ReturnedRow = pst.executeUpdate();
                 
-                if(ReturnedRow > 0) return true;
+                if(ReturnedRow > 0) return "Admin registration success.";
             }
             catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Registration failed. Email is already taken.");
-                return false;
+                return "Registration failed. Email is already taken.";
             }
         }
         catch(SQLException e){
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Registration failed. Email is already taken.");
-            return false;
+            return "Registration failed.";
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Registration failed.");
-            return false;
+            return "Registration failed.";
         }
-        JOptionPane.showMessageDialog(null, "Registration failed.");
-        return false;
+        return "Registration failed";
     }
     
     @Override
-    public boolean RegisterStaffQuery(Users user){
+    public String RegisterStaffQuery(Users user){
         try(Connection dbconn = Db_Connector.getCOnnection()){
-            if(dbconn == null){
-                JOptionPane.showMessageDialog(null, "Failed to connect to database");
-                return false;
-            }
+            if(dbconn == null) return "Failed to connect to database";
             
             String query = "INSERT INTO USERS (first_name, last_name, password, phone, email, role)"
                     + "VALUES (?, ?, ?, ?, ?, ?)";
@@ -78,39 +85,32 @@ public class UserDAO extends UserDAOTemplate{
                 pst.setString(1, user.getFirst_name());
                 pst.setString(2, user.getLast_name());
                 pst.setString(3, user.getPassword());
-                pst.setString(4, user.getPhone());
+                pst.setLong(4, user.getPhone());
                 pst.setString(5, user.getEmail());
                 pst.setString(6, "Staff");
                 
                 int ReturnedRow = pst.executeUpdate();
                 
-                if(ReturnedRow > 0) return true;
+                if(ReturnedRow > 0) return "Staff registration success.";
             }
             catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Registration failed. Email is already taken.");
-                return false;
+                return "Registration failed. Email is already taken.";
             }
         }
         catch(SQLException e){
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Registration failed. Email is already taken.");
-            return false;
+            return "Registration failed.";
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Registration failed.");
-            return false;
+            return "Registration failed.";
         }
-        JOptionPane.showMessageDialog(null, "Registration failed.");
-        return false;
+        return "Registration failed";
     }
     
     @Override
-    public boolean ChangeUserPasswordThroughEmailQuery(String email, String hashedPass){
+    public String ChangeUserPasswordThroughEmailQuery(String email, String hashedPass){
         try(Connection dbconn = Db_Connector.getCOnnection()){
-            if(dbconn == null){
-                JOptionPane.showMessageDialog(null, "Failed to connect to database");
-                return false;
-            }
+            if(dbconn == null) return "Failed to connect to database";
             
             String query = "UPDATE USERS SET password = ? WHERE email = ?";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
@@ -120,31 +120,25 @@ public class UserDAO extends UserDAOTemplate{
                 int affectedRows = pst.executeUpdate();
                 
                 if(affectedRows > 0){
-                    return true;
+                    return "Password changed successfully.";
                 }
             }
             catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Change password failed.");
-                return false;
+                return "Change password failed";
             }
             
         }
         catch(SQLException e){
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Change password failed.");
-            return false;
+            return "Failed to connect to database.";
         }
-        JOptionPane.showMessageDialog(null, "Change password failed.");
-        return false;
+        return "Failed to connect to database.";
     }
     
     @Override
     public boolean CheckAllUsersIfEmailIsPresentQuery(String email){
         try(Connection dbconn = Db_Connector.getCOnnection()){
-            if(dbconn == null){
-                JOptionPane.showMessageDialog(null, "Can't connect to the database.");
-                return false;
-            }
+            if(dbconn == null) return false;
             
             String query = "SELECT email FROM Users WHERE email = ?"; 
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
@@ -152,24 +146,20 @@ public class UserDAO extends UserDAOTemplate{
                 
                 ResultSet rs = pst.executeQuery();
                 
-                if(rs.next()){
+                while(rs.next()){
                     return true;
                 }
-                
-                JOptionPane.showMessageDialog(null, "Email is not registered.");
-                return false;
             }
             catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Failed to search database.");
                 return false;
             }
             
         }
         catch(SQLException e){
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Failed to search database.");
-                return false;
+            return false;
         }
+        return false;
     }
     
     @Override
@@ -189,7 +179,7 @@ public class UserDAO extends UserDAOTemplate{
                     user.setFirst_name(rs.getString("first_name"));
                     user.setLast_name(rs.getString("last_name"));
                     user.setPassword(rs.getString("password"));
-                    user.setPhone(rs.getString("phone"));
+                    user.setPhone(rs.getLong("phone"));
                     user.setEmail(rs.getString("email"));
                     
                     return user;
@@ -224,7 +214,7 @@ public class UserDAO extends UserDAOTemplate{
                     user.setFirst_name(rs.getString("first_name"));
                     user.setLast_name(rs.getString("last_name"));
                     user.setPassword(rs.getString("password"));
-                    user.setPhone(rs.getString("phone"));
+                    user.setPhone(rs.getLong("phone"));
                     user.setEmail(rs.getString("email"));
                     
                     return user;

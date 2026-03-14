@@ -1,4 +1,4 @@
-package renderer.CustomerRenderer;
+package renderer.CutomerRenderer;
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;

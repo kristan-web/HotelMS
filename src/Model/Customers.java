@@ -1,7 +1,7 @@
 package Model;
 public class Customers {
     //ATTRIBUTES
-    private String customer_id;
+    private int customer_id;
     private String first_name;
     private String last_name;
     private String phone_number;
@@ -9,11 +9,11 @@ public class Customers {
     private String status;
     //SETTERS AND GETTERS
 
-    public String getCustomer_id() {
+    public int getCustomer_id() {
         return customer_id;
     }
 
-    public void setCustomer_id(String customer_id) {
+    public void setCustomer_id(int customer_id) {
         this.customer_id = customer_id;
     }
 
