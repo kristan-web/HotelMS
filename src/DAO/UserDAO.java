@@ -17,7 +17,28 @@ abstract class UserDAOTemplate {
     
     //
     abstract boolean CheckAllUsersIfEmailIsPresentQuery(String email);
+    
+    //
+    abstract Users AuthenticateStaffLoginQuery(String email);
+    
+    //
+    abstract Users AuthenticateAdminLoginQuery(String email);
+        
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 public class UserDAO extends UserDAOTemplate{
     @Override
@@ -119,7 +140,7 @@ public class UserDAO extends UserDAOTemplate{
         try(Connection dbconn = Db_Connector.getCOnnection()){
             if(dbconn == null) return false;
             
-            String query = "SELECT email FROM Users WHERE email = ? AND role = 'Staff'"; 
+            String query = "SELECT email FROM Users WHERE email = ?"; 
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setString(1, email);
                 
@@ -139,5 +160,75 @@ public class UserDAO extends UserDAOTemplate{
             return false;
         }
         return false;
+    }
+    
+    @Override
+    public Users AuthenticateStaffLoginQuery(String email){
+        try(Connection dbconn = Db_Connector.getCOnnection()){
+            if(dbconn == null) return null;
+            
+            String query = "SELECT * FROM Users WHERE email = ? AND role = 'Staff'"; 
+            try(PreparedStatement pst = dbconn.prepareStatement(query)){
+                pst.setString(1, email);
+                
+                ResultSet rs = pst.executeQuery();
+                Users user = new Users();
+                
+                while(rs.next()){
+                    user.setUser_id(rs.getString("user_id"));
+                    user.setFirst_name(rs.getString("first_name"));
+                    user.setLast_name(rs.getString("last_name"));
+                    user.setPassword(rs.getString("password"));
+                    user.setPhone(rs.getLong("phone"));
+                    user.setEmail(rs.getString("email"));
+                    
+                    return user;
+                }
+            }
+            catch(Exception e){
+                return null;
+            }
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+        return null;
+    }
+    
+    @Override
+    public Users AuthenticateAdminLoginQuery(String email){
+        try(Connection dbconn = Db_Connector.getCOnnection()){
+            if(dbconn == null) return null;
+            
+            String query = "SELECT * FROM Users WHERE email = ? AND role = 'Admin'"; 
+            try(PreparedStatement pst = dbconn.prepareStatement(query)){
+                pst.setString(1, email);
+                
+                ResultSet rs = pst.executeQuery();
+                Users user = new Users();
+                
+                while(rs.next()){
+                    user.setUser_id(rs.getString("user_id"));
+                    user.setFirst_name(rs.getString("first_name"));
+                    user.setLast_name(rs.getString("last_name"));
+                    user.setPassword(rs.getString("password"));
+                    user.setPhone(rs.getLong("phone"));
+                    user.setEmail(rs.getString("email"));
+                    
+                    return user;
+                }
+            }
+            catch(Exception e){
+                return null;
+            }
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+        return null;
     }
 }

@@ -17,6 +17,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
      */
     public AdminDashBoardView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

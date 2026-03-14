@@ -1,15 +1,27 @@
 package Controllers;
 import Model.Users;
 import DAO.UserDAO;
-import java.security.MessageDigest;
 import java.util.Random;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
+import javax.swing.JOptionPane;
+import org.mindrot.jbcrypt.BCrypt;
+
+/*
+    STATUS: EDITING NOT DONE! 
+    
+    WRITE GOOD COMMENTS
+    REFACTOR CODE
+    ADD FUNCTIONS
+*/
 
 abstract class UserControllersTemplate {
     //Returns a hashed string, used for password before inserting to database.
     abstract String hashPassword(String password);
+    
+    //Returns TRUE if password match from the storedHash. FALSE if not.
+    abstract boolean checkPassword(String inputPassword, String storedHash);
     
     //Returns a string for JOptionPane message. 
     //Validate Admin Details and Call RegisterValidateUser method.
@@ -43,9 +55,28 @@ abstract class UserControllersTemplate {
     //Call DAO to change the user password WHERE email = true;
     abstract String ChangeUserPasswordThroughEmail(String email, String password);
     
+    //Returns TRUE if email is found in the database. FALSE if not.
     abstract boolean CheckAllUsersIfEmailIsPresent(String email);
     
+    //Returns a string for JOptionPane message.
+    //Authenticate staff account.
+    abstract Users AuthenticateStaffLogin(String email, String password);
+    
+    //Returns a string for JOptionPane message.
+    //Authenticate admin account.
+    abstract Users AuthenticateAdminLogin(String email, String password);
 }
+
+
+
+
+
+//================================== DERIVED CLASS ======================================
+
+
+
+
+
 
 
 public class UserControllers extends UserControllersTemplate{
@@ -53,23 +84,12 @@ public class UserControllers extends UserControllersTemplate{
     
     @Override
     public String hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hash = md.digest(password.getBytes());
-
-            StringBuilder hexString = new StringBuilder();
-
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if(hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-
-            return hexString.toString();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+    
+    @Override
+    public boolean checkPassword(String inputPassword, String storedHash) {
+        return BCrypt.checkpw(inputPassword, storedHash);
     }
     
     @Override
@@ -220,5 +240,51 @@ public class UserControllers extends UserControllersTemplate{
         }
         
         return dao.CheckAllUsersIfEmailIsPresentQuery(email);
+    }
+    
+    @Override
+    public Users AuthenticateStaffLogin(String email, String password){
+        if(email.isEmpty() || password.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Enter username and password.");
+            return null;
+        }
+        
+        Users user = dao.AuthenticateStaffLoginQuery(email);
+        
+        if(user == null){
+            JOptionPane.showMessageDialog(null, "Account does not exist.");
+            return null;
+        }
+        
+        if(checkPassword(password, user.getPassword())){
+            return user;
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Incorrect username or password");
+            return null;
+        }
+    }
+    
+    
+    public Users AuthenticateAdminLogin(String email, String password){
+        if(email.isEmpty() || password.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Enter username and password.");
+            return null;
+        }
+        
+        Users user = dao.AuthenticateAdminLoginQuery(email);
+        
+        if(user == null){
+            JOptionPane.showMessageDialog(null, "Account does not exist.");
+            return null;
+        }
+        
+        if(checkPassword(password, user.getPassword())){
+            return user;
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Incorrect username or password");
+            return null;
+        }
     }
 }

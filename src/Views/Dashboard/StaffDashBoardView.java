@@ -17,6 +17,7 @@ public class StaffDashBoardView extends javax.swing.JFrame {
      */
     public StaffDashBoardView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

@@ -314,6 +314,15 @@ public class AdminRegistrationView extends javax.swing.JFrame {
         String message = control.ValidateAdminRegistration(firstName, lastName, email, phone, password, confpass);
         
         JOptionPane.showMessageDialog(null, message);
+        
+        if(message.equals("Admin registration success.")){
+            FirstNameField.setText("");
+            LastNameField.setText("");
+            EmailField.setText("");
+            PhoneField.setText("");
+            PasswordField.setText("");
+            ConfPassField.setText("");
+        }
     }//GEN-LAST:event_RegisterAdminButtonActionPerformed
 
     private void LoginFormButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginFormButtonMouseEntered

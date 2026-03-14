@@ -1,8 +1,11 @@
 package Views.AccountManagement;
 import java.awt.*;
+import Model.Users;
+import Controllers.UserControllers;
+import Views.Dashboard.AdminDashBoardView;
 
 public class AdminLoginView extends javax.swing.JFrame {
-    
+    private static final UserControllers control = new UserControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminLoginView.class.getName());
 
     /**
@@ -26,13 +29,13 @@ public class AdminLoginView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        PasswordField = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
         ForgotPasswordButton = new javax.swing.JLabel();
+        EmailField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
@@ -54,12 +57,14 @@ public class AdminLoginView extends javax.swing.JFrame {
         jLabel1.setMinimumSize(new java.awt.Dimension(150, 32));
         jLabel1.setPreferredSize(new java.awt.Dimension(150, 32));
 
-        jPasswordField1.setBackground(new java.awt.Color(255, 239, 241));
-        jPasswordField1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(48, 24, 29));
-        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jPasswordField1.setSelectionColor(new java.awt.Color(210, 90, 119));
-        jPasswordField1.addActionListener(this::jPasswordField1ActionPerformed);
+        PasswordField.setBackground(new java.awt.Color(255, 239, 241));
+        PasswordField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
+        PasswordField.setForeground(new java.awt.Color(48, 24, 29));
+        PasswordField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        PasswordField.setMinimumSize(new java.awt.Dimension(64, 30));
+        PasswordField.setPreferredSize(new java.awt.Dimension(64, 30));
+        PasswordField.setSelectionColor(new java.awt.Color(210, 90, 119));
+        PasswordField.addActionListener(this::PasswordFieldActionPerformed);
 
         jButton1.setBackground(new java.awt.Color(255, 219, 222));
         jButton1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
@@ -86,16 +91,6 @@ public class AdminLoginView extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 224, 227));
         jLabel10.setText("Email:");
 
-        jPasswordField2.setBackground(new java.awt.Color(255, 239, 241));
-        jPasswordField2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        jPasswordField2.setForeground(new java.awt.Color(48, 24, 29));
-        jPasswordField2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jPasswordField2.setMinimumSize(new java.awt.Dimension(350, 30));
-        jPasswordField2.setPreferredSize(new java.awt.Dimension(350, 30));
-        jPasswordField2.setRequestFocusEnabled(false);
-        jPasswordField2.setSelectionColor(new java.awt.Color(210, 90, 119));
-        jPasswordField2.addActionListener(this::jPasswordField2ActionPerformed);
-
         ForgotPasswordButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         ForgotPasswordButton.setForeground(new java.awt.Color(255, 224, 227));
         ForgotPasswordButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -106,6 +101,9 @@ public class AdminLoginView extends javax.swing.JFrame {
         ForgotPasswordButton.setMinimumSize(new java.awt.Dimension(80, 20));
         ForgotPasswordButton.setPreferredSize(new java.awt.Dimension(80, 20));
         ForgotPasswordButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ForgotPasswordButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 ForgotPasswordButtonMouseEntered(evt);
             }
@@ -113,6 +111,9 @@ public class AdminLoginView extends javax.swing.JFrame {
                 ForgotPasswordButtonMouseExited(evt);
             }
         });
+
+        EmailField.setMinimumSize(new java.awt.Dimension(64, 30));
+        EmailField.setPreferredSize(new java.awt.Dimension(71, 30));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -125,13 +126,6 @@ public class AdminLoginView extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(90, 90, 90))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(ForgotPasswordButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(210, 210, 210))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -139,11 +133,15 @@ public class AdminLoginView extends javax.swing.JFrame {
                         .addGap(130, 130, 130))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(190, 190, 190))))
+                        .addGap(190, 190, 190))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(EmailField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(90, 90, 90))))
         );
-
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPasswordField1, jPasswordField2});
-
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -151,12 +149,12 @@ public class AdminLoginView extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jLabel10)
-                .addGap(10, 10, 10)
-                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -165,8 +163,6 @@ public class AdminLoginView extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
-
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPasswordField1, jPasswordField2});
 
         jLabel3.setBackground(new java.awt.Color(255, 224, 227));
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 18)); // NOI18N
@@ -236,22 +232,30 @@ public class AdminLoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String email = EmailField.getText().trim();
+        String password = new String(PasswordField.getPassword());
+        
+        Users user = control.AuthenticateAdminLogin(email, password);
+        
+        if(user != null){
+            /*
+                PASS THE USER MODEL AS ARGUMENT LATER
+            */
+            AdminDashBoardView dialog = new AdminDashBoardView();
+            dialog.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_PasswordFieldActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         StaffLoginView dialog = new StaffLoginView();
         dialog.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField2ActionPerformed
 
     private void ForgotPasswordButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ForgotPasswordButtonMouseEntered
         Font f = ForgotPasswordButton.getFont();
@@ -262,6 +266,12 @@ public class AdminLoginView extends javax.swing.JFrame {
         Font f = ForgotPasswordButton.getFont();
         ForgotPasswordButton.setFont(new Font(f.getName(), Font.PLAIN, f.getSize()));
     }//GEN-LAST:event_ForgotPasswordButtonMouseExited
+
+    private void ForgotPasswordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ForgotPasswordButtonMouseClicked
+        ForgotPasswordView dialog = new ForgotPasswordView();
+        dialog.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ForgotPasswordButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -289,7 +299,9 @@ public class AdminLoginView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField EmailField;
     private javax.swing.JLabel ForgotPasswordButton;
+    private javax.swing.JPasswordField PasswordField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -299,8 +311,6 @@ public class AdminLoginView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables
