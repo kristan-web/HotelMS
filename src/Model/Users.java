@@ -1,5 +1,7 @@
 package Model;
+
 public class Users {
+
     private String user_id;
     private String first_name;
     private String last_name;
@@ -64,14 +66,3 @@ public class Users {
         this.role = role;
     }
 }
-
-/*
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(155) NOT NULL,
-    last_name VARCHAR(155) NOT NULL,
-    password VARCHAR(155) NOT NULL,
-    email VARCHAR(155) NOT NULL UNIQUE,
-    role ENUM('Admin', 'Staff') DEFAULT 'Staff',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    is_deleted BOOLEAN DEFAULT FALSE
-*/

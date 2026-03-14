@@ -55,9 +55,6 @@ public class ServiceDAO extends ServiceDAOTemplate{
                 
                 if(rowsAffected > 0) return "Service added successfully.";
             }
-            catch(Exception e){
-                return "Failed to add service.";
-            }
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -92,9 +89,6 @@ public class ServiceDAO extends ServiceDAOTemplate{
                     
                     servicesList.add(service);
                 }
-            }
-            catch(Exception e){
-                return null;
             }
         }
         catch(SQLException e){
@@ -133,9 +127,6 @@ public class ServiceDAO extends ServiceDAOTemplate{
                     servicesList.add(service);
                 }
             }
-            catch(Exception e){
-                return null;
-            }
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -167,9 +158,6 @@ public class ServiceDAO extends ServiceDAOTemplate{
                     service.setDurationMinutes(rs.getInt("duration_minutes"));
                     service.setStatus(rs.getString("status"));
                 }
-            }
-            catch(Exception e){
-                return null;
             }
         }
         catch(SQLException e){
@@ -204,9 +192,6 @@ public class ServiceDAO extends ServiceDAOTemplate{
                
                if(RowsAffected > 0) return "Service updated successfully.";
            }
-           catch(Exception e){
-                return "Failed to update service details.";
-            }
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -231,18 +216,15 @@ public class ServiceDAO extends ServiceDAOTemplate{
                 
                 if(RowsAffected > 0) return "Service deleted successfully";
             }
-            catch(Exception e){
-                return "Failed to delete service.";
-            }
         }
         catch(SQLException e){
             e.printStackTrace();
-            return "Failed to delete service.";
+            return "Failed to update service details";
         }
         catch(Exception e){
-            return "Failed to delete service.";
+            return "Failed to update service details";
         }
-        return "Failed to delete service.";
+        return "Failed to update service details";
     }
     
     @Override
@@ -267,9 +249,6 @@ public class ServiceDAO extends ServiceDAOTemplate{
                     
                     servicesList.add(service);
                 }
-            }
-            catch(Exception e){
-                return null;
             }
         }
         catch(SQLException e){
@@ -308,9 +287,6 @@ public class ServiceDAO extends ServiceDAOTemplate{
                     servicesList.add(service);
                 }
             }
-            catch(Exception e){
-                return null;
-            }
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -336,17 +312,14 @@ public class ServiceDAO extends ServiceDAOTemplate{
                 
                 if(RowsAffected > 0) return "Service restored successfully";
             }
-            catch(Exception e){
-                return "Failed to restore service.";
-            }
         }
         catch(SQLException e){
             e.printStackTrace();
-            return "Failed to restore service.";
+            return "Failed to update service details";
         }
         catch(Exception e){
-            return "Failed to restore service.";
+            return "Failed to update service details";
         }
-        return "Failed to restore service.";
+        return "Failed to update service details";
     }
 }

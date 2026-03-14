@@ -26,15 +26,6 @@ abstract class CustomerDAOTemplate{
     
     //Deletes customer details. Returns string for JOptionPane message.
     abstract String DeleteCustomerQuery(int customerID);
-    
-    //Query that returns a list of all deleted customers.
-    abstract List<Customers> ListOfAllDeletedCustomersQuery();
-    
-    //Query that returns a list of all deleted customers that matches search bar.
-    abstract List<Customers> ListOfAllDeletedCustomersQuery(String searchfield);
-    
-    //
-    abstract String RestoreCustomerByIDQuery(int customerID);
 
 }
 
@@ -60,9 +51,6 @@ public class CustomerDAO extends CustomerDAOTemplate{
                 int RowsAffected = pst.executeUpdate();
                 
                 if(RowsAffected > 0) return "Service added successfully.";
-            }
-            catch(Exception e){
-                return "Failed to add customer to the databae.";
             }
         }
         catch(SQLException e){
@@ -92,9 +80,6 @@ public class CustomerDAO extends CustomerDAOTemplate{
                     
                     cstmr.add(customer);
                 }
-            }
-            catch(Exception e){
-                return null;
             }
             
             
@@ -129,9 +114,6 @@ public class CustomerDAO extends CustomerDAOTemplate{
                     cstmr.add(customer);
                 }
             }
-            catch(Exception e){
-                return null;
-            }
             
             
         }
@@ -161,9 +143,6 @@ public class CustomerDAO extends CustomerDAOTemplate{
                     cstmr.setStatus(rs.getString("status"));
                 }
             }
-            catch(Exception e){
-                return null;
-            }
         }catch(SQLException e){
             e.printStackTrace();
             return null;
@@ -172,7 +151,17 @@ public class CustomerDAO extends CustomerDAOTemplate{
         return cstmr;
     }
     
-    public String UpdateCustomerQuery(int customer_id, String fname, String lname, String email, String phone, String status){        
+    public String UpdateCustomerQuery(int customer_id, String fname, String lname, String email, String phone, String status){
+        /*
+            CONNECT TO DATABASE
+            QUERY
+            PREPARED STATEMENT
+            AFFECTED ROW
+            
+            IF > 1 RETURN UPDATE SUCCESS
+            ELSE FAILED TO UPDATE
+        */
+        
         try(Connection dbconn = Db_Connector.getCOnnection()){
             String query = "UPDATE Customer SET first_name = ?, last_name = ?, "
             + "phone_number = ?, email = ?, status = ? WHERE customer_id = ?";
@@ -189,9 +178,6 @@ public class CustomerDAO extends CustomerDAOTemplate{
                 
                 if(AffectedRow > 0) return "Update Success";
             }
-            catch(Exception e){
-                return "Failed to update customer details.";
-            }
         }
         catch(SQLException e){
             return "Failed to update customer details.";
@@ -204,16 +190,13 @@ public class CustomerDAO extends CustomerDAOTemplate{
         try(Connection dbconn = Db_Connector.getCOnnection()){
             if(dbconn == null) return "Can't connect to database.";
             
-            String query = "UPDATE Customer SET is_deleted = true, status = Inactive WHERE customer_id = ?";
+            String query = "UPDATE Customer SET is_deleted = true WHERE customer_id = ?";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setInt(1, customerID);
                 
                 int AffectedRows = pst.executeUpdate();
                 
                 if(AffectedRows > 0) return "Delete Success.";
-            }
-            catch(Exception e){
-                return "Failed to delete from databae.";
             }
         }
         catch(SQLException e){
@@ -224,109 +207,5 @@ public class CustomerDAO extends CustomerDAOTemplate{
             return "Failed to delete from database";
         }
         return "Failed to delete from database";
-    }
-    
-    @Override
-    public List<Customers> ListOfAllDeletedCustomersQuery(){
-        List<Customers> ListOfDeletedCustomers = new ArrayList<>();
-        try(Connection dbconn = Db_Connector.getCOnnection()){
-            if(dbconn == null) return null;
-            
-            String query = "SELECT * FROM Customer WHERE is_deleted = true";
-            try(PreparedStatement pst = dbconn.prepareStatement(query)){
-                ResultSet rs = pst.executeQuery();
-                
-                while(rs.next()){
-                    Customers customer = new Customers();
-                    
-                    customer.setCustomer_id(rs.getInt("customer_id"));
-                    customer.setFirst_name(rs.getString("first_name"));
-                    customer.setLast_name(rs.getString("last_name"));
-                    customer.setEmail(rs.getString("email"));
-                    customer.setPhone_number(rs.getString("phone_number"));
-                    customer.setStatus(rs.getString("status"));
-                    
-                    ListOfDeletedCustomers.add(customer);
-                }
-                
-                return ListOfDeletedCustomers;
-            }
-            catch(Exception e){
-                return null;
-            }
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-            return null;
-        }
-        catch(Exception e){
-            return null;
-        }
-    }
-    
-    @Override
-    public List<Customers> ListOfAllDeletedCustomersQuery(String searchfield){
-        List<Customers> ListOfDeletedCustomers = new ArrayList<>();
-        try(Connection dbconn = Db_Connector.getCOnnection()){
-            if(dbconn == null) return null;
-            
-            String query = "SELECT * FROM Customer WHERE first_name LIKE ? AND is_deleted = true";
-            try(PreparedStatement pst = dbconn.prepareStatement(query)){
-                pst.setString(1, "%" + searchfield + "%");
-                ResultSet rs = pst.executeQuery();
-                
-                while(rs.next()){
-                    Customers customer = new Customers();
-                    
-                    customer.setCustomer_id(rs.getInt("customer_id"));
-                    customer.setFirst_name(rs.getString("first_name"));
-                    customer.setLast_name(rs.getString("lastt_name"));
-                    customer.setEmail(rs.getString("email"));
-                    customer.setPhone_number(rs.getString("phone_number"));
-                    customer.setStatus(rs.getString("status"));
-                    
-                    ListOfDeletedCustomers.add(customer);
-                }
-                
-                return ListOfDeletedCustomers;
-            }
-            catch(Exception e){
-                return null;
-            }
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-            return null;
-        }
-        catch(Exception e){
-            return null;
-        }
-    }
-    
-    @Override
-    public String RestoreCustomerByIDQuery(int customerID){
-        try(Connection dbconn = Db_Connector.getCOnnection()){
-            if(dbconn == null) return "Can't connect to the database";
-            
-            String query = "UPDATE Customer SET is_deleted = false WHERE customer_id = ?";
-            try(PreparedStatement pst = dbconn.prepareStatement(query)){
-                pst.setInt(1, customerID);
-                
-                int RowsAffected = pst.executeUpdate();
-                
-                if(RowsAffected > 0) return "Customer restored successfully";
-            }
-            catch(Exception e){
-                return "Failed to update customer details.";
-            }
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-            return "Failed to update customer details";
-        }
-        catch(Exception e){
-            return "Failed to update customer details";
-        }
-        return "Failed to update customer details";
     }
 }
