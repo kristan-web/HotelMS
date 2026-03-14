@@ -7,8 +7,9 @@ CREATE TABLE Users (
     first_name VARCHAR(155) NOT NULL,
     last_name VARCHAR(155) NOT NULL,
     password VARCHAR(155) NOT NULL,
+    phone BIGINT NOT NULL,
     email VARCHAR(155) NOT NULL UNIQUE,
-    role ENUM('Admin', 'Staff', 'Manager') DEFAULT 'Staff',
+    role ENUM('Admin', 'Staff') DEFAULT 'Staff',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     is_deleted BOOLEAN DEFAULT FALSE
 );
@@ -64,7 +65,7 @@ These triggers ensure that if you "delete" a customer or service by setting `is_
 #### Trigger: Handle Customer Soft-Delete
 This trigger monitors the `Customer` table. If a customer is marked as deleted, it sets the `customer_id` in their reservations to `NULL` (so you keep the financial data but lose the personal link) and marks the reservation as deleted too.
 
-```sql
+"""sql
 DELIMITER //
 
 CREATE TRIGGER after_customer_soft_delete
@@ -98,3 +99,4 @@ BEGIN
 END; //
 
 DELIMITER ;
+"""

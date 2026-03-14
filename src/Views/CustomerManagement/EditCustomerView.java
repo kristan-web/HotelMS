@@ -17,6 +17,7 @@ public class EditCustomerView extends javax.swing.JDialog {
     }
     public EditCustomerView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

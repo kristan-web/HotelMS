@@ -4,6 +4,7 @@ import Model.*;
 import Controllers.ServiceControllers;
 import renderer.ServicesRenderer.*;
 import javax.swing.event.*;
+import javax.swing.table.DefaultTableModel;
 
 public class ServiceView extends javax.swing.JFrame {
     public static ServiceView instance;
@@ -11,32 +12,25 @@ public class ServiceView extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ServiceView.class.getName());
     
     public final void loadServicesToTable() {
-    List<Services> services = control.ListOfAllServices();
+        List<Services> services = control.ListOfAllServices();
     
-    javax.swing.table.DefaultTableModel model = 
-        (javax.swing.table.DefaultTableModel) tblServices.getModel();
-    model.setRowCount(0); // clear previous data
+        DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
+        model.setRowCount(0); // clear previous data
 
-    for (Services s : services) {
-        model.addRow(new Object[]{
-            s.getServiceID(),
-            s.getServiceName(),
-            s.getPrice(),
-            s.getDurationMinutes(),
-            s.getStatus(),
-            "Edit/Delete" // placeholder for actions
-        });
-    }
+        for (Services s : services) {
+            model.addRow(new Object[]{
+                s.getServiceID(),
+                s.getServiceName(),
+                s.getPrice(),
+                s.getDurationMinutes(),
+                s.getStatus(),
+                "Edit/Delete" // placeholder for actions
+            });
+        }
     
     
 }
     public final void loadServicesToTable(String text) {
-    /*
-        CREATES A LIST
-        CALLS CONTROL FUNCTION TO FETCH ALL SERVICES
-        ADD ALL SERVICES INSIDE THE LIST
-        STARTS LOOP TO DISPLAY VALUES INSIDE THE TABLE
-    */
         List<Services> services = control.ListOfAllServices(text);
 
         javax.swing.table.DefaultTableModel model = 

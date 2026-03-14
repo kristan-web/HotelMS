@@ -4,18 +4,19 @@ import java.util.List;
 import Model.Customers;
 import Controllers.CustomerControllers;
 import javax.swing.event.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
-public class CustomersView extends javax.swing.JFrame {   
-    public static CustomersView instance;
+public class DeletedCustomersView extends javax.swing.JFrame {   
+    public static DeletedCustomersView instance;
     public static CustomerControllers control = new CustomerControllers();
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CustomersView.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DeletedCustomersView.class.getName());
     
     public final void LoadCustomerDetails(){     
-        List<Customers> customerList = control.ListOfAllCustomers(); 
+        List<Customers> customerList = control.ListOfAllDeletedCustomers(); 
         
         
-        DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
+        javax.swing.table.DefaultTableModel model = 
+        (javax.swing.table.DefaultTableModel) tblCustomers.getModel();
         model.setRowCount(0); // clear previous data
 
         for (Customers c : customerList) {
@@ -32,10 +33,11 @@ public class CustomersView extends javax.swing.JFrame {
     }
     
     public final void LoadCustomerDetails(String searchfield){     
-        List<Customers> customerList = control.ListOfAllCustomers(searchfield); 
+        List<Customers> customerList = control.ListOfAllDeletedCustomers(searchfield); 
         
         
-        DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
+        javax.swing.table.DefaultTableModel model = 
+        (javax.swing.table.DefaultTableModel) tblCustomers.getModel();
         model.setRowCount(0); // clear previous data
 
         for (Customers c : customerList) {
@@ -52,16 +54,16 @@ public class CustomersView extends javax.swing.JFrame {
     }
     
     
-    public static CustomersView getInstance(){
+    public static DeletedCustomersView getInstance(){
         return instance;
     }
     
     
     // =========================== CONSTRUCTOR ===========================
-    public CustomersView() {
+    public DeletedCustomersView() {
         initComponents();
-        instance = this;
         this.setLocationRelativeTo(null);
+        instance = this;
         LoadCustomerDetails();
         tblCustomers.getColumn("Actions").setCellRenderer(new CustomerActionRenderer());
         tblCustomers.getColumn("Actions").setCellEditor(new CustomerActionEditor(tblCustomers));
@@ -75,7 +77,7 @@ public class CustomersView extends javax.swing.JFrame {
                     CALL LOAD SERVICES
                 */
                 String searchfieldtext = CustomerSearchField.getText();
-                CustomersView.getInstance().LoadCustomerDetails(searchfieldtext);
+                DeletedCustomersView.getInstance().LoadCustomerDetails(searchfieldtext);
             }
             
             @Override
@@ -87,7 +89,7 @@ public class CustomersView extends javax.swing.JFrame {
 
                 */
                 String searchfieldtext = CustomerSearchField.getText();
-                CustomersView.getInstance().LoadCustomerDetails(searchfieldtext);
+                DeletedCustomersView.getInstance().LoadCustomerDetails(searchfieldtext);
             }
             
             @Override
@@ -98,7 +100,7 @@ public class CustomersView extends javax.swing.JFrame {
                     CALL LOAD SERVICES  
                 */
                 String searchfieldtext = CustomerSearchField.getText();
-                CustomersView.getInstance().LoadCustomerDetails(searchfieldtext);
+                DeletedCustomersView.getInstance().LoadCustomerDetails(searchfieldtext);
             }
         });
     }
@@ -116,8 +118,8 @@ public class CustomersView extends javax.swing.JFrame {
         CustomerSearchField = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCustomers = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        DeletedServicesButton = new javax.swing.JButton();
+        RestoreCustomerButton = new javax.swing.JButton();
+        BackToCustomerViewButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,11 +128,11 @@ public class CustomersView extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(47, 32, 56));
-        jLabel1.setText("Customer Management");
+        jLabel1.setText("Deleted Customers");
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(53, 42, 44));
-        jLabel2.setText("Manage your customer database");
+        jLabel2.setText("List of Deleted Customers");
 
         jPanel2.setBackground(new java.awt.Color(243, 223, 220));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 194, 189), 2));
@@ -202,14 +204,14 @@ public class CustomersView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        jButton1.setText("+   Add");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        RestoreCustomerButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
+        RestoreCustomerButton.setText("Restore Customer");
+        RestoreCustomerButton.addActionListener(this::RestoreCustomerButtonActionPerformed);
 
-        DeletedServicesButton.setBackground(new java.awt.Color(204, 204, 204));
-        DeletedServicesButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        DeletedServicesButton.setText("View Deleted Customers");
-        DeletedServicesButton.addActionListener(this::DeletedServicesButtonActionPerformed);
+        BackToCustomerViewButton.setBackground(new java.awt.Color(204, 204, 204));
+        BackToCustomerViewButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
+        BackToCustomerViewButton.setText("Go Back");
+        BackToCustomerViewButton.addActionListener(this::BackToCustomerViewButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -219,7 +221,7 @@ public class CustomersView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(DeletedServicesButton))
+                        .addComponent(BackToCustomerViewButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -230,7 +232,7 @@ public class CustomersView extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(RestoreCustomerButton)))))
                 .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
@@ -244,13 +246,13 @@ public class CustomersView extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(RestoreCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(11, 11, 11)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(DeletedServicesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BackToCustomerViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -272,17 +274,33 @@ public class CustomersView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CustomerSearchFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AddCustomerView dialog = new AddCustomerView();
-        dialog.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void RestoreCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestoreCustomerButtonActionPerformed
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to restore this customer?", 
+        "Confirm Delete", 
+        JOptionPane.YES_OPTION,
+        JOptionPane.WARNING_MESSAGE
+        );
 
-    private void DeletedServicesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletedServicesButtonActionPerformed
-        DeletedCustomersView dialog = new DeletedCustomersView();
-        dialog.setLocationRelativeTo(null);
+        if(choice == JOptionPane.YES_OPTION){
+            try{
+               int selectedRow = tblCustomers.getSelectedRow();
+                String customerID = tblCustomers.getValueAt(selectedRow, 0).toString();
+                String message = control.RestoreCustomerByID(customerID);
+                JOptionPane.showMessageDialog(this, message);
+                DeletedCustomersView.getInstance().LoadCustomerDetails(); 
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(this, "No customer is selected to be restored");
+            }
+            }
+        
+    }//GEN-LAST:event_RestoreCustomerButtonActionPerformed
+
+    private void BackToCustomerViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackToCustomerViewButtonActionPerformed
+        CustomersView dialog = new CustomersView();
         dialog.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_DeletedServicesButtonActionPerformed
+    }//GEN-LAST:event_BackToCustomerViewButtonActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -303,13 +321,13 @@ public class CustomersView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new CustomersView().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new DeletedCustomersView().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackToCustomerViewButton;
     private javax.swing.JTextField CustomerSearchField;
-    private javax.swing.JButton DeletedServicesButton;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton RestoreCustomerButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
