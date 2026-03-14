@@ -247,7 +247,7 @@ public class DeletedServicesView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RestoreServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestoreServiceButtonActionPerformed
-        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to restore this service?", 
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this service?", 
             "Confirm Delete", 
             JOptionPane.YES_OPTION,
             JOptionPane.WARNING_MESSAGE
