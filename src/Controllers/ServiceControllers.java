@@ -4,6 +4,16 @@ import Model.Services;
 import Views.ServiceManagement.*;
 import DAO.ServiceDAO;
 
+/*
+    STATUS: EDITING NOT DONE! 
+    
+    WRITE GOOD COMMENTS
+    REFACTOR CODE
+    ADD FUNCTIONS
+*/
+
+
+
 abstract class ServiceControllersTemplate {
     //Returns a string for JOptionPane, adds a service to the database.
     abstract String AddServiceProcess(String service_name, 

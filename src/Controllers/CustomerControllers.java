@@ -5,25 +5,36 @@ import Model.Customers;
 import java.util.List;
 import Views.CustomerManagement.*;
 
+/*
+    STATUS: EDITING NOT DONE! 
+    
+    WRITE GOOD COMMENTS
+    REFACTOR CODE
+    ADD FUNCTIONS
+*/
+
 abstract class CustomerControllersTemplate {
     public static CustomerDAO dao = new CustomerDAO();
     
-    //Returns a string as a message for JOptionPane, adds customer details.
+    
+    //Call this method when adding a customer. The returned string is for JOptionPane.
+    //Proposed solution: Pass argument as object instead of multiple parameters.
+    
     abstract String AddCustomerProcess(String first_name, String last_name, String phone_number, String email, String status);
 
-    //Returns a list of customers for displaying in table.
+    //Call this method to get details of all customers. Used for table display.
     abstract List<Customers> ListOfAllCustomers();
     
-    //Method overloading, returns a list of customers that matches the search bar.
+    //Works like the method above. This one returns details that matches the user input.
     abstract List<Customers> ListOfAllCustomers(String searchfield);
     
-    //Returns a list of a deleted customers for table display.
+    //Call this method to get details of all deleted customers. Used for table display
     abstract List<Customers> ListOfAllDeletedCustomers();
     
-    //Method overloading, returns a list of deleted customers that matches the search bar.
+    //Works like the method above. This one returns details that matches the user input.
     abstract List<Customers> ListOfAllDeletedCustomers(String searchfield);
     
-    //Fetch single object from the datbase, pass the values to the dialog.
+    //Call this method to get single customer detail using ID as argument.
     abstract void GetCustomerDetailsByID(int customer_id);
     
     //Returns a string as a message for JOptionPane, updates customer details. 
