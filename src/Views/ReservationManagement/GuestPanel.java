@@ -1,0 +1,429 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
+package Views.ReservationManagement;
+
+import Controllers.ReservationManagement.GuestControllers;
+import Model.ReservationManagement.Guest;
+import java.util.List;
+
+public class GuestPanel extends javax.swing.JPanel {
+
+    // ── Controller & table model ──────────────────────────────────────────────
+    private final GuestControllers ctrl = new GuestControllers();
+    private javax.swing.table.DefaultTableModel tableModel;
+
+    public GuestPanel() {
+        initComponents();
+        setupTable();
+        loadGuests();
+
+        // Clicking a row fills the form fields for editing
+        jTable1.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) fillFormFromTable();
+        });
+
+        // Wire buttons that have no actionPerformed in Design tab
+        jButton2.addActionListener(e -> clearForm());    // Clear button
+        jButton3.addActionListener(e -> handleDelete()); // Delete button
+        jButton4.addActionListener(e -> loadGuests());   // Refresh button
+    }
+
+    // ── Setup table columns ───────────────────────────────────────────────────
+    private void setupTable() {
+        tableModel = new javax.swing.table.DefaultTableModel(
+            new String[]{"ID", "First Name", "Last Name", "Email", "Phone", "Address"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int col) { return false; }
+        };
+        jTable1.setModel(tableModel);
+        jTable1.setEnabled(true);
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        // Hide the ID column — still in model but invisible to user
+        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getColumnModel().getColumn(0).setWidth(0);
+    }
+
+    // ── Load all guests from DB into table ────────────────────────────────────
+    private void loadGuests() {
+        tableModel.setRowCount(0);
+        List<Guest> list = ctrl.getAllGuests();
+        for (Guest g : list) {
+            tableModel.addRow(new Object[]{
+                g.getGuestId(),
+                g.getFirstName(),
+                g.getLastName(),
+                g.getEmail(),
+                g.getPhone(),
+                g.getAddress()
+            });
+        }
+    }
+
+    // ── Fill form when a table row is clicked ─────────────────────────────────
+    private void fillFormFromTable() {
+        int row = jTable1.getSelectedRow();
+        if (row < 0) return;
+        jTextField1.setText((String) tableModel.getValueAt(row, 1)); // First Name
+        jTextField2.setText((String) tableModel.getValueAt(row, 2)); // Last Name
+        jTextField3.setText((String) tableModel.getValueAt(row, 3)); // Email
+        jTextField4.setText((String) tableModel.getValueAt(row, 5)); // Address
+        jTextField5.setText((String) tableModel.getValueAt(row, 4)); // Phone
+
+        // Change button label to show we're in edit mode
+        jButton1.setText("Update Guest");
+    }
+
+    // ── Clear all form fields and reset button ────────────────────────────────
+    private void clearForm() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTable1.clearSelection();
+        jButton1.setText("Add Guest"); // reset back to Add mode
+    }
+
+    // ── Handle Delete button ──────────────────────────────────────────────────
+    private void handleDelete() {
+        int row = jTable1.getSelectedRow();
+        if (row < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Please select a guest from the table first.",
+                "No Selection", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int id = (int) tableModel.getValueAt(row, 0);
+        String name = tableModel.getValueAt(row, 1) + " " + tableModel.getValueAt(row, 2);
+
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
+            "Delete guest \"" + name + "\"?\nThis will also remove all their reservations.",
+            "Confirm Delete", javax.swing.JOptionPane.YES_NO_OPTION,
+            javax.swing.JOptionPane.WARNING_MESSAGE);
+
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            String result = ctrl.deleteGuest(id);
+            javax.swing.JOptionPane.showMessageDialog(this, result);
+            if (result.startsWith("SUCCESS")) { loadGuests(); clearForm(); }
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(102, 153, 255));
+        setMinimumSize(new java.awt.Dimension(100, 100));
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1113, 200));
+        jPanel1.setMinimumSize(new java.awt.Dimension(100, 100));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1115, 163));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jPanel3.setMinimumSize(new java.awt.Dimension(150, 100));
+        jPanel3.setPreferredSize(new java.awt.Dimension(350, 175));
+        jPanel3.setRequestFocusEnabled(false);
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("First name:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        jPanel3.add(jLabel1, gridBagConstraints);
+
+        jTextField1.setPreferredSize(new java.awt.Dimension(300, 30));
+        jTextField1.addActionListener(this::jTextField1ActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 7;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        jPanel3.add(jTextField1, gridBagConstraints);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Last name:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        jPanel3.add(jLabel2, gridBagConstraints);
+
+        jTextField2.setPreferredSize(new java.awt.Dimension(300, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        jPanel3.add(jTextField2, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel1.add(jPanel3, gridBagConstraints);
+
+        jPanel6.setMinimumSize(new java.awt.Dimension(150, 100));
+        jPanel6.setPreferredSize(new java.awt.Dimension(350, 175));
+        jPanel6.setRequestFocusEnabled(false);
+        jPanel6.setLayout(new java.awt.GridBagLayout());
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Email:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        jPanel6.add(jLabel3, gridBagConstraints);
+
+        jTextField3.setPreferredSize(new java.awt.Dimension(300, 30));
+        jTextField3.addActionListener(this::jTextField3ActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 7;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        jPanel6.add(jTextField3, gridBagConstraints);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Address:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        jPanel6.add(jLabel4, gridBagConstraints);
+
+        jTextField4.setPreferredSize(new java.awt.Dimension(300, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        jPanel6.add(jTextField4, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel1.add(jPanel6, gridBagConstraints);
+
+        jPanel7.setMinimumSize(new java.awt.Dimension(150, 100));
+        jPanel7.setPreferredSize(new java.awt.Dimension(350, 175));
+        jPanel7.setRequestFocusEnabled(false);
+        jPanel7.setLayout(new java.awt.GridBagLayout());
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Phone:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        jPanel7.add(jLabel5, gridBagConstraints);
+
+        jTextField5.setPreferredSize(new java.awt.Dimension(300, 30));
+        jTextField5.addActionListener(this::jTextField5ActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 7;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        jPanel7.add(jTextField5, gridBagConstraints);
+
+        jButton1.setText("Add Guest");
+        jButton1.setPreferredSize(new java.awt.Dimension(150, 35));
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        jPanel7.add(jButton1, gridBagConstraints);
+
+        jButton2.setText("Clear");
+        jButton2.setPreferredSize(new java.awt.Dimension(150, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        jPanel7.add(jButton2, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel1.add(jPanel7, gridBagConstraints);
+
+        jPanel2.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel2.setMinimumSize(new java.awt.Dimension(100, 100));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.setEnabled(false);
+        jTable1.setOpaque(false);
+        jTable1.setRowHeight(40);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        jButton3.setText("Delete");
+
+        jButton4.setText("Refresh");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        jTextField2.requestFocus(); // Enter on First Name → jump to Last Name
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        jTextField4.requestFocus(); // Enter on Email → jump to Address
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        jButton1.doClick(); // Enter on Phone → trigger Add/Update
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String firstName = jTextField1.getText().trim();
+        String lastName  = jTextField2.getText().trim();
+        String email     = jTextField3.getText().trim();
+        String address   = jTextField4.getText().trim();
+        String phone     = jTextField5.getText().trim();
+
+        int selectedRow = jTable1.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            // ── UPDATE mode: a row was selected ──────────────────────────────
+            int id = (int) tableModel.getValueAt(selectedRow, 0);
+            Guest g = new Guest();
+            g.setGuestId(id);
+            g.setFirstName(firstName);
+            g.setLastName(lastName);
+            g.setEmail(email);
+            g.setPhone(phone);
+            g.setAddress(address);
+            String result = ctrl.updateGuest(g);
+            javax.swing.JOptionPane.showMessageDialog(this, result);
+            if (result.startsWith("SUCCESS")) { loadGuests(); clearForm(); }
+        } else {
+            // ── ADD mode: no row selected ─────────────────────────────────────
+            String result = ctrl.addGuest(firstName, lastName, email, phone, address);
+            javax.swing.JOptionPane.showMessageDialog(this, result);
+            if (result.startsWith("SUCCESS")) { loadGuests(); clearForm(); }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    // End of variables declaration//GEN-END:variables
+}

@@ -4,16 +4,6 @@ import Model.Services;
 import Views.ServiceManagement.*;
 import DAO.ServiceDAO;
 
-/*
-    STATUS: EDITING NOT DONE! 
-    
-    WRITE GOOD COMMENTS
-    REFACTOR CODE
-    ADD FUNCTIONS
-*/
-
-
-
 abstract class ServiceControllersTemplate {
     //Returns a string for JOptionPane, adds a service to the database.
     abstract String AddServiceProcess(String service_name, 
@@ -135,17 +125,14 @@ public class ServiceControllers extends ServiceControllersTemplate{
         return dao.DeleteServiceQuery(service_id);
     }
     
-    @Override
     public List<Services> ListOfAllDeletedServices(){
         return dao.ListOfAllDeletedServicesQuery();
     }
     
-    @Override
     public List<Services> ListOfAllDeletedServices(String seachfield){
         return dao.ListOfAllDeletedServicesQuery(seachfield);
     }
     
-    @Override
     public String RestoreServiceByID(String service_id){
         try{
             int serviceID = Integer.parseInt(service_id);
