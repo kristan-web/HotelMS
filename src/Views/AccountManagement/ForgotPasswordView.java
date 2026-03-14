@@ -1,15 +1,14 @@
 package Views.AccountManagement;
+import Controllers.UserControllers;
+import javax.swing.JOptionPane;
 
 public class ForgotPasswordView extends javax.swing.JDialog {
-    
+    private static final UserControllers control = new UserControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ForgotPasswordView.class.getName());
-
-    /**
-     * Creates new form ForgotPasswordView
-     */
-    public ForgotPasswordView(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    
+    public ForgotPasswordView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -23,12 +22,20 @@ public class ForgotPasswordView extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        EmailField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 224, 227));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 224, 227));
 
@@ -36,11 +43,11 @@ public class ForgotPasswordView extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(47, 32, 56));
         jLabel1.setText("Enter your email:");
 
-        jTextField1.setBackground(new java.awt.Color(255, 239, 241));
-        jTextField1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(47, 32, 56));
-        jTextField1.setSelectionColor(new java.awt.Color(210, 90, 119));
-        jTextField1.addActionListener(this::jTextField1ActionPerformed);
+        EmailField.setBackground(new java.awt.Color(255, 239, 241));
+        EmailField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
+        EmailField.setForeground(new java.awt.Color(47, 32, 56));
+        EmailField.setSelectionColor(new java.awt.Color(210, 90, 119));
+        EmailField.addActionListener(this::EmailFieldActionPerformed);
 
         jButton1.setBackground(new java.awt.Color(47, 32, 56));
         jButton1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
@@ -60,7 +67,7 @@ public class ForgotPasswordView extends javax.swing.JDialog {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)))
@@ -72,7 +79,7 @@ public class ForgotPasswordView extends javax.swing.JDialog {
                 .addContainerGap(51, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(31, 31, 31)
@@ -94,13 +101,35 @@ public class ForgotPasswordView extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void EmailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_EmailFieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String email = EmailField.getText().trim();
+        
+        if(control.CheckAllUsersIfEmailIsPresent(email)){
+            String generatedOTP = control.generateOTP();
+            control.sendOTP(email, generatedOTP);
+            
+            EnterOTPView dialog = new EnterOTPView(generatedOTP, email);
+            dialog.setVisible(true);
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Invalid input or email does not exist.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        StaffLoginView dialog = new StaffLoginView();
+        dialog.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -122,28 +151,13 @@ public class ForgotPasswordView extends javax.swing.JDialog {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                ForgotPasswordView dialog = new ForgotPasswordView(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField EmailField;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

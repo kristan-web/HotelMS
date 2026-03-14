@@ -125,14 +125,17 @@ public class ServiceControllers extends ServiceControllersTemplate{
         return dao.DeleteServiceQuery(service_id);
     }
     
+    @Override
     public List<Services> ListOfAllDeletedServices(){
         return dao.ListOfAllDeletedServicesQuery();
     }
     
+    @Override
     public List<Services> ListOfAllDeletedServices(String seachfield){
         return dao.ListOfAllDeletedServicesQuery(seachfield);
     }
     
+    @Override
     public String RestoreServiceByID(String service_id){
         try{
             int serviceID = Integer.parseInt(service_id);

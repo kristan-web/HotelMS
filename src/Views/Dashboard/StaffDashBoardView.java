@@ -6,16 +6,16 @@ package Views.Dashboard;
 
 /**
  *
- * @author KC
+ * @author Daphne
  */
-public class DashBoardView extends javax.swing.JFrame {
+public class StaffDashBoardView extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashBoardView.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StaffDashBoardView.class.getName());
 
     /**
-     * Creates new form DashBoard
+     * Creates new form StaffDashBoardView
      */
-    public DashBoardView() {
+    public StaffDashBoardView() {
         initComponents();
     }
 
@@ -66,7 +66,7 @@ public class DashBoardView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new DashBoardView().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new StaffDashBoardView().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
