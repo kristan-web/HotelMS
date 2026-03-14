@@ -95,23 +95,9 @@ public class EnterOTPView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
-        /*
-            GET the user input otp in the field.
-            CALL the authenticate OTP method.
-            SET the input field to empty string.
-            
-            SHOW message dialog.
-            IF message dialog == Correct OTP
-                OPEN the New Password Frame.
-                PASS the email as argument.
-        */
         String UserInputOTP = OTPCodeField.getText().trim();
-        String message = control.AuthenticateUserOTP(this.generatedOTP, UserInputOTP);
-        OTPCodeField.setText("");
-        
-        JOptionPane.showMessageDialog(this, message);
-        
-        if(message.equals("Correct OTP.")){
+        if(control.AuthenticateUserOTP(generatedOTP, UserInputOTP)){
+            OTPCodeField.setText("");
             NewPasswordView dialog = new NewPasswordView(email);
             dialog.setVisible(true);
             this.dispose();

@@ -71,34 +71,18 @@ public class ServiceView extends javax.swing.JFrame {
        serviceSearchField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e){
-                /*
-                    CALL CONTROLLER FUNCTION
-                    PASS SEARCH FIELD TEXT AS ARGUMENT
-                    CALL LOAD SERVICES
-                */
                 String searchfieldtext = serviceSearchField.getText();
                 ServiceView.getInstance().loadServicesToTable(searchfieldtext);
             }
             
             @Override
             public void changedUpdate(DocumentEvent e){
-                /*
-                    CALL CONTROLLER FUNCTION
-                    PASS SEARCH FIELD TEXT AS ARGUMENT
-                    CALL LOAD SERVICES
-
-                */
                 String searchfieldtext = serviceSearchField.getText();
                 ServiceView.getInstance().loadServicesToTable(searchfieldtext);
             }
             
             @Override
             public void removeUpdate(DocumentEvent e) {
-                /*
-                    CALL CONTROLLER FUNCTION
-                    PASS SEARCH FIELD TEXT AS ARGUMENT
-                    CALL LOAD SERVICES  
-                */
                 String searchfieldtext = serviceSearchField.getText();
                 ServiceView.getInstance().loadServicesToTable(searchfieldtext);
             }

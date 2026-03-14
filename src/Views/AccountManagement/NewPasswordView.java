@@ -87,13 +87,11 @@ public class NewPasswordView extends javax.swing.JDialog {
     private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
         String password = new String(NewPasswordField.getPassword());
         
-        String message = control.ChangeUserPasswordThroughEmail(this.email, password);
-        JOptionPane.showMessageDialog(null, message);
-        
-        StaffLoginView dialog = new StaffLoginView();
-        dialog.setVisible(true);
-        
-        this.dispose();
+        if(control.ChangeUserPasswordThroughEmail(this.email, password)){
+            StaffLoginView dialog = new StaffLoginView();
+            dialog.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_EnterButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
