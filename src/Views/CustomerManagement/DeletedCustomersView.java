@@ -133,7 +133,7 @@ public class DeletedCustomersView extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(53, 42, 44));
-        jLabel2.setText("List of Deleted Customers");
+        jLabel2.setText("List of deleted customers");
 
         jPanel2.setBackground(new java.awt.Color(243, 223, 220));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 194, 189), 2));
@@ -205,12 +205,15 @@ public class DeletedCustomersView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        RestoreCustomerButton.setBackground(new java.awt.Color(47, 32, 56));
         RestoreCustomerButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
+        RestoreCustomerButton.setForeground(new java.awt.Color(255, 224, 227));
         RestoreCustomerButton.setText("Restore Customer");
         RestoreCustomerButton.addActionListener(this::RestoreCustomerButtonActionPerformed);
 
-        BackToCustomerViewButton.setBackground(new java.awt.Color(204, 204, 204));
+        BackToCustomerViewButton.setBackground(new java.awt.Color(190, 52, 85));
         BackToCustomerViewButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
+        BackToCustomerViewButton.setForeground(new java.awt.Color(255, 224, 227));
         BackToCustomerViewButton.setText("Go Back");
         BackToCustomerViewButton.addActionListener(this::BackToCustomerViewButtonActionPerformed);
 
@@ -218,13 +221,13 @@ public class DeletedCustomersView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BackToCustomerViewButton))
+                        .addComponent(BackToCustomerViewButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,8 +236,8 @@ public class DeletedCustomersView extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RestoreCustomerButton)))))
-                .addGap(15, 15, 15))
+                                .addComponent(RestoreCustomerButton)))
+                        .addGap(15, 15, 15))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
