@@ -3,21 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Views.ReservationManagement;
-import Views.Dashboard.DashBoardView;
 import Model.Users;
+import Views.Dashboard.*;
 
 public class MainFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
     private String staffID;
+    private String userRole;
     
     public MainFrame(Users user) {
         initComponents();
         staffID = user.getUser_id();
+        userRole = user.getRole();
         
         mainTabs.addTab("Reservations", new ReservationPanel());
         mainTabs.addTab("Guests", new GuestPanel());
-        mainTabs.addTab("Rooms", new RoomPanel());
+        if(userRole.equals("Admin")){
+            mainTabs.addTab("Rooms", new RoomPanel());
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -142,11 +146,16 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        DashBoardView Dbord = new DashBoardView();
-        Dbord.setVisible(true);
-        Dbord.setLocationRelativeTo(null);
-        this.dispose();
-        
+        if(userRole.equals("Admin")){
+            AdminDashBoardView AdminDB = new AdminDashBoardView();
+            AdminDB.setLocationRelativeTo(null);
+            this.dispose();
+        }else{
+            StaffDashBoardView StaffDB = new StaffDashBoardView();
+            StaffDB.setVisible(true);
+            StaffDB.setLocationRelativeTo(null);
+            this.dispose();
+        }        
     }//GEN-LAST:event_jLabel2MouseClicked
 
     public static void main(String args[]) {

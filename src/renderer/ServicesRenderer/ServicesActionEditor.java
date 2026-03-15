@@ -4,7 +4,8 @@ import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.net.URL;
 import Controllers.ServiceControllers;
-import Views.ServiceManagement.ServiceView;
+import Views.ServiceManagement.*;
+import Model.Services;
 
 public class ServicesActionEditor extends AbstractCellEditor implements TableCellEditor {
     private static final ServiceControllers control = new ServiceControllers();
@@ -39,8 +40,11 @@ public class ServicesActionEditor extends AbstractCellEditor implements TableCel
             fireEditingStopped();
             
             int ServiceID = Integer.parseInt(table.getValueAt(row, 0).toString());
+            Services service = control.GetServiceDetailsByID(ServiceID);
             
-            control.GetServiceDetailsByID(ServiceID);
+            EditServiceView dialog = new EditServiceView();
+            dialog.loadServiceData(service);
+            dialog.setVisible(true);
         });
 
         deleteButton.addActionListener(e -> {
@@ -56,8 +60,7 @@ public class ServicesActionEditor extends AbstractCellEditor implements TableCel
             );
             
             if(choice == JOptionPane.YES_OPTION){
-                String message = control.DeleteServiceByID(serviceID);
-                JOptionPane.showMessageDialog(null, message);
+                control.DeleteServiceByID(serviceID);
                 ServiceView.getInstance().loadServicesToTable();
             }
         });

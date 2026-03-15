@@ -1,11 +1,14 @@
 
 package Views.ReservationManagement;
 import Controllers.ReservationManagement.*;
-import Model.ReservationManagement.*;
+import Controllers.CustomerControllers;
+import Model.ReservationManagement.Reservation;
+import Model.ReservationManagement.Room;
+import Model.Customers;
 public class ReservationPanel extends javax.swing.JPanel {
 
     private final ReservationController resCtrl   = new ReservationController();
-    private final GuestControllers       guestCtrl = new GuestControllers();
+    private final CustomerControllers       guestCtrl = new CustomerControllers();
     private final RoomController        roomCtrl  = new RoomController();
     private java.time.LocalDate checkInDate, checkOutDate;
     private javax.swing.table.DefaultTableModel tableModel;
@@ -36,7 +39,7 @@ public class ReservationPanel extends javax.swing.JPanel {
 
     private void loadGuestsAndRooms() {
         javax.swing.DefaultComboBoxModel guestModel = new javax.swing.DefaultComboBoxModel();
-        guestCtrl.getAllGuests().forEach(guestModel::addElement);
+        guestCtrl.ListOfAllCustomers().forEach(guestModel::addElement);
         guestCombo.setModel(guestModel);
 
         javax.swing.DefaultComboBoxModel roomModel = new javax.swing.DefaultComboBoxModel();
@@ -470,12 +473,12 @@ public class ReservationPanel extends javax.swing.JPanel {
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         Object guestObj = guestCombo.getSelectedItem();
         Object roomObj  = roomCombo.getSelectedItem();
-        if (!(guestObj instanceof Guest) || !(roomObj instanceof Room)) {
+        if (!(guestObj instanceof Customers) || !(roomObj instanceof Room)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Please select a valid guest and room.");
             return;
         }
         String result = resCtrl.makeReservation(
-            (Guest) guestObj, (Room) roomObj,
+            (Customers) guestObj, (Room) roomObj,
             checkInDate, checkOutDate, notesArea.getText());
         javax.swing.JOptionPane.showMessageDialog(this, result);
         if (result.startsWith("SUCCESS")) {

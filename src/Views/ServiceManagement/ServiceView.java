@@ -4,6 +4,8 @@ import Model.*;
 import Controllers.ServiceControllers;
 import renderer.ServicesRenderer.*;
 import javax.swing.event.*;
+import javax.swing.table.DefaultTableModel;
+import Views.Dashboard.*;
 
 public class ServiceView extends javax.swing.JFrame {
     public static ServiceView instance;
@@ -11,32 +13,25 @@ public class ServiceView extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ServiceView.class.getName());
     
     public final void loadServicesToTable() {
-    List<Services> services = control.ListOfAllServices();
+        List<Services> services = control.ListOfAllServices();
     
-    javax.swing.table.DefaultTableModel model = 
-        (javax.swing.table.DefaultTableModel) tblServices.getModel();
-    model.setRowCount(0); // clear previous data
+        DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
+        model.setRowCount(0); // clear previous data
 
-    for (Services s : services) {
-        model.addRow(new Object[]{
-            s.getServiceID(),
-            s.getServiceName(),
-            s.getPrice(),
-            s.getDurationMinutes(),
-            s.getStatus(),
-            "Edit/Delete" // placeholder for actions
-        });
-    }
+        for (Services s : services) {
+            model.addRow(new Object[]{
+                s.getServiceID(),
+                s.getServiceName(),
+                s.getPrice(),
+                s.getDurationMinutes(),
+                s.getStatus(),
+                "Edit/Delete" // placeholder for actions
+            });
+        }
     
     
 }
     public final void loadServicesToTable(String text) {
-    /*
-        CREATES A LIST
-        CALLS CONTROL FUNCTION TO FETCH ALL SERVICES
-        ADD ALL SERVICES INSIDE THE LIST
-        STARTS LOOP TO DISPLAY VALUES INSIDE THE TABLE
-    */
         List<Services> services = control.ListOfAllServices(text);
 
         javax.swing.table.DefaultTableModel model = 
@@ -71,34 +66,18 @@ public class ServiceView extends javax.swing.JFrame {
        serviceSearchField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e){
-                /*
-                    CALL CONTROLLER FUNCTION
-                    PASS SEARCH FIELD TEXT AS ARGUMENT
-                    CALL LOAD SERVICES
-                */
                 String searchfieldtext = serviceSearchField.getText();
                 ServiceView.getInstance().loadServicesToTable(searchfieldtext);
             }
             
             @Override
             public void changedUpdate(DocumentEvent e){
-                /*
-                    CALL CONTROLLER FUNCTION
-                    PASS SEARCH FIELD TEXT AS ARGUMENT
-                    CALL LOAD SERVICES
-
-                */
                 String searchfieldtext = serviceSearchField.getText();
                 ServiceView.getInstance().loadServicesToTable(searchfieldtext);
             }
             
             @Override
             public void removeUpdate(DocumentEvent e) {
-                /*
-                    CALL CONTROLLER FUNCTION
-                    PASS SEARCH FIELD TEXT AS ARGUMENT
-                    CALL LOAD SERVICES  
-                */
                 String searchfieldtext = serviceSearchField.getText();
                 ServiceView.getInstance().loadServicesToTable(searchfieldtext);
             }
@@ -120,7 +99,12 @@ public class ServiceView extends javax.swing.JFrame {
         tblServices = new javax.swing.JTable();
         DeletedServicesButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 224, 227));
 
@@ -290,6 +274,12 @@ public class ServiceView extends javax.swing.JFrame {
         dialog.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_DeletedServicesButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        AdminDashBoardView dialog = new AdminDashBoardView();
+        dialog.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

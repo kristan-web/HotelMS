@@ -7,64 +7,35 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import javax.swing.JOptionPane;
 import org.mindrot.jbcrypt.BCrypt;
-
-/*
-    STATUS: EDITING NOT DONE! 
-    
-    WRITE GOOD COMMENTS
-    REFACTOR CODE
-    ADD FUNCTIONS
-*/
+import java.util.List;
 
 abstract class UserControllersTemplate {
-    //Returns a hashed string, used for password before inserting to database.
-    abstract String hashPassword(String password);
     
-    //Returns TRUE if password match from the storedHash. FALSE if not.
+    abstract String hashPassword(String password);
+
     abstract boolean checkPassword(String inputPassword, String storedHash);
     
-    //Returns a string for JOptionPane message. 
-    //Validate Admin Details and Call RegisterValidateUser method.
-    abstract String ValidateAdminRegistration(String firstName, String lastName, String email,
-            String phone, String password, String confpass);
+    abstract boolean ValidateAndRegisterAdminAccount(Users user);
     
-    //Returns a string for JOptionPane message.
-    //Validate staff details and call RegisterValidatedStaff method.
-    abstract String ValidateStaffRegistration(String firstName, String lastName, String email,
-            String phone, String password, String confpass);
-    
-    //Returns a string for JOptionPane message.
-    //Call DAO method and register the passed value from ValidateUserRegistration.
-    abstract String RegisterValidatedAdmin(Users user);
-    
-    //Returns a string for JOptionPane message.
-    //Call DAO method and register the passed value from ValidateStaffRegistration.
-    abstract String RegisterValidatedStaff(Users user);
-    
-    //Returns a String of numbers for OTP.
+    abstract boolean ValidateAndRegisterStaffAccount(Users user);
+
     abstract String generateOTP();
-    
-    //Sends the OTP to the email indicated.
+
     abstract void sendOTP(String recipientEmail, String otp);
     
-    //Returns a string for JOptionPane.
-    //Compare the email-generated OTP to the userInputOTP;
-    abstract String AuthenticateUserOTP(String generatedOTP, String UserInputOTP);
-    
-    //Returns a string for JOptionPane.
-    //Call DAO to change the user password WHERE email = true;
-    abstract String ChangeUserPasswordThroughEmail(String email, String password);
-    
-    //Returns TRUE if email is found in the database. FALSE if not.
+    abstract boolean AuthenticateUserOTP(String generatedOTP, String UserInputOTP);
+
+    abstract boolean ChangeUserPasswordThroughEmail(String email, String password);
+
     abstract boolean CheckAllUsersIfEmailIsPresent(String email);
-    
-    //Returns a string for JOptionPane message.
-    //Authenticate staff account.
+
     abstract Users AuthenticateStaffLogin(String email, String password);
-    
-    //Returns a string for JOptionPane message.
-    //Authenticate admin account.
+
     abstract Users AuthenticateAdminLogin(String email, String password);
+    
+    abstract List<Users> ListOfAllUsers();
+    
+    abstract List<Users> ListOfAllUsers(String searchfield);
 }
 
 
@@ -93,83 +64,71 @@ public class UserControllers extends UserControllersTemplate{
     }
     
     @Override
-    public String ValidateAdminRegistration(String firstName, String lastName, String email,
-            String phone, String password, String confpass)
-    {    
-        if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() 
-        || phone.isEmpty() || password.isEmpty() || confpass.isEmpty())
+    public boolean ValidateAndRegisterAdminAccount(Users user){
+        if(user.getFirst_name().isEmpty() || user.getLast_name().isEmpty()
+        || user.getPassword().isEmpty() || user.getEmail().isEmpty() || user.getPhone().isEmpty())
         {
-           return  "All fields should be filled.";
+            JOptionPane.showMessageDialog(null, "All fields should be filled.");
+            return false;
         }
         
-        if(!password.equals(confpass)){
-            return "Passwords do not match.";
+        if(!user.getPassword().equals(user.getConfpass())){
+            JOptionPane.showMessageDialog(null, "Passwords do not match.");
+            return false;
         }
         
         try{
-            long phone_num = Long.parseLong(phone);
-            String hashedPass = hashPassword(password);
-            Users user = new Users();
+            long number = Long.parseLong(user.getPhone());
             
-            user.setFirst_name(firstName);
-            user.setLast_name(lastName);
-            user.setPassword(hashedPass);
-            user.setEmail(email);
-            user.setPhone(phone_num);
-            
-            String message = RegisterValidatedAdmin(user);
-            
-            return message;
-        }
-        catch(Exception e){
-            return "Registration failed.";
-        }
-    }
-    
-    @Override
-    public String ValidateStaffRegistration(String firstName, String lastName, String email,
-            String phone, String password, String confpass)
-    {
-        if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() 
-        || phone.isEmpty() || password.isEmpty() || confpass.isEmpty())
-        {
-           return  "All fields should be filled.";
+            String hashedpass = hashPassword(user.getPassword());
+            user.setPassword(hashedpass);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Contact number must be numerical.");
+            return false;
         }
         
-        if(!password.equals(confpass)){
-            return "Passwords do not match.";
+        
+        if(dao.RegisterAdminQuery(user)){
+            JOptionPane.showMessageDialog(null, "Registration success!");
+            return true;
+        }
+        
+        return false;
+    }
+
+    @Override
+    public boolean ValidateAndRegisterStaffAccount(Users user){
+        if(user.getFirst_name().isEmpty() || user.getLast_name().isEmpty()
+        || user.getPassword().isEmpty() || user.getEmail().isEmpty() || user.getPhone().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "All fields should be filled.");
+            return false;
+        }
+        
+        if(!user.getPassword().equals(user.getConfpass())){
+            JOptionPane.showMessageDialog(null, "Passwords do not match.");
+            return false;
         }
         
         try{
-            long phone_num = Long.parseLong(phone);
-            String hashedPass = hashPassword(password);
-            Users user = new Users();
+            long number = Long.parseLong(user.getPhone());
             
-            user.setFirst_name(firstName);
-            user.setLast_name(lastName);
-            user.setPassword(hashedPass);
-            user.setEmail(email);
-            user.setPhone(phone_num);
-            
-            String message = RegisterValidatedStaff(user);
-            
-            return message;
+            String hashedpass = hashPassword(user.getPassword());
+            user.setPassword(hashedpass);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Contact number must be numerical.");
+            return false;
         }
-        catch(Exception e){
-            return "Invalid input.";
+        
+        if(dao.RegisterStaffQuery(user)){
+            JOptionPane.showMessageDialog(null, "Registration success!");
+            return true;
         }
+        
+        return false;
     }
     
     @Override
-    public String RegisterValidatedAdmin(Users user){
-        return dao.RegisterAdminQuery(user);
-    }
-    
-    @Override
-    public String RegisterValidatedStaff(Users user){
-        return dao.RegisterStaffQuery(user);
-    }
-    
     public String generateOTP() {
         Random rand = new Random();
         int otp = 100000 + rand.nextInt(900000);
@@ -216,21 +175,29 @@ public class UserControllers extends UserControllersTemplate{
     }
     
     @Override
-    public String AuthenticateUserOTP(String generatedOTP, String UserInputOTP){
+    public boolean AuthenticateUserOTP(String generatedOTP, String UserInputOTP){
         if(!UserInputOTP.equals(generatedOTP)){
-            return "Incorrect OTP.";
+            JOptionPane.showMessageDialog(null, "Incorrect OTP");
+            return false;
         }
-        return "Correct OTP.";
+        JOptionPane.showMessageDialog(null, "OTP is correct");
+        return true;
     }
     
     @Override
-    public String ChangeUserPasswordThroughEmail(String email, String password){
+    public boolean ChangeUserPasswordThroughEmail(String email, String password){
         if(password.isEmpty()){
-            return "Password field is empty. Enter your new password";
+            JOptionPane.showMessageDialog(null, "Password is empty.");
+            return false;
+        }
+        String hashedPass = hashPassword(password);
+        
+        if(dao.ChangeUserPasswordThroughEmailQuery(email, hashedPass)){
+            JOptionPane.showMessageDialog(null, "Change password success!");
+            return true;
         }
         
-        String hashedPass = hashPassword(password);
-        return dao.ChangeUserPasswordThroughEmailQuery(email, hashedPass);
+        return false;
     }
     
     @Override
@@ -256,13 +223,12 @@ public class UserControllers extends UserControllersTemplate{
             return null;
         }
         
-        if(checkPassword(password, user.getPassword())){
-            return user;
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Incorrect username or password");
+        if(!checkPassword(password, user.getPassword())){
+            JOptionPane.showMessageDialog(null, "Incorrect email or password.");
             return null;
         }
+        
+        return user;
     }
     
     
@@ -279,12 +245,19 @@ public class UserControllers extends UserControllersTemplate{
             return null;
         }
         
-        if(checkPassword(password, user.getPassword())){
-            return user;
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Incorrect username or password");
+        if(!checkPassword(password, user.getPassword())){
+            JOptionPane.showMessageDialog(null, "Incorrect email or password.");
             return null;
         }
+        
+        return user;
+    }
+    
+    public List<Users> ListOfAllUsers(){
+        return dao.ListOfAllUsersQuery();
+    }
+    
+    public List<Users> ListOfAllUsers(String searchfield){
+        return dao.ListOfAllUsersQuery(searchfield);
     }
 }

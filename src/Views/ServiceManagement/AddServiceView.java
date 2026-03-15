@@ -1,6 +1,7 @@
 package Views.ServiceManagement;
 import Controllers.ServiceControllers;
 import javax.swing.JOptionPane;
+import Model.Services;
 
 public class AddServiceView extends javax.swing.JDialog {
     private static ServiceControllers control = new ServiceControllers();
@@ -42,6 +43,11 @@ public class AddServiceView extends javax.swing.JDialog {
         ServiceStatusField = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 224, 227));
 
@@ -206,18 +212,24 @@ public class AddServiceView extends javax.swing.JDialog {
     }//GEN-LAST:event_ServiceNameFieldActionPerformed
 
     private void AddServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddServiceButtonActionPerformed
-        String serv_name, serv_status, serv_price, serv_duration;
+        Services service = new Services();
         
-        serv_name = ServiceNameField.getText().trim();
-        serv_price = ServicePriceField.getText().trim();
-        serv_duration = ServiceDurationField.getText().trim();
-        serv_status = ServiceStatusField.getSelectedItem().toString().trim();
+        service.setServiceName(ServiceNameField.getText().trim());
+        service.setPrice(ServicePriceField.getText().trim());
+        service.setDurationMinutes(ServiceDurationField.getText().trim());
+        service.setStatus(ServiceStatusField.getSelectedItem().toString().trim());
         
-        String message = control.AddServiceProcess(serv_name, serv_duration, serv_price, serv_status);
-        JOptionPane.showMessageDialog(this, message);
-        ServiceView.getInstance().loadServicesToTable();
-        this.dispose();
+        if(control.AddServiceProcess(service)){
+            ServiceView.getInstance().loadServicesToTable();;
+            this.dispose();
+        }
     }//GEN-LAST:event_AddServiceButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        ServiceView dialog = new ServiceView();
+        dialog.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

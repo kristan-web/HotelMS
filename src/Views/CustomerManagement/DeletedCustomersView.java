@@ -1,5 +1,4 @@
 package Views.CustomerManagement;
-import renderer.CutomerRenderer.*;
 import java.util.List;
 import Model.Customers;
 import Controllers.CustomerControllers;
@@ -47,8 +46,7 @@ public class DeletedCustomersView extends javax.swing.JFrame {
                 c.getLast_name(),
                 c.getPhone_number(),
                 c.getEmail(),
-                c.getStatus(), 
-                "Edit/Delete" // placeholder for actions
+                c.getStatus()
             });
         }
     }
@@ -65,8 +63,6 @@ public class DeletedCustomersView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         instance = this;
         LoadCustomerDetails();
-        tblCustomers.getColumn("Actions").setCellRenderer(new CustomerActionRenderer());
-        tblCustomers.getColumn("Actions").setCellEditor(new CustomerActionEditor(tblCustomers));
         
         CustomerSearchField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -121,7 +117,12 @@ public class DeletedCustomersView extends javax.swing.JFrame {
         RestoreCustomerButton = new javax.swing.JButton();
         BackToCustomerViewButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 224, 227));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 568));
@@ -146,22 +147,22 @@ public class DeletedCustomersView extends javax.swing.JFrame {
         tblCustomers.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         tblCustomers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "First Name", "Last Name", "Contact", "Email", "Status", "Actions"
+                "Id", "First Name", "Last Name", "Contact", "Email", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false, true
+                false, false, true, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -285,14 +286,15 @@ public class DeletedCustomersView extends javax.swing.JFrame {
             try{
                int selectedRow = tblCustomers.getSelectedRow();
                 String customerID = tblCustomers.getValueAt(selectedRow, 0).toString();
-                String message = control.RestoreCustomerByID(customerID);
-                JOptionPane.showMessageDialog(this, message);
-                DeletedCustomersView.getInstance().LoadCustomerDetails(); 
+                
+                if(control.RestoreCustomerByID(customerID)){
+                    DeletedCustomersView.getInstance().LoadCustomerDetails(); 
+                }
             }
             catch(Exception e){
                 JOptionPane.showMessageDialog(this, "No customer is selected to be restored");
             }
-            }
+        }
         
     }//GEN-LAST:event_RestoreCustomerButtonActionPerformed
 
@@ -301,6 +303,13 @@ public class DeletedCustomersView extends javax.swing.JFrame {
         dialog.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BackToCustomerViewButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        CustomersView dialog = new CustomersView();
+        dialog.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this. dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

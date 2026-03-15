@@ -4,14 +4,14 @@
  */
 package Views.ReservationManagement;
 
-import Controllers.ReservationManagement.GuestControllers;
-import Model.ReservationManagement.Guest;
+import Controllers.CustomerControllers;
+import Model.Customers;
 import java.util.List;
 
 public class GuestPanel extends javax.swing.JPanel {
 
     // ── Controller & table model ──────────────────────────────────────────────
-    private final GuestControllers ctrl = new GuestControllers();
+    private final CustomerControllers ctrl = new CustomerControllers();
     private javax.swing.table.DefaultTableModel tableModel;
 
     public GuestPanel() {
@@ -50,15 +50,15 @@ public class GuestPanel extends javax.swing.JPanel {
     // ── Load all guests from DB into table ────────────────────────────────────
     private void loadGuests() {
         tableModel.setRowCount(0);
-        List<Guest> list = ctrl.getAllGuests();
-        for (Guest g : list) {
+        List<Customers> list = ctrl.ListOfAllCustomers();
+        for (Customers g : list) {
             tableModel.addRow(new Object[]{
-                g.getGuestId(),
-                g.getFirstName(),
-                g.getLastName(),
+                g.getCustomer_id(),
+                g.getFirst_name(),
+                g.getLast_name(),
                 g.getEmail(),
-                g.getPhone(),
-                g.getAddress()
+                g.getPhone_number(),
+                g.getCustomer_address()
             });
         }
     }
@@ -106,9 +106,10 @@ public class GuestPanel extends javax.swing.JPanel {
             javax.swing.JOptionPane.WARNING_MESSAGE);
 
         if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-            String result = ctrl.deleteGuest(id);
+            
+            boolean result = ctrl.DeleteCustomerByID(id);
             javax.swing.JOptionPane.showMessageDialog(this, result);
-            if (result.startsWith("SUCCESS")) { loadGuests(); clearForm(); }
+            if (result) { loadGuests(); clearForm(); }
         }
     }
 
@@ -384,16 +385,17 @@ public class GuestPanel extends javax.swing.JPanel {
         if (selectedRow >= 0) {
             // ── UPDATE mode: a row was selected ──────────────────────────────
             int id = (int) tableModel.getValueAt(selectedRow, 0);
-            Guest g = new Guest();
-            g.setGuestId(id);
-            g.setFirstName(firstName);
-            g.setLastName(lastName);
+            String idString = String.valueOf(id);
+            Customers g = new Customers();
+            g.setCustomer_id(idString);
+            g.setFirst_name(firstName);
+            g.setLast_name(lastName);
             g.setEmail(email);
-            g.setPhone(phone);
-            g.setAddress(address);
-            String result = ctrl.updateGuest(g);
+            g.setPhone_number(phone);
+            g.setCustomer_address(address);
+            boolean result = ctrl.UpdateCustomerDetails(g);
             javax.swing.JOptionPane.showMessageDialog(this, result);
-            if (result.startsWith("SUCCESS")) { loadGuests(); clearForm(); }
+            if (result) { loadGuests(); clearForm(); }
         } else {
             // ── ADD mode: no row selected ─────────────────────────────────────
             String result = ctrl.addGuest(firstName, lastName, email, phone, address);

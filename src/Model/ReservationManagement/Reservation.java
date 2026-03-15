@@ -1,11 +1,11 @@
 package Model.ReservationManagement;
-
+import Model.Customers;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class Reservation {
     private int       reservationId;
-    private Guest     guest;
+    private Customers     guest;
     private Room      room;
     private LocalDate checkIn;
     private LocalDate checkOut;
@@ -15,7 +15,7 @@ public class Reservation {
 
     public Reservation() {}
 
-    public Reservation(Guest guest, Room room, LocalDate checkIn, LocalDate checkOut) {
+    public Reservation(Customers guest, Room room, LocalDate checkIn, LocalDate checkOut) {
         this.guest    = guest;
         this.room     = room;
         this.checkIn  = checkIn;
@@ -36,8 +36,8 @@ public class Reservation {
     // Getters & Setters
     public int       getReservationId()           { return reservationId; }
     public void      setReservationId(int v)       { this.reservationId = v; }
-    public Guest     getGuest()                    { return guest; }
-    public void      setGuest(Guest v)             { this.guest = v; }
+    public Customers getGuest()                    { return guest; }
+    public void      setGuest(Customers v)             { this.guest = v; }
     public Room      getRoom()                     { return room; }
     public void      setRoom(Room v)               { this.room = v; }
     public LocalDate getCheckIn()                  { return checkIn; }
