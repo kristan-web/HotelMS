@@ -49,7 +49,7 @@ public class AddCustomerView extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 224, 227));
 
-        jPanel2.setBackground(new java.awt.Color(190, 52, 85));
+        jPanel2.setBackground(new java.awt.Color(47, 32, 56));
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 224, 227));
@@ -101,15 +101,15 @@ public class AddCustomerView extends javax.swing.JDialog {
         EmailField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         EmailField.setSelectionColor(new java.awt.Color(210, 90, 119));
 
-        SaveCustomerButton.setBackground(new java.awt.Color(190, 52, 85));
+        SaveCustomerButton.setBackground(new java.awt.Color(47, 32, 56));
         SaveCustomerButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         SaveCustomerButton.setForeground(new java.awt.Color(255, 224, 227));
         SaveCustomerButton.setText("Save");
         SaveCustomerButton.addActionListener(this::SaveCustomerButtonActionPerformed);
 
-        CancelButton.setBackground(new java.awt.Color(255, 239, 241));
+        CancelButton.setBackground(new java.awt.Color(190, 52, 85));
         CancelButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        CancelButton.setForeground(new java.awt.Color(190, 52, 85));
+        CancelButton.setForeground(new java.awt.Color(255, 224, 227));
         CancelButton.setText("Cancel");
         CancelButton.addActionListener(this::CancelButtonActionPerformed);
 
