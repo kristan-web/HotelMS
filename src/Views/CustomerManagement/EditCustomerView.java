@@ -48,7 +48,7 @@ public class EditCustomerView extends javax.swing.JDialog {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(47, 32, 56));
+        jPanel1.setBackground(new java.awt.Color(190, 52, 85));
 
         jPanel2.setBackground(new java.awt.Color(255, 224, 227));
 
@@ -73,7 +73,7 @@ public class EditCustomerView extends javax.swing.JDialog {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        CancelCustomerUpdate.setBackground(new java.awt.Color(190, 52, 85));
+        CancelCustomerUpdate.setBackground(new java.awt.Color(140, 38, 62));
         CancelCustomerUpdate.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         CancelCustomerUpdate.setForeground(new java.awt.Color(255, 224, 227));
         CancelCustomerUpdate.setText("Cancel");
@@ -81,7 +81,7 @@ public class EditCustomerView extends javax.swing.JDialog {
 
         UpdateCustomerButton.setBackground(new java.awt.Color(255, 224, 227));
         UpdateCustomerButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        UpdateCustomerButton.setForeground(new java.awt.Color(47, 32, 56));
+        UpdateCustomerButton.setForeground(new java.awt.Color(190, 52, 85));
         UpdateCustomerButton.setText("Update");
         UpdateCustomerButton.addActionListener(this::UpdateCustomerButtonActionPerformed);
 
