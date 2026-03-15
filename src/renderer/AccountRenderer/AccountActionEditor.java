@@ -1,14 +1,15 @@
 package renderer.AccountRenderer;
+import Views.GuestManagement.GuestsView;
+import Views.GuestManagement.EditGuestView;
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.net.URL;
-import Controllers.CustomerControllers;
-import Views.CustomerManagement.*;
-import Model.Customers;
+import Controllers.UserControllers;
+import Model.Users;
 
 public class AccountActionEditor extends AbstractCellEditor implements TableCellEditor {
-    private static CustomerControllers control = new CustomerControllers();
+    private static UserControllers control = new UserControllers();
     private JPanel panel = new JPanel();
     private JButton updateButton = new JButton();
     private JButton deleteButton = new JButton();
@@ -39,11 +40,11 @@ public class AccountActionEditor extends AbstractCellEditor implements TableCell
             int row = table.getEditingRow();
             fireEditingStopped();
             
-            int ServiceID = Integer.parseInt(table.getValueAt(row, 0).toString()); 
-            Customers customer = control.GetCustomerDetailsByID(ServiceID);
+            int userID = Integer.parseInt(table.getValueAt(row, 0).toString()); 
+            Users user = control.GetUserDetailsByID(userID);
             
-            EditCustomerView dialog = new EditCustomerView();
-            dialog.loadCustomerData(customer);
+            
+            dialog.loadCustomerData(c);
             dialog.setVisible(true);
         });
 
@@ -60,8 +61,8 @@ public class AccountActionEditor extends AbstractCellEditor implements TableCell
             );
             
             if(choice == JOptionPane.YES_OPTION){
-                if(control.DeleteCustomerByID(customerID)){
-                    CustomersView.getInstance().LoadCustomerDetails();
+                if(control.DeleteGuestByID(customerID)){
+                    GuestsView.getInstance().LoadGuestDetails();
                 }
             }
         });

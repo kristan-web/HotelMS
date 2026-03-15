@@ -36,19 +36,9 @@ abstract class UserControllersTemplate {
     abstract List<Users> ListOfAllUsers();
     
     abstract List<Users> ListOfAllUsers(String searchfield);
+    
+    abstract Users GetUserDetailsByID(int userID);
 }
-
-
-
-
-
-//================================== DERIVED CLASS ======================================
-
-
-
-
-
-
 
 public class UserControllers extends UserControllersTemplate{
     private static final UserDAO dao = new UserDAO();
@@ -259,5 +249,55 @@ public class UserControllers extends UserControllersTemplate{
     
     public List<Users> ListOfAllUsers(String searchfield){
         return dao.ListOfAllUsersQuery(searchfield);
+    }
+    
+    public Users GetUserDetailsByID(int userID){
+        Users user = dao.GetUserDetailsByIDQuery(userID);
+        
+        if(user == null){
+            JOptionPane.showMessageDialog(null, "Failed to get user details.");
+            return null;
+        }
+        
+        return user;
+    }
+    
+        public boolean UpdateServiceQuery(Services service){        
+        try(Connection dbconn = Db_Connector.getCOnnection()){
+           if(dbconn == null){
+               JOptionPane.showMessageDialog(null, "Can't connect to the database.");
+                return false;
+           }
+           
+           String query = "UPDATE Services SET service_name = ?, duration_minutes = ?, price = ?, status = ? "
+           + "WHERE service_id = ?";
+           
+           try(PreparedStatement pst = dbconn.prepareStatement(query)){
+               pst.setString(1, service.getServiceName());
+               pst.setInt(2, Integer.parseInt(service.getDurationMinutes()));
+               pst.setDouble(3, Double.parseDouble(service.getPrice()));
+               pst.setString(4, service.getStatus());
+               pst.setInt(5, Integer.parseInt(service.getServiceID()));
+               
+               int RowsAffected = pst.executeUpdate();
+               
+               if(RowsAffected > 0) return true;
+           }
+           catch(Exception e){
+               JOptionPane.showMessageDialog(null, "Failed to update service details.");
+                return false;
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to update service details.");
+            return false;
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Failed to update service details.");
+            return false;
+        }
+        JOptionPane.showMessageDialog(null, "Failed to update service details.");
+        return false;
     }
 }
