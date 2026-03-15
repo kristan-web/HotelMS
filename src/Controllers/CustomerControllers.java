@@ -3,40 +3,30 @@ package Controllers;
 import DAO.CustomerDAO;
 import Model.Customers;
 import java.util.List;
-import javax.swing.JOptionPane;
-import java.sql.SQLException;
+import Views.CustomerManagement.*;
 
 abstract class CustomerControllersTemplate {
     public static CustomerDAO dao = new CustomerDAO();
- 
-    abstract boolean AddCustomerProcess(Customers customer);
+    
+    //Returns a string as a message for JOptionPane, adds customer details.
+    abstract String AddCustomerProcess(String first_name, String last_name, String phone_number, String email, String status);
 
+    //Returns a list of customers for displaying in table.
     abstract List<Customers> ListOfAllCustomers();
     
+    //Method overloading, returns a list of customers that matches the search bar.
     abstract List<Customers> ListOfAllCustomers(String searchfield);
     
-    abstract List<Customers> ListOfAllDeletedCustomers();
+    //Fetch single object from the datbase, pass the values to the dialog.
+    abstract void GetCustomerDetailsByID(int customer_id);
     
-    abstract List<Customers> ListOfAllDeletedCustomers(String searchfield);
+    //Returns a string as a message for JOptionPane, updates customer details. 
+    abstract String UpdateCustomerDetails(String customerID, String customerfName, 
+                                          String customerlName, String customerEmail, 
+                                          String customerPhone, String customerStatus);
     
-    abstract Customers GetCustomerDetailsByID(int customer_id);
-    
-    abstract boolean UpdateCustomerDetails(Customers customer);
-    
-    abstract boolean DeleteCustomerByID(int customerID);
-    
-    abstract boolean RestoreCustomerByID(String customerID);
-    
-    abstract public String addGuest(String firstName, String lastName, String email, String phone, String address);
-    
-    
-    
-
-    /*abstract String addGuest(String firstName, String lastName, String email, String phone, String address);
-    abstract String updateGuest(Customers g);
-    abstract String deleteGuest(int id);
-    abstract List<Customers> getAllGuests();
-    abstract Customers getGuestById(int id);*/
+    //Soft delete customers by changing is_deleted to true.
+    abstract String DeleteCustomerByID(int customerID);
 }
 
 
@@ -44,135 +34,65 @@ abstract class CustomerControllersTemplate {
 
 
 public class CustomerControllers extends CustomerControllersTemplate{
-    @Override
-    public boolean AddCustomerProcess(Customers customer){
-        if(customer.getFirst_name().isEmpty() || customer.getLast_name().isEmpty() 
-        || customer.getPhone_number().isEmpty() || customer.getEmail().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null, "All fields should be filled.");
-            return false;
-        }
-        if (customer.getEmail().matches("^[\\w.%+\\-]+@[\\w.\\-]+\\.[a-zA-Z]{2,}$")){
-            JOptionPane.showMessageDialog(null, "ERROR: Invalid email format.");
-            return false;
-        }
+    public String AddCustomerProcess(String first_name, String last_name, 
+    String phone_number, String email, String status){
         try{
-            long phone = Long.parseLong(customer.getPhone_number());
+            int phone = Integer.parseInt(phone_number);
             
-            if (dao.getGuestByEmail(customer.getEmail()) != null){
-                JOptionPane.showMessageDialog(null, "ERROR: A guest with this email already exists.");
-                return false;
-            }
-            if(dao.AddCustomerQuery(customer)){
-                JOptionPane.showMessageDialog(null, "Customer added successfully!");
-                return true;
-            }
+            String message = dao.AddCustomerQuery(first_name, last_name, phone_number, email, status);
             
-            return false;
+            
+            return message;
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Contact number must be numerical.");
-            return false;
-        }
-        
-        
-    }
-    
-    @Override
-    public String addGuest(String firstName, String lastName, String email, String phone, String address) {
-        if (firstName.isBlank() || lastName.isBlank() || email.isBlank())
-            return "ERROR: First name, last name, and email are required.";
-        if (!email.matches("^[\\w.%+\\-]+@[\\w.\\-]+\\.[a-zA-Z]{2,}$"))
-            return "ERROR: Invalid email format.";
-        try {
-            if (dao.getGuestByEmail(email) != null)
-                return "ERROR: A guest with this email already exists.";
-            Customers g = new Customers(firstName.trim(), lastName.trim(), email.trim(), phone.trim(), address.trim());
-            dao.AddCustomerQuery(g);
-            return "SUCCESS: Guest added successfully.";
-        } catch (SQLException e) {
-            return "ERROR: " + e.getMessage();
+            return "Failed to add customer.";
         }
     }
     
-    @Override
     public List<Customers> ListOfAllCustomers(){
         return dao.ListOfAllCustomersQuery();
     }
     
-    @Override
     public List<Customers> ListOfAllCustomers(String searchfield){
         return dao.ListOfAllCustomersQuery(searchfield);
     }
     
-    @Override
-    public Customers GetCustomerDetailsByID(int customer_id){
-        return dao.GetCustomerDetailsQuery(customer_id);
+    public void GetCustomerDetailsByID(int customer_id){
+        Customers cstmr;
+        cstmr = dao.GetCustomerDetailsQuery(customer_id);
+         
+        if(cstmr != null){
+            EditCustomerView dialog = new EditCustomerView();
+            dialog.loadCustomerData(cstmr);
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        }
     }
-    
-    @Override
-    public boolean UpdateCustomerDetails(Customers customer){
-        if(customer.getCustomer_id().isEmpty() || customer.getFirst_name().isEmpty() || customer.getLast_name().isEmpty() 
-        || customer.getEmail().isEmpty() || customer.getPhone_number().isEmpty() || customer.getStatus().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null, "All fields should be filled.");
-            return false;
+     
+    public String UpdateCustomerDetails(String customerID, String customerfName, 
+                                          String customerlName, String customerEmail, 
+                                          String customerPhone, String customerStatus)
+    {
+        if(customerID.isEmpty() || customerfName.isEmpty() || customerlName.isEmpty() || customerEmail.isEmpty() || 
+        customerPhone.isEmpty() || customerStatus.isEmpty()){
+            return "All fields must be filled.";
         }
         
         try{
-            int phone = Integer.parseInt(customer.getPhone_number());
-            int cstID = Integer.parseInt(customer.getCustomer_id());
+            int phone = Integer.parseInt(customerPhone);
+            int cstID = Integer.parseInt(customerID);
             
-            if(dao.UpdateCustomerQuery(customer)){
-                JOptionPane.showMessageDialog(null, "Customer details updated!");
-                return true;
-            }
-            
-            return false;
+            return dao.UpdateCustomerQuery(cstID, customerfName, 
+            customerlName, customerEmail, customerPhone, customerStatus);
+           
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Failed to update customer details.");
-            return false;
+            return "Failed to update customer details.";
         }
     }
     
-    @Override
-    public boolean DeleteCustomerByID(int customerID){
-        if(dao.DeleteCustomerQuery(customerID)){
-            JOptionPane.showMessageDialog(null, "Customer delete success.");
-            return true;
-        }
-        
-        
-        return false;
-    }
-    
-    
-    @Override
-    public List<Customers> ListOfAllDeletedCustomers(){
-        return dao.ListOfAllDeletedCustomersQuery();
-    }
-    
-    @Override
-    public List<Customers> ListOfAllDeletedCustomers(String searchfield){
-        return dao.ListOfAllDeletedCustomersQuery(searchfield);
-    }
-    
-    @Override
-    public boolean RestoreCustomerByID(String customerID){
-        try{
-            int customer_id = Integer.parseInt(customerID);
-            
-            if(dao.RestoreCustomerByIDQuery(customer_id)){
-                JOptionPane.showMessageDialog(null, "Customer is restored.");
-                return true;
-            }
-            
-            return false;
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Failed to restore customer.");
-            return false;
-        }
+    //Soft delete customers by changing is_deleted to true.
+    public String DeleteCustomerByID(int customerID){
+        return dao.DeleteCustomerQuery(customerID);
     }
 }

@@ -94,12 +94,7 @@ public class DeletedServicesView extends javax.swing.JFrame {
         tblServices = new javax.swing.JTable();
         ServiceViewButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 224, 227));
 
@@ -252,7 +247,7 @@ public class DeletedServicesView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RestoreServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestoreServiceButtonActionPerformed
-        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to restore this service?", 
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this service?", 
             "Confirm Delete", 
             JOptionPane.YES_OPTION,
             JOptionPane.WARNING_MESSAGE
@@ -262,10 +257,9 @@ public class DeletedServicesView extends javax.swing.JFrame {
                 try{
                     int selectedRow = tblServices.getSelectedRow();
                     String serviceID = tblServices.getValueAt(selectedRow, 0).toString();
-                    
-                    if(control.RestoreServiceByID(serviceID)){
-                        DeletedServicesView.getInstance().loadServicesToTable();
-                    }
+                    String message = control.RestoreServiceByID(serviceID);
+                    JOptionPane.showMessageDialog(this, message);
+                    DeletedServicesView.getInstance().loadServicesToTable();
                 }
                 catch(Exception e){
                     JOptionPane.showMessageDialog(this, "No service is selected to be restored");
@@ -286,12 +280,6 @@ public class DeletedServicesView extends javax.swing.JFrame {
         dialog.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ServiceViewButtonActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        ServiceView dialog = new ServiceView();
-        dialog.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

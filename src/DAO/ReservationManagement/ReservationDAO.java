@@ -1,6 +1,6 @@
 package DAO.ReservationManagement;
 
-import Model.Customers;
+import Model.ReservationManagement.Guest;
 import Model.ReservationManagement.Reservation;
 import Model.ReservationManagement.Room;
 import Database.Db_Connector;
@@ -22,12 +22,12 @@ public class ReservationDAO {
         r.setTotalAmount(rs.getDouble("total_amount"));
         r.setNotes(rs.getString("notes"));
 
-        Customers g = new Customers();
-        g.setCustomer_id(rs.getString("customer_id"));
-        g.setFirst_name(rs.getString("first_name"));
-        g.setLast_name(rs.getString("last_name"));
+        Guest g = new Guest();
+        g.setGuestId(rs.getInt("guest_id"));
+        g.setFirstName(rs.getString("first_name"));
+        g.setLastName(rs.getString("last_name"));
         g.setEmail(rs.getString("email"));
-        g.setPhone_number(rs.getString("phone"));
+        g.setPhone(rs.getString("phone"));
         r.setGuest(g);
 
         Room room = new Room();
@@ -42,18 +42,18 @@ public class ReservationDAO {
 
     private static final String SELECT_ALL_SQL = """
         SELECT rv.*, 
-               g.customer_id, g.first_name, g.last_name, g.email, g.phone,
+               g.guest_id, g.first_name, g.last_name, g.email, g.phone,
                rm.room_id, rm.room_number, rm.room_type, rm.price
         FROM reservations rv
-        JOIN customers g  ON rv.guest_id = g.customer_id
+        JOIN guests g  ON rv.guest_id = g.guest_id
         JOIN rooms  rm ON rv.room_id  = rm.room_id
     """;
 
     public void addReservation(Reservation r) throws SQLException {
-        String sql = "INSERT INTO reservations (customer_id, room_id, check_in, check_out, status, total_amount, notes) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO reservations (guest_id, room_id, check_in, check_out, status, total_amount, notes) VALUES (?,?,?,?,?,?,?)";
         try (Connection conn = Db_Connector.getCOnnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setInt(1, Integer.parseInt(r.getGuest().getCustomer_id()));
+            ps.setInt(1, r.getGuest().getGuestId());
             ps.setInt(2, r.getRoom().getRoomId());
             ps.setDate(3, Date.valueOf(r.getCheckIn()));
             ps.setDate(4, Date.valueOf(r.getCheckOut()));
@@ -89,7 +89,7 @@ public class ReservationDAO {
 
     public List<Reservation> getReservationsByGuest(int guestId) throws SQLException {
         List<Reservation> list = new ArrayList<>();
-        String sql = SELECT_ALL_SQL + " WHERE rv.customer_id = ? ORDER BY rv.check_in DESC";
+        String sql = SELECT_ALL_SQL + " WHERE rv.guest_id = ? ORDER BY rv.check_in DESC";
         try (Connection conn = Db_Connector.getCOnnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, guestId);
@@ -112,10 +112,10 @@ public class ReservationDAO {
     }
 
     public void updateReservation(Reservation r) throws SQLException {
-        String sql = "UPDATE reservations SET customer_id=?, room_id=?, check_in=?, check_out=?, status=?, total_amount=?, notes=? WHERE reservation_id=?";
+        String sql = "UPDATE reservations SET guest_id=?, room_id=?, check_in=?, check_out=?, status=?, total_amount=?, notes=? WHERE reservation_id=?";
         try (Connection conn = Db_Connector.getCOnnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, Integer.parseInt(r.getGuest().getCustomer_id()));
+            ps.setInt(1, r.getGuest().getGuestId());
             ps.setInt(2, r.getRoom().getRoomId());
             ps.setDate(3, Date.valueOf(r.getCheckIn()));
             ps.setDate(4, Date.valueOf(r.getCheckOut()));

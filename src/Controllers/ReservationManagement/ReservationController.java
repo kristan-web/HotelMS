@@ -2,7 +2,7 @@
 package Controllers.ReservationManagement;
 
 import DAO.ReservationManagement.ReservationDAO;
-import Model.Customers;
+import Model.ReservationManagement.Guest;
 import Model.ReservationManagement.Reservation;
 import Model.ReservationManagement.Room;
 
@@ -14,7 +14,7 @@ public class ReservationController {
 
     private final ReservationDAO reservationDAO = new ReservationDAO();
 
-    public String makeReservation(Customers guest, Room room, LocalDate checkIn, LocalDate checkOut, String notes) {
+    public String makeReservation(Guest guest, Room room, LocalDate checkIn, LocalDate checkOut, String notes) {
         // Validate inputs
         if (guest == null) return "ERROR: Please select a guest.";
         if (room  == null) return "ERROR: Please select a room.";

@@ -1,27 +1,20 @@
 package Model;
+
 public class Users {
+
     private String user_id;
     private String first_name;
     private String last_name;
     private String password;
     private String email;
     private String role;
-    private String phone;
-    private String confpass;
+    private long phone;
 
-    public String getConfpass() {
-        return confpass;
-    }
-
-    public void setConfpass(String confpass) {
-        this.confpass = confpass;
-    }
-
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
