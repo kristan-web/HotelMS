@@ -105,7 +105,7 @@ public class UserControllers extends UserControllersTemplate{
             return false;
         }
         
-        if(user.getPassword().equals(user.getConfpass())){
+        if(!user.getPassword().equals(user.getConfpass())){
             JOptionPane.showMessageDialog(null, "Passwords do not match.");
             return false;
         }

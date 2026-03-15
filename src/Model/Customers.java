@@ -7,7 +7,18 @@ public class Customers {
     private String phone_number;
     private String email;
     private String status;
+    private String address;
     //SETTERS AND GETTERS
+    
+    public Customers() {}
+
+    public Customers(String firstName, String lastName, String email, String phone, String address) {
+        this.first_name = firstName;
+        this.last_name  = lastName;
+        this.email     = email;
+        this.phone_number     = phone;
+        this.address   = address;
+    }
 
     public String getCustomer_id() {
         return customer_id;
@@ -56,4 +67,15 @@ public class Customers {
     public void setStatus(String status) {
         this.status = status;
     }
+    
+    public String getCustomer_address() {
+        return address;
+    }
+    public String setCustomer_address(String address) {
+        return this.address = address;
+    }
+    public String getFullName() { return first_name + " " + last_name; }
+
+    @Override
+    public String toString() { return getFullName(); }
 }

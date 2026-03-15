@@ -241,7 +241,8 @@ public class AdminLoginView extends javax.swing.JFrame {
             /*
                 PASS THE USER MODEL AS ARGUMENT LATER
             */
-            AdminDashBoardView dialog = new AdminDashBoardView();
+            String id = user.getUser_id();
+            AdminDashBoardView dialog = new AdminDashBoardView(id);
             dialog.setVisible(true);
             this.dispose();
         }

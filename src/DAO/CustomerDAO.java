@@ -25,12 +25,28 @@ abstract class CustomerDAOTemplate{
     abstract List<Customers> ListOfAllDeletedCustomersQuery(String searchfield);
 
     abstract boolean RestoreCustomerByIDQuery(int customerID);
+    
+    abstract Customers mapRow(ResultSet rs) throws SQLException;
+    
+    abstract Customers getGuestByEmail(String email) throws SQLException;
 
 }
 
 
 
 public class CustomerDAO extends CustomerDAOTemplate{
+    
+    public Customers mapRow(ResultSet rs) throws SQLException {
+        Customers g = new Customers();
+        g.setCustomer_id(rs.getString("guest_id"));
+        g.setFirst_name(rs.getString("first_name"));
+        g.setLast_name(rs.getString("last_name"));
+        g.setEmail(rs.getString("email"));
+        g.setPhone_number(rs.getString("phone"));
+        g.setCustomer_address(rs.getString("address"));
+        return g;
+    }
+    
     @Override
     public boolean AddCustomerQuery(Customers customer){
         try(Connection dbconn = Db_Connector.getCOnnection()){
@@ -153,6 +169,7 @@ public class CustomerDAO extends CustomerDAOTemplate{
                     cstmr.setLast_name(rs.getString("last_name"));
                     cstmr.setPhone_number(rs.getString("phone_number"));
                     cstmr.setEmail(rs.getString("email"));
+                    cstmr.setEmail(rs.getString("address"));
                     cstmr.setStatus(rs.getString("status"));
                 }
             }
@@ -339,5 +356,15 @@ public class CustomerDAO extends CustomerDAOTemplate{
         }
         JOptionPane.showMessageDialog(null, "Failed to restore customer");
         return false;
+    }
+    
+    public Customers getGuestByEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM guests WHERE email = ?";
+        try (Connection conn = Db_Connector.getCOnnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            return rs.next() ? mapRow(rs) : null;
+        }
     }
 }

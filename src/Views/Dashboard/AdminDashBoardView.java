@@ -5,6 +5,7 @@ import Controllers.DashboardControllers;
 import Views.CustomerManagement.*;
 import Views.ServiceManagement.*;
 import Views.AccountManagement.AccountAdministration.*;
+import Views.ReservationManagement.MainFrame;
 
 public class AdminDashBoardView extends javax.swing.JFrame {
     private static final DashboardControllers control = new DashboardControllers();
@@ -15,7 +16,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         OccupiedServicesLabel.setText(String.valueOf(control.getOccupiedServices()));
     }
     
-    public AdminDashBoardView() {
+    public AdminDashBoardView(String int) {
     initComponents();
     setIcons(); // your custom method
     this.setLocationRelativeTo(null);
@@ -225,6 +226,11 @@ public class AdminDashBoardView extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(156, 175, 214));
         jPanel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel11MouseClicked(evt);
+            }
+        });
 
         lblIcon1.setText("jLabel3");
 
@@ -782,6 +788,10 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         dialog.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jPanel16MouseClicked
+
+    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
+        MainFrame MFrame = new MainFrame();
+    }//GEN-LAST:event_jPanel11MouseClicked
 
     /**
      * @param args the command line arguments

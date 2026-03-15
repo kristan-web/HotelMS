@@ -4,6 +4,7 @@ import DAO.CustomerDAO;
 import Model.Customers;
 import java.util.List;
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
 
 abstract class CustomerControllersTemplate {
     public static CustomerDAO dao = new CustomerDAO();
@@ -25,6 +26,17 @@ abstract class CustomerControllersTemplate {
     abstract boolean DeleteCustomerByID(int customerID);
     
     abstract boolean RestoreCustomerByID(String customerID);
+    
+    abstract public String addGuest(String firstName, String lastName, String email, String phone, String address);
+    
+    
+    
+
+    /*abstract String addGuest(String firstName, String lastName, String email, String phone, String address);
+    abstract String updateGuest(Customers g);
+    abstract String deleteGuest(int id);
+    abstract List<Customers> getAllGuests();
+    abstract Customers getGuestById(int id);*/
 }
 
 
@@ -40,10 +52,17 @@ public class CustomerControllers extends CustomerControllersTemplate{
             JOptionPane.showMessageDialog(null, "All fields should be filled.");
             return false;
         }
-        
+        if (customer.getEmail().matches("^[\\w.%+\\-]+@[\\w.\\-]+\\.[a-zA-Z]{2,}$")){
+            JOptionPane.showMessageDialog(null, "ERROR: Invalid email format.");
+            return false;
+        }
         try{
             long phone = Long.parseLong(customer.getPhone_number());
-
+            
+            if (dao.getGuestByEmail(customer.getEmail()) != null){
+                JOptionPane.showMessageDialog(null, "ERROR: A guest with this email already exists.");
+                return false;
+            }
             if(dao.AddCustomerQuery(customer)){
                 JOptionPane.showMessageDialog(null, "Customer added successfully!");
                 return true;
@@ -57,6 +76,23 @@ public class CustomerControllers extends CustomerControllersTemplate{
         }
         
         
+    }
+    
+    @Override
+    public String addGuest(String firstName, String lastName, String email, String phone, String address) {
+        if (firstName.isBlank() || lastName.isBlank() || email.isBlank())
+            return "ERROR: First name, last name, and email are required.";
+        if (!email.matches("^[\\w.%+\\-]+@[\\w.\\-]+\\.[a-zA-Z]{2,}$"))
+            return "ERROR: Invalid email format.";
+        try {
+            if (dao.getGuestByEmail(email) != null)
+                return "ERROR: A guest with this email already exists.";
+            Customers g = new Customers(firstName.trim(), lastName.trim(), email.trim(), phone.trim(), address.trim());
+            dao.AddCustomerQuery(g);
+            return "SUCCESS: Guest added successfully.";
+        } catch (SQLException e) {
+            return "ERROR: " + e.getMessage();
+        }
     }
     
     @Override

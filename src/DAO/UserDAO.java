@@ -40,8 +40,8 @@ public class UserDAO extends UserDAOTemplate{
                 return false;
             }
             
-            String query = "INSERT INTO USERS (first_name, last_name, password, phone, email, role)"
-                    + "VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO users (first_name, last_name, password, phone, email, role)"
+                    + " VALUES (?, ?, ?, ?, ?, ?)";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setString(1, user.getFirst_name());
                 pst.setString(2, user.getLast_name());
@@ -55,7 +55,8 @@ public class UserDAO extends UserDAOTemplate{
                 if(ReturnedRow > 0) return true;
             }
             catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Registration failed. Email is already taken.");
+                e.printStackTrace(); // ← add this
+                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage()); // ← shows real error
                 return false;
             }
         }
@@ -81,7 +82,7 @@ public class UserDAO extends UserDAOTemplate{
             }
             
             String query = "INSERT INTO USERS (first_name, last_name, password, phone, email, role)"
-                    + "VALUES (?, ?, ?, ?, ?, ?)";
+                    + " VALUES (?, ?, ?, ?, ?, ?)";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setString(1, user.getFirst_name());
                 pst.setString(2, user.getLast_name());
