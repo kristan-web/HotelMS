@@ -17,6 +17,7 @@ public class EditCustomerView extends javax.swing.JDialog {
     }
     public EditCustomerView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -41,6 +42,11 @@ public class EditCustomerView extends javax.swing.JDialog {
         LastNameField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(190, 52, 85));
 
@@ -217,23 +223,30 @@ public class EditCustomerView extends javax.swing.JDialog {
     }//GEN-LAST:event_FirstNameFieldActionPerformed
 
     private void UpdateCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerButtonActionPerformed
-        String cstID = CustomerIDField.getText().trim();
-        String cstfName = FirstNameField.getText().trim();
-        String cstlName = LastNameField.getText().trim();
-        String cstEmail = EmailField.getText().trim();
-        String cstPhone = PhoneField.getText().trim();
-        String cstStatus = StatusField.getSelectedItem().toString().trim();
+        Customers customer = new Customers();
+        customer.setCustomer_id(CustomerIDField.getText().trim());
+        customer.setFirst_name(FirstNameField.getText().trim());
+        customer.setLast_name(LastNameField.getText().trim());
+        customer.setEmail(EmailField.getText().trim());
+        customer.setPhone_number(PhoneField.getText().trim());
+        customer.setStatus(StatusField.getSelectedItem().toString().trim());
         
-        String message = control.UpdateCustomerDetails(cstID, cstfName, cstlName, cstEmail, cstPhone, cstStatus);
-        
-        JOptionPane.showMessageDialog(this, message);
-        CustomersView.getInstance().LoadCustomerDetails();
-        this.dispose();
+        if(control.UpdateCustomerDetails(customer)){
+            CustomersView.getInstance().LoadCustomerDetails();
+            this.dispose();
+        }
     }//GEN-LAST:event_UpdateCustomerButtonActionPerformed
 
     private void EmailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EmailFieldActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        CustomersView dialog = new CustomersView();
+        dialog.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

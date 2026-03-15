@@ -52,6 +52,11 @@ public class EditServiceView extends javax.swing.JDialog {
         ServiceIDField.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(190, 52, 85));
 
@@ -214,17 +219,18 @@ public class EditServiceView extends javax.swing.JDialog {
     }//GEN-LAST:event_ServiceDurationFieldActionPerformed
 
     private void UpdateServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateServiceButtonActionPerformed
-        String service_id, service_name, service_duration, service_price, service_status;
-        service_id = ServiceIDField.getText().trim();
-        service_name = ServiceNameField.getText().trim();
-        service_duration = ServiceDurationField.getText();
-        service_price = ServicePriceField.getText().trim();
-        service_status = (String) ServiceStatusField.getSelectedItem();
+        Services service = new Services();
         
-        String message = control.UpdateServiceDetails(service_id, service_name, service_price, service_duration, service_status);
-        JOptionPane.showMessageDialog(null, message);
-        ServiceView.getInstance().loadServicesToTable();
-        this.dispose(); 
+        service.setServiceID(ServiceIDField.getText().trim());
+        service.setServiceName(ServiceNameField.getText().trim());
+        service.setPrice(ServicePriceField.getText().trim());
+        service.setDurationMinutes(ServiceDurationField.getText());
+        service.setStatus((String) ServiceStatusField.getSelectedItem());
+        
+        if(control.UpdateServiceDetails(service)){
+            ServiceView.getInstance().loadServicesToTable();
+            this.dispose();
+        } 
     }//GEN-LAST:event_UpdateServiceButtonActionPerformed
 
     private void CancelUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelUpdateButtonActionPerformed
@@ -234,6 +240,12 @@ public class EditServiceView extends javax.swing.JDialog {
     private void ServiceStatusFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceStatusFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ServiceStatusFieldActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        ServiceView dialog = new ServiceView();
+        dialog.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

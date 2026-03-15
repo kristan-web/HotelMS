@@ -1,9 +1,11 @@
 package Views.CustomerManagement;
-import renderer.CutomerRenderer.*;
+import renderer.CustomerRenderer.*;
 import java.util.List;
 import Model.Customers;
 import Controllers.CustomerControllers;
+import Views.Dashboard.*;
 import javax.swing.event.*;
+import javax.swing.table.DefaultTableModel;
 
 public class CustomersView extends javax.swing.JFrame {   
     public static CustomersView instance;
@@ -14,8 +16,7 @@ public class CustomersView extends javax.swing.JFrame {
         List<Customers> customerList = control.ListOfAllCustomers(); 
         
         
-        javax.swing.table.DefaultTableModel model = 
-        (javax.swing.table.DefaultTableModel) tblCustomers.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
         model.setRowCount(0); // clear previous data
 
         for (Customers c : customerList) {
@@ -35,8 +36,7 @@ public class CustomersView extends javax.swing.JFrame {
         List<Customers> customerList = control.ListOfAllCustomers(searchfield); 
         
         
-        javax.swing.table.DefaultTableModel model = 
-        (javax.swing.table.DefaultTableModel) tblCustomers.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
         model.setRowCount(0); // clear previous data
 
         for (Customers c : customerList) {
@@ -62,6 +62,7 @@ public class CustomersView extends javax.swing.JFrame {
     public CustomersView() {
         initComponents();
         instance = this;
+        this.setLocationRelativeTo(null);
         LoadCustomerDetails();
         tblCustomers.getColumn("Actions").setCellRenderer(new CustomerActionRenderer());
         tblCustomers.getColumn("Actions").setCellEditor(new CustomerActionEditor(tblCustomers));
@@ -117,8 +118,17 @@ public class CustomersView extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCustomers = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        DeletedServicesButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 224, 227));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 568));
@@ -188,7 +198,7 @@ public class CustomersView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CustomerSearchField)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -205,21 +215,31 @@ public class CustomersView extends javax.swing.JFrame {
         jButton1.setText("+   Add");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
+        DeletedServicesButton.setBackground(new java.awt.Color(204, 204, 204));
+        DeletedServicesButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
+        DeletedServicesButton.setText("View Deleted Customers");
+        DeletedServicesButton.addActionListener(this::DeletedServicesButtonActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(DeletedServicesButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
@@ -238,7 +258,9 @@ public class CustomersView extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(DeletedServicesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -260,10 +282,26 @@ public class CustomersView extends javax.swing.JFrame {
     }//GEN-LAST:event_CustomerSearchFieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AddCustomerView dialog = new AddCustomerView(this, true);
-        dialog.setLocationRelativeTo(this);
+        AddCustomerView dialog = new AddCustomerView();
         dialog.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void DeletedServicesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletedServicesButtonActionPerformed
+        DeletedCustomersView dialog = new DeletedCustomersView();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_DeletedServicesButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        AdminDashBoardView dialog = new AdminDashBoardView();
+        dialog.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+    }//GEN-LAST:event_formWindowClosed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -289,6 +327,7 @@ public class CustomersView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CustomerSearchField;
+    private javax.swing.JButton DeletedServicesButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

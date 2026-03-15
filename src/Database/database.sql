@@ -7,7 +7,7 @@ CREATE TABLE Users (
     first_name VARCHAR(155) NOT NULL,
     last_name VARCHAR(155) NOT NULL,
     password VARCHAR(155) NOT NULL,
-    phone BIGINT NOT NULL,
+    phone VARCHAR(155) NOT NULL,
     email VARCHAR(155) NOT NULL UNIQUE,
     role ENUM('Admin', 'Staff') DEFAULT 'Staff',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -21,6 +21,7 @@ CREATE TABLE Services (
     price DECIMAL(10, 2) NOT NULL,
     duration_minutes INT, -- Changed to INT for better logic than the ERD's TIMESTAMP
     status ENUM('Active', 'Inactive', 'Maintenance') DEFAULT 'Active',
+    is_occupied BOOLEAN DEFAULT FALSE,
     is_deleted BOOLEAN DEFAULT FALSE
 );
 
@@ -53,50 +54,3 @@ CREATE TABLE Reservations (
     CONSTRAINT FK_Res_Service FOREIGN KEY (service_id) 
         REFERENCES Services(service_id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
-
----
-
-### Automated Soft-Delete Triggers
-
-These triggers ensure that if you "delete" a customer or service by setting `is_deleted = TRUE`, the corresponding reservations are automatically updated to reflect that the link is now hidden or cancelled.
-
-
-
-#### Trigger: Handle Customer Soft-Delete
-This trigger monitors the `Customer` table. If a customer is marked as deleted, it sets the `customer_id` in their reservations to `NULL` (so you keep the financial data but lose the personal link) and marks the reservation as deleted too.
-
-"""sql
-DELIMITER //
-
-CREATE TRIGGER after_customer_soft_delete
-AFTER UPDATE ON Customer
-FOR EACH ROW
-BEGIN
-    -- If the is_deleted flag was changed from FALSE to TRUE
-    IF OLD.is_deleted = FALSE AND NEW.is_deleted = TRUE THEN
-        UPDATE Reservations 
-        SET customer_id = NULL, 
-            is_deleted = TRUE,
-            status = 'Cancelled'
-        WHERE customer_id = NEW.customer_id;
-    END IF;
-END; //
-
-DELIMITER ;
-
-DELIMITER //
-
-CREATE TRIGGER after_service_soft_delete
-AFTER UPDATE ON Services
-FOR EACH ROW
-BEGIN
-    IF OLD.is_deleted = FALSE AND NEW.is_deleted = TRUE THEN
-        UPDATE Reservations 
-        SET service_id = NULL,
-            status = 'Cancelled'
-        WHERE service_id = NEW.service_id AND status = 'Pending';
-    END IF;
-END; //
-
-DELIMITER ;
-"""
