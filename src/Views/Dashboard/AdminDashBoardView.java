@@ -1,11 +1,11 @@
 package Views.Dashboard;
+import Views.GuestManagement.GuestsView;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import Controllers.DashboardControllers;
-import Views.CustomerManagement.*;
 import Views.ServiceManagement.*;
 import Views.AccountManagement.AccountAdministration.*;
-import Views.ReservationManagement.MainFrame;
+import Model.Users;
 
 public class AdminDashBoardView extends javax.swing.JFrame {
     private static final DashboardControllers control = new DashboardControllers();
@@ -16,7 +16,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         OccupiedServicesLabel.setText(String.valueOf(control.getOccupiedServices()));
     }
     
-    public AdminDashBoardView(String int) {
+    public AdminDashBoardView() {
     initComponents();
     setIcons(); // your custom method
     this.setLocationRelativeTo(null);
@@ -226,11 +226,6 @@ public class AdminDashBoardView extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(156, 175, 214));
         jPanel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel11MouseClicked(evt);
-            }
-        });
 
         lblIcon1.setText("jLabel3");
 
@@ -772,7 +767,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPanel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseClicked
-        CustomersView customer_view = new CustomersView();
+        GuestsView customer_view = new GuestsView();
         customer_view.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jPanel17MouseClicked
@@ -788,10 +783,6 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         dialog.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jPanel16MouseClicked
-
-    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
-        MainFrame MFrame = new MainFrame();
-    }//GEN-LAST:event_jPanel11MouseClicked
 
     /**
      * @param args the command line arguments

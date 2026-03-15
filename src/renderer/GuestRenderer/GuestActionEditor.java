@@ -1,20 +1,20 @@
-package renderer.AccountRenderer;
+package renderer.GuestRenderer;
 import Views.GuestManagement.GuestsView;
 import Views.GuestManagement.EditGuestView;
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.net.URL;
-import Controllers.UserControllers;
-import Model.Users;
+import Controllers.GuestControllers;
+import Model.Guests;
 
-public class AccountActionEditor extends AbstractCellEditor implements TableCellEditor {
-    private static UserControllers control = new UserControllers();
+public class GuestActionEditor extends AbstractCellEditor implements TableCellEditor {
+    private static GuestControllers control = new GuestControllers();
     private JPanel panel = new JPanel();
     private JButton updateButton = new JButton();
     private JButton deleteButton = new JButton();
 
-    public AccountActionEditor(JTable table) {
+    public GuestActionEditor(JTable table) {
         // FETCH ICONS FROM THE LIBRARY
         
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
@@ -40,11 +40,12 @@ public class AccountActionEditor extends AbstractCellEditor implements TableCell
             int row = table.getEditingRow();
             fireEditingStopped();
             
-            int userID = Integer.parseInt(table.getValueAt(row, 0).toString()); 
-            Users user = control.GetUserDetailsByID(userID);
+            int ServiceID = Integer.parseInt(table.getValueAt(row, 0).toString()); 
+            System.out.println("I AM IN GUEST ACTION EDITOR: THIS IS THE SERVICE ID: " + ServiceID);
+            Guests guest = control.GetGuestDetailsByID(ServiceID);
             
-            
-            dialog.loadCustomerData(c);
+            EditGuestView dialog = new EditGuestView();
+            dialog.loadCustomerData(guest);
             dialog.setVisible(true);
         });
 
@@ -54,7 +55,7 @@ public class AccountActionEditor extends AbstractCellEditor implements TableCell
             
             int customerID = Integer.parseInt(table.getValueAt(row, 0).toString());
             
-            int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this service?", 
+            int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this guest?", 
             "Confirm Delete", 
             JOptionPane.YES_OPTION,
             JOptionPane.WARNING_MESSAGE
