@@ -10,7 +10,7 @@ CREATE TABLE Users (
     password VARCHAR(155) NOT NULL,
     phone VARCHAR(155) NOT NULL,
     email VARCHAR(155) NOT NULL UNIQUE,
-    role ENUM('Admin', 'Staff') DEFAULT 'Staff',
+    role ENUM('Admin', 'Staaff') DEFAULT 'Staff',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     is_deleted BOOLEAN DEFAULT FALSE
 );

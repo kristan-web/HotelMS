@@ -68,13 +68,13 @@
                                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Component id="jLabel3" pref="79" max="32767" attributes="0"/>
+                                          <Component id="jLabel3" max="32767" attributes="0"/>
                                           <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="jLabel7" pref="79" max="32767" attributes="0"/>
+                                          <Component id="jLabel7" max="32767" attributes="0"/>
                                           <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="LastNameField" max="32767" attributes="0"/>
@@ -192,9 +192,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="LastNameField">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f1" green="ef" red="ff" type="rgb"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Yu Gothic UI Semilight" size="14" style="0"/>
             </Property>
@@ -220,6 +217,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="PhoneField">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f1" green="ef" red="ff" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Yu Gothic UI Semilight" size="14" style="0"/>
             </Property>
@@ -245,9 +245,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="EmailField">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f1" green="ef" red="ff" type="rgb"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Yu Gothic UI Semilight" size="14" style="0"/>
             </Property>
@@ -311,9 +308,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="FirstNameField">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f1" green="ef" red="ff" type="rgb"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Yu Gothic UI Semilight" size="14" style="0"/>
             </Property>

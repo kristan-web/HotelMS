@@ -122,7 +122,9 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Component id="lblIcon10" min="-2" pref="60" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="SessionAdminLabel" min="-2" max="-2" attributes="0"/>
@@ -143,6 +145,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="lblIcon10" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -184,6 +187,8 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Welcome, Admin"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblIcon10">
                 </Component>
               </SubComponents>
             </Container>
@@ -433,7 +438,7 @@
                 <Component class="javax.swing.JSeparator" name="jSeparator4">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f2" green="f2" red="f2" type="rgb"/>
+                      <Color blue="d3" green="ea" red="d1" type="rgb"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -525,7 +530,7 @@
                 <Component class="javax.swing.JSeparator" name="jSeparator5">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f2" green="f2" red="f2" type="rgb"/>
+                      <Color blue="ce" green="da" red="fc" type="rgb"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -609,7 +614,7 @@
                 <Component class="javax.swing.JSeparator" name="jSeparator6">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f2" green="f2" red="f2" type="rgb"/>
+                      <Color blue="bb" green="c3" red="fa" type="rgb"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -694,7 +699,7 @@
                 <Component class="javax.swing.JSeparator" name="jSeparator3">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f2" green="f2" red="f2" type="rgb"/>
+                      <Color blue="e9" green="ee" red="be" type="rgb"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -821,7 +826,7 @@
                 <Component class="javax.swing.JSeparator" name="jSeparator8">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f2" green="f2" red="f2" type="rgb"/>
+                      <Color blue="af" green="a5" red="9b" type="rgb"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -910,7 +915,7 @@
                 <Component class="javax.swing.JSeparator" name="jSeparator7">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f2" green="f2" red="f2" type="rgb"/>
+                      <Color blue="d4" green="9b" red="c6" type="rgb"/>
                     </Property>
                   </Properties>
                 </Component>
