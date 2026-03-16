@@ -2,11 +2,16 @@ package Views.Dashboard;
 import Views.GuestManagement.GuestsView;
 import javax.swing.ImageIcon;
 import java.awt.Image;
+
 import Controllers.DashboardControllers;
+
+import Views.ReservationManagement.MainFrame;
 import Views.ServiceManagement.*;
 import Views.AccountManagement.AccountAdministration.*;
 import Views.AccountManagement.AccountCreation.*;
+
 import Session.Session;
+
 import Model.Users;
 import javax.swing.JOptionPane;
 
@@ -155,6 +160,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowStateListener(this::formWindowStateChanged);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -252,6 +258,11 @@ public class AdminDashBoardView extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(156, 175, 214));
         jPanel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel11MouseClicked(evt);
+            }
+        });
 
         lblIcon1.setText("jLabel3");
 
@@ -526,6 +537,11 @@ public class AdminDashBoardView extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(127, 140, 153));
         jPanel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel10MouseClicked(evt);
+            }
+        });
 
         lblIcon5.setText("jLabel6");
 
@@ -836,6 +852,24 @@ public class AdminDashBoardView extends javax.swing.JFrame {
                 this.dispose();
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
+        AdminLogsView LogsView = new AdminLogsView(); 
+        LogsView.setVisible(true);
+        LogsView.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jPanel10MouseClicked
+
+    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
+        MainFrame MFrame = new MainFrame();
+        MFrame.setVisible(true);
+        MFrame.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jPanel11MouseClicked
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowStateChanged
 
     /**
      * @param args the command line arguments
