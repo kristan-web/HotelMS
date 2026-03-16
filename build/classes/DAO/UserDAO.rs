@@ -1,2 +1,0 @@
-DAO.UserDAO
-DAO.UserDAOTemplate
