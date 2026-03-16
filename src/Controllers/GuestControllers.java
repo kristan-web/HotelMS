@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import Debugger.Debugger;
 
 abstract class GuestControllersTemplate {
     public static GuestDAO dao = new GuestDAO();
@@ -37,6 +38,7 @@ abstract class GuestControllersTemplate {
 public class GuestControllers extends GuestControllersTemplate{
     @Override
     public boolean AddGuestProcess(Guests guest){
+        Debugger.Debugger("I AM INSIDE ADD GUEST PROCESS");
         if(guest.getFirst_name().isEmpty() || guest.getLast_name().isEmpty() 
         || guest.getPhone().isEmpty() || guest.getEmail().isEmpty() 
         || guest.getAddress().isEmpty())
@@ -45,7 +47,10 @@ public class GuestControllers extends GuestControllersTemplate{
             return false;
         }
         
+        Debugger.Debugger("ALL FIELDS ARE NOT EMPTY");
+        
         try{
+            Debugger.Debugger("I AM INSIDE THE TRY BLOCK");
             long phone = Long.parseLong(guest.getPhone());
 
             if(dao.AddGuestQuery(guest)){

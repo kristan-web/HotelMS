@@ -1,5 +1,6 @@
 package Controllers;
 import DAO.DashboardDAO;
+import Debugger.Debugger;
 
 abstract class DashboardControllersTemplate {
     abstract int getAvailableServices();
@@ -12,6 +13,8 @@ public class DashboardControllers extends DashboardControllersTemplate{
     
     @Override
     public int getAvailableServices(){
+        Debugger.Debugger("I AM INSIDE GET AVAILABLE SERVICES");
+        Debugger.Debugger(dao.getAvailableServicesQuery());
         return dao.getAvailableServicesQuery();
     }
     /*

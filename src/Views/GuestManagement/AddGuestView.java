@@ -37,8 +37,6 @@ public class AddGuestView extends javax.swing.JDialog {
         CancelButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         FirstNameField = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        StatusField = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         AddressField = new javax.swing.JTextField();
 
@@ -78,7 +76,6 @@ public class AddGuestView extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(48, 24, 29));
         jLabel3.setText("First Name: *");
 
-        LastNameField.setBackground(new java.awt.Color(255, 239, 241));
         LastNameField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         LastNameField.setForeground(new java.awt.Color(48, 24, 29));
         LastNameField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -88,6 +85,7 @@ public class AddGuestView extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(48, 24, 29));
         jLabel4.setText("Contact Number: *");
 
+        PhoneField.setBackground(new java.awt.Color(255, 239, 241));
         PhoneField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         PhoneField.setForeground(new java.awt.Color(48, 24, 29));
         PhoneField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -97,7 +95,6 @@ public class AddGuestView extends javax.swing.JDialog {
         jLabel5.setForeground(new java.awt.Color(48, 24, 29));
         jLabel5.setText("Email Address: *");
 
-        EmailField.setBackground(new java.awt.Color(255, 239, 241));
         EmailField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         EmailField.setForeground(new java.awt.Color(48, 24, 29));
         EmailField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -123,19 +120,11 @@ public class AddGuestView extends javax.swing.JDialog {
         jLabel7.setForeground(new java.awt.Color(48, 24, 29));
         jLabel7.setText("Last Name: *");
 
-        FirstNameField.setBackground(new java.awt.Color(255, 239, 241));
         FirstNameField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         FirstNameField.setForeground(new java.awt.Color(48, 24, 29));
         FirstNameField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         FirstNameField.setSelectionColor(new java.awt.Color(210, 90, 119));
         FirstNameField.addActionListener(this::FirstNameFieldActionPerformed);
-
-        jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(48, 24, 29));
-        jLabel6.setText("Status: *");
-
-        StatusField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        StatusField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(48, 24, 29));
@@ -162,61 +151,55 @@ public class AddGuestView extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(StatusField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(PhoneField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(EmailField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(FirstNameField)
                                         .addGap(18, 18, 18))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(154, 154, 154)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(148, 148, 148))
                                     .addComponent(LastNameField)))
                             .addComponent(AddressField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(EmailField, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(20, 20, 20))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FirstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                    .addComponent(FirstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(PhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(EmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AddressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(StatusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(AddressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaveCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -252,7 +235,6 @@ public class AddGuestView extends javax.swing.JDialog {
         customer.setLast_name(LastNameField.getText().trim());
         customer.setPhone(PhoneField.getText().trim());
         customer.setEmail(EmailField.getText().trim());
-        customer.setStatus(StatusField.getSelectedItem().toString().trim());
         customer.setAddress(AddressField.getText().trim());
        
         if(control.AddGuestProcess(customer)){
@@ -312,12 +294,10 @@ public class AddGuestView extends javax.swing.JDialog {
     private javax.swing.JTextField LastNameField;
     private javax.swing.JTextField PhoneField;
     private javax.swing.JButton SaveCustomerButton;
-    private javax.swing.JComboBox<String> StatusField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;

@@ -15,4 +15,10 @@ public class Db_Connector {
             return null;
         }
     }
+    public static void setCurrentUser(Connection conn, int userId) throws SQLException {
+        try (PreparedStatement ps = conn.prepareStatement("SET @current_user_id = ?")) {
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        }
+    }
 }
