@@ -37,17 +37,7 @@ CREATE TABLE `guests` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) 
 
--- 3. Customer Table
 
-```CREATE TABLE Customer (
-    customer_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(155) NOT NULL,
-    last_name VARCHAR(155) NOT NULL,
-    phone VARCHAR(155),
-    email VARCHAR(155) NOT NULL UNIQUE,
-    status ENUM('Active', 'Inactive') DEFAULT 'ACTIVE',
-    is_deleted BOOLEAN DEFAULT FALSE
-);```
 
 -- 4. Reservations Table
 CREATE TABLE Reservations (
