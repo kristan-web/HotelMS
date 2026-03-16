@@ -1,0 +1,2 @@
+DAO.ReservationManagement.GuestDAO
+DAO.ReservationManagement.CustomerTemplate
