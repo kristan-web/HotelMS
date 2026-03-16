@@ -3,11 +3,12 @@ import java.util.List;
 import Model.*;
 import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
-import Views.Dashboard.*;
 import javax.swing.JOptionPane;
 import Controllers.UserControllers;
+import Session.Session;
 
 public class DeletedUserView extends javax.swing.JFrame {
+    private Users currentUser = Session.getCurrentUser();
     public static DeletedUserView instance;
     public static final UserControllers control = new UserControllers();
     
@@ -106,10 +107,9 @@ public class DeletedUserView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 224, 227));
 
-        BackToMainUserView.setBackground(new java.awt.Color(190, 52, 85));
+        BackToMainUserView.setBackground(new java.awt.Color(204, 204, 204));
         BackToMainUserView.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        BackToMainUserView.setForeground(new java.awt.Color(255, 224, 227));
-        BackToMainUserView.setText("Back");
+        BackToMainUserView.setText("Go Back");
         BackToMainUserView.setFocusPainted(false);
         BackToMainUserView.setFocusable(false);
         BackToMainUserView.addActionListener(this::BackToMainUserViewActionPerformed);
@@ -196,9 +196,7 @@ public class DeletedUserView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        RestoreButton.setBackground(new java.awt.Color(47, 32, 56));
         RestoreButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        RestoreButton.setForeground(new java.awt.Color(255, 224, 227));
         RestoreButton.setText("Restore User");
         RestoreButton.setFocusPainted(false);
         RestoreButton.setFocusable(false);
@@ -210,23 +208,19 @@ public class DeletedUserView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BackToMainUserView, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RestoreButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(15, 15, 15))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BackToMainUserView)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(RestoreButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

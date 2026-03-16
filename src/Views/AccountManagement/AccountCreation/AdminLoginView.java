@@ -4,7 +4,7 @@ import Model.Users;
 import Controllers.UserControllers;
 import Views.Dashboard.*;
 import Session.Session;
-import javax.swing.ImageIcon;
+import Debugger.Debugger;
 
 public class AdminLoginView extends javax.swing.JFrame {
     private String source;
@@ -15,12 +15,8 @@ public class AdminLoginView extends javax.swing.JFrame {
      * Creates new form LoginView
      */
     public AdminLoginView(String source) {
+        Debugger.Debugger("I AM INSIDE ADMIN LOGIN VIEW");
         initComponents();
-        
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/resources/admin_logo.jpg"));
-        Image scaled1 = icon1.getImage().getScaledInstance(lblIcon1.getWidth(), lblIcon1.getHeight(), Image.SCALE_SMOOTH);
-        lblIcon1.setIcon(new ImageIcon(scaled1));
-        
         this.source = source;
         this.setLocationRelativeTo(null);
     }
@@ -34,6 +30,7 @@ public class AdminLoginView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -47,9 +44,10 @@ public class AdminLoginView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        lblIcon1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(190, 52, 85));
 
         jPanel2.setBackground(new java.awt.Color(255, 224, 227));
 
@@ -67,7 +65,7 @@ public class AdminLoginView extends javax.swing.JFrame {
 
         PasswordField.setBackground(new java.awt.Color(255, 239, 241));
         PasswordField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        PasswordField.setForeground(new java.awt.Color(47, 32, 56));
+        PasswordField.setForeground(new java.awt.Color(48, 24, 29));
         PasswordField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         PasswordField.setMinimumSize(new java.awt.Dimension(64, 30));
         PasswordField.setPreferredSize(new java.awt.Dimension(64, 30));
@@ -91,9 +89,9 @@ public class AdminLoginView extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 224, 227));
         jLabel8.setText("Password:");
 
-        jButton2.setBackground(new java.awt.Color(190, 52, 85));
+        jButton2.setBackground(new java.awt.Color(255, 224, 227));
         jButton2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 219, 222));
+        jButton2.setForeground(new java.awt.Color(47, 32, 56));
         jButton2.setText("Staff");
         jButton2.setBorderPainted(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -108,7 +106,7 @@ public class AdminLoginView extends javax.swing.JFrame {
         ForgotPasswordButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         ForgotPasswordButton.setForeground(new java.awt.Color(255, 224, 227));
         ForgotPasswordButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ForgotPasswordButton.setText("Forgot Password?");
+        ForgotPasswordButton.setText("Forgot Password");
         ForgotPasswordButton.setAlignmentY(0.0F);
         ForgotPasswordButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ForgotPasswordButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -126,13 +124,8 @@ public class AdminLoginView extends javax.swing.JFrame {
             }
         });
 
-        EmailField.setBackground(new java.awt.Color(255, 239, 241));
-        EmailField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        EmailField.setForeground(new java.awt.Color(47, 32, 56));
         EmailField.setMinimumSize(new java.awt.Dimension(64, 30));
         EmailField.setPreferredSize(new java.awt.Dimension(71, 30));
-        EmailField.setSelectionColor(new java.awt.Color(210, 90, 119));
-        EmailField.addActionListener(this::EmailFieldActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -145,6 +138,9 @@ public class AdminLoginView extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(ForgotPasswordButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(210, 210, 210))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(130, 130, 130))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -156,10 +152,7 @@ public class AdminLoginView extends javax.swing.JFrame {
                             .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(EmailField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(90, 90, 90))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(ForgotPasswordButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(203, 203, 203))))
+                        .addGap(90, 90, 90))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +163,7 @@ public class AdminLoginView extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,19 +171,19 @@ public class AdminLoginView extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ForgotPasswordButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addGap(53, 53, 53)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
 
         jLabel3.setBackground(new java.awt.Color(255, 224, 227));
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(47, 32, 56));
+        jLabel3.setForeground(new java.awt.Color(190, 52, 85));
         jLabel3.setText("Hotel MS");
 
-        jSeparator2.setForeground(new java.awt.Color(47, 32, 56));
+        jSeparator2.setForeground(new java.awt.Color(190, 52, 85));
 
-        jSeparator3.setForeground(new java.awt.Color(47, 32, 56));
+        jSeparator3.setForeground(new java.awt.Color(190, 52, 85));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -199,18 +192,15 @@ public class AdminLoginView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -222,62 +212,51 @@ public class AdminLoginView extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(421, Short.MAX_VALUE)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73))
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 497, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void EmailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmailFieldActionPerformed
-
-    private void ForgotPasswordButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ForgotPasswordButtonMouseExited
-        Font f = ForgotPasswordButton.getFont();
-        ForgotPasswordButton.setFont(new Font(f.getName(), Font.PLAIN, f.getSize()));
-    }//GEN-LAST:event_ForgotPasswordButtonMouseExited
-
-    private void ForgotPasswordButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ForgotPasswordButtonMouseEntered
-        Font f = ForgotPasswordButton.getFont();
-        ForgotPasswordButton.setFont(new Font(f.getName(), Font.BOLD, f.getSize()));
-    }//GEN-LAST:event_ForgotPasswordButtonMouseEntered
-
-    private void ForgotPasswordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ForgotPasswordButtonMouseClicked
-        ForgotPasswordView dialog = new ForgotPasswordView("admin");
-        dialog.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_ForgotPasswordButtonMouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        StaffLoginView dialog = new StaffLoginView(source);
-        dialog.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Debugger.Debugger("LOGIN BUTTON IS CLICKED");
         String email = EmailField.getText().trim();
+        Debugger.Debugger(email);
         String password = new String(PasswordField.getPassword());
-
+        Debugger.Debugger(password);
         Users user = control.AuthenticateAdminLogin(email, password);
-
+        
         if(user != null){
+            Debugger.Debugger("USER IS NOT NULL.");
             Session.setCurrentUser(user);
+            Debugger.Debugger("I AM STILL HERE");
+            Debugger.Debugger(user.getEmail());
+            Debugger.Debugger(user.getFirst_name());
             AdminDashBoardView dialog = new AdminDashBoardView();
             dialog.setVisible(true);
             this.dispose();
@@ -287,6 +266,28 @@ public class AdminLoginView extends javax.swing.JFrame {
     private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordFieldActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        StaffLoginView dialog = new StaffLoginView(source);
+        dialog.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void ForgotPasswordButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ForgotPasswordButtonMouseEntered
+        Font f = ForgotPasswordButton.getFont();
+        ForgotPasswordButton.setFont(new Font(f.getName(), Font.BOLD, f.getSize()));
+    }//GEN-LAST:event_ForgotPasswordButtonMouseEntered
+
+    private void ForgotPasswordButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ForgotPasswordButtonMouseExited
+        Font f = ForgotPasswordButton.getFont();
+        ForgotPasswordButton.setFont(new Font(f.getName(), Font.PLAIN, f.getSize()));
+    }//GEN-LAST:event_ForgotPasswordButtonMouseExited
+
+    private void ForgotPasswordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ForgotPasswordButtonMouseClicked
+        ForgotPasswordView dialog = new ForgotPasswordView("admin");
+        dialog.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ForgotPasswordButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -322,10 +323,10 @@ public class AdminLoginView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JLabel lblIcon1;
     // End of variables declaration//GEN-END:variables
 }

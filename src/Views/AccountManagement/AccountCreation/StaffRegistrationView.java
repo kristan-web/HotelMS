@@ -4,7 +4,6 @@ import java.awt.*;
 import Controllers.UserControllers;
 import javax.swing.JOptionPane;
 import Model.Users;
-import javax.swing.ImageIcon;
  
 public class StaffRegistrationView extends javax.swing.JFrame {
     private String source;
@@ -13,10 +12,6 @@ public class StaffRegistrationView extends javax.swing.JFrame {
 
     public StaffRegistrationView(String source) {
         initComponents();
-        
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/resources/staff_logo.jpg"));
-        Image scaled1 = icon1.getImage().getScaledInstance(lblIcon1.getWidth(), lblIcon1.getHeight(), Image.SCALE_SMOOTH);
-        lblIcon1.setIcon(new ImageIcon(scaled1));
         this.source = source;
         this.setLocationRelativeTo(null);
     }
@@ -41,12 +36,9 @@ public class StaffRegistrationView extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         PasswordField = new javax.swing.JPasswordField();
         ConfPassField = new javax.swing.JPasswordField();
-        LoginFormButton = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        lblIcon1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -133,41 +125,11 @@ public class StaffRegistrationView extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(48, 24, 29));
         jLabel8.setText("Confirm Password:");
 
-        PasswordField.setBackground(new java.awt.Color(255, 239, 241));
-        PasswordField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        PasswordField.setForeground(new java.awt.Color(48, 24, 29));
         PasswordField.setMinimumSize(new java.awt.Dimension(160, 30));
         PasswordField.setPreferredSize(new java.awt.Dimension(160, 30));
-        PasswordField.setSelectionColor(new java.awt.Color(210, 90, 119));
 
-        ConfPassField.setBackground(new java.awt.Color(255, 239, 241));
-        ConfPassField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        ConfPassField.setForeground(new java.awt.Color(48, 24, 29));
         ConfPassField.setMinimumSize(new java.awt.Dimension(160, 30));
         ConfPassField.setPreferredSize(new java.awt.Dimension(160, 30));
-        ConfPassField.setSelectionColor(new java.awt.Color(210, 90, 119));
-        ConfPassField.addActionListener(this::ConfPassFieldActionPerformed);
-
-        LoginFormButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
-        LoginFormButton.setForeground(new java.awt.Color(48, 24, 29));
-        LoginFormButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LoginFormButton.setText("Login Here");
-        LoginFormButton.setAlignmentY(0.0F);
-        LoginFormButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        LoginFormButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        LoginFormButton.setMinimumSize(new java.awt.Dimension(90, 20));
-        LoginFormButton.setPreferredSize(new java.awt.Dimension(90, 20));
-        LoginFormButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LoginFormButtonMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                LoginFormButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                LoginFormButtonMouseExited(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -205,10 +167,6 @@ public class StaffRegistrationView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ConfPassField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(LoginFormButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(200, 200, 200))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {FirstNameField, LastNameField});
@@ -218,7 +176,7 @@ public class StaffRegistrationView extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(50, 50, 50)
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -244,11 +202,9 @@ public class StaffRegistrationView extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ConfPassField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(50, 50, 50)
                 .addComponent(StaffRegistrationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LoginFormButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGap(74, 74, 74))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {EmailField, FirstNameField, LastNameField, PhoneField});
@@ -265,55 +221,30 @@ public class StaffRegistrationView extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 224, 227));
         jLabel6.setText("Registration Form for Staffs.");
 
-        jButton1.setBackground(new java.awt.Color(255, 224, 227));
-        jButton1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(47, 32, 56));
-        jButton1.setText("Go Back");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                                    .addComponent(jLabel6))
-                                .addGap(27, 27, 27))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(42, 208, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(85, 85, 85)
-                                .addComponent(lblIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
-                                .addComponent(jButton1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel2)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(50, 50, 50)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68))
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 500, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -368,31 +299,6 @@ public class StaffRegistrationView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EmailFieldActionPerformed
 
-    private void LoginFormButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginFormButtonMouseClicked
-        if(source.equals("setup")){
-            StaffLoginView dialog = new StaffLoginView(source);
-            dialog.setVisible(true);
-            this.dispose();
-        }
-        else if(source.equals("dashboard")){
-            JOptionPane.showMessageDialog(null, "You can't login from dashboard.");
-            StaffAndAdminAccountView dialog = new StaffAndAdminAccountView();
-            dialog.setVisible(true);
-            this.dispose();
-        }
-        
-    }//GEN-LAST:event_LoginFormButtonMouseClicked
-
-    private void LoginFormButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginFormButtonMouseEntered
-        Font f = LoginFormButton.getFont();
-        LoginFormButton.setFont(new Font(f.getName(), Font.BOLD, f.getSize()));
-    }//GEN-LAST:event_LoginFormButtonMouseEntered
-
-    private void LoginFormButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginFormButtonMouseExited
-        Font f = LoginFormButton.getFont();
-        LoginFormButton.setFont(new Font(f.getName(), Font.PLAIN, f.getSize()));
-    }//GEN-LAST:event_LoginFormButtonMouseExited
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if(source.equals("setup")){
             this.dispose();
@@ -403,14 +309,6 @@ public class StaffRegistrationView extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_formWindowClosing
-
-    private void ConfPassFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfPassFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ConfPassFieldActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -442,11 +340,9 @@ public class StaffRegistrationView extends javax.swing.JFrame {
     private javax.swing.JTextField EmailField;
     private javax.swing.JTextField FirstNameField;
     private javax.swing.JTextField LastNameField;
-    private javax.swing.JLabel LoginFormButton;
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JTextField PhoneField;
     private javax.swing.JButton StaffRegistrationButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -459,6 +355,5 @@ public class StaffRegistrationView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblIcon1;
     // End of variables declaration//GEN-END:variables
 }

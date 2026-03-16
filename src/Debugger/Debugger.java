@@ -1,6 +1,6 @@
 package Debugger;
 public class Debugger {
-    private static boolean DEBUG_MODE = false;
+    private static boolean DEBUG_MODE = true;
     
     public static void Debugger(String message){
         if(DEBUG_MODE){
@@ -16,7 +16,7 @@ public class Debugger {
     
     public static void Debugger(boolean message){
         if(DEBUG_MODE){
-            System.out.println("[BOOLEAN]: " + message);
+            System.out.println("[BOOL]: " + message);
         }
     }
 }

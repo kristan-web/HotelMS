@@ -120,51 +120,65 @@ public class ReservationPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1000, 600));
         setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 224, 227));
+        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
         jPanel1.setMinimumSize(new java.awt.Dimension(900, 500));
 
-        jPanel2.setBackground(new java.awt.Color(190, 52, 85));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(232, 194, 189), 1, true));
-        jPanel2.setForeground(new java.awt.Color(190, 52, 85));
+        jPanel2.setBackground(new java.awt.Color(255, 204, 255));
         jPanel2.setMaximumSize(new java.awt.Dimension(1300, 200));
         jPanel2.setMinimumSize(new java.awt.Dimension(100, 100));
         jPanel2.setPreferredSize(new java.awt.Dimension(1113, 200));
         jPanel2.setRequestFocusEnabled(false);
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        jPanel3.setBackground(new java.awt.Color(255, 224, 227));
         jPanel3.setMinimumSize(new java.awt.Dimension(150, 100));
         jPanel3.setPreferredSize(new java.awt.Dimension(350, 175));
         jPanel3.setRequestFocusEnabled(false);
+        jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(47, 32, 56));
         jLabel6.setText("Guest:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel3.add(jLabel6, gridBagConstraints);
 
-        jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(47, 32, 56));
         jLabel7.setText("Rooms:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel3.add(jLabel7, gridBagConstraints);
 
-        guestCombo.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        guestCombo.setForeground(new java.awt.Color(47, 32, 56));
         guestCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         guestCombo.setPreferredSize(new java.awt.Dimension(250, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 10);
+        jPanel3.add(guestCombo, gridBagConstraints);
 
-        roomCombo.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        roomCombo.setForeground(new java.awt.Color(47, 32, 56));
         roomCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         roomCombo.setPreferredSize(new java.awt.Dimension(250, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 10);
+        jPanel3.add(roomCombo, gridBagConstraints);
 
-        jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(47, 32, 56));
         jLabel8.setText("Notes:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel3.add(jLabel8, gridBagConstraints);
 
         jScrollPane2.setMaximumSize(new java.awt.Dimension(32767, 100));
         jScrollPane2.setPreferredSize(new java.awt.Dimension(224, 70));
 
         notesArea.setColumns(20);
-        notesArea.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        notesArea.setForeground(new java.awt.Color(47, 32, 56));
         notesArea.setLineWrap(true);
         notesArea.setRows(3);
         notesArea.setTabSize(10);
@@ -173,42 +187,14 @@ public class ReservationPanel extends javax.swing.JPanel {
         notesArea.setRequestFocusEnabled(false);
         jScrollPane2.setViewportView(notesArea);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(125, 125, 125)
-                        .addComponent(jLabel7))
-                    .addComponent(jLabel8)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(guestCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(roomCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(guestCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(roomCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 10);
+        jPanel3.add(jScrollPane2, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -217,80 +203,60 @@ public class ReservationPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(jPanel3, gridBagConstraints);
 
-        jPanel6.setBackground(new java.awt.Color(255, 224, 227));
         jPanel6.setMinimumSize(new java.awt.Dimension(150, 100));
         jPanel6.setPreferredSize(new java.awt.Dimension(350, 175));
         jPanel6.setRequestFocusEnabled(false);
+        jPanel6.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(47, 32, 56));
         jLabel1.setText("Check-In:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
+        jPanel6.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(47, 32, 56));
-        jLabel2.setText("Check-Out:");
+        jLabel2.setText(" Check-Out:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
+        jPanel6.add(jLabel2, gridBagConstraints);
 
         checkInField.setEditable(false);
-        checkInField.setBackground(new java.awt.Color(255, 255, 255));
-        checkInField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        checkInField.setForeground(new java.awt.Color(47, 32, 56));
         checkInField.setMaximumSize(new java.awt.Dimension(2147483647, 40));
         checkInField.setPreferredSize(new java.awt.Dimension(225, 30));
         checkInField.addActionListener(this::checkInFieldActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 5, 10, 5);
+        jPanel6.add(checkInField, gridBagConstraints);
 
         checkOutField.setEditable(false);
-        checkOutField.setBackground(new java.awt.Color(255, 255, 255));
-        checkOutField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        checkOutField.setForeground(new java.awt.Color(47, 32, 56));
         checkOutField.setPreferredSize(new java.awt.Dimension(225, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 20, 5);
+        jPanel6.add(checkOutField, gridBagConstraints);
 
-        btnPickCheckIn.setBackground(new java.awt.Color(255, 239, 241));
-        btnPickCheckIn.setForeground(new java.awt.Color(190, 52, 85));
         btnPickCheckIn.setText("📅");
         btnPickCheckIn.addActionListener(this::btnPickCheckInActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
+        jPanel6.add(btnPickCheckIn, gridBagConstraints);
 
-        btnPickCheckOut.setBackground(new java.awt.Color(255, 239, 241));
-        btnPickCheckOut.setForeground(new java.awt.Color(190, 52, 85));
         btnPickCheckOut.setText("📅");
         btnPickCheckOut.addActionListener(this::btnPickCheckOutActionPerformed);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(checkInField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPickCheckIn))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(checkOutField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPickCheckOut))
-                    .addComponent(jLabel2))
-                .addContainerGap(60, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(checkInField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPickCheckIn))
-                .addGap(12, 12, 12)
-                .addComponent(jLabel2)
-                .addGap(1, 1, 1)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(checkOutField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPickCheckOut))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
+        jPanel6.add(btnPickCheckOut, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -299,13 +265,12 @@ public class ReservationPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(jPanel6, gridBagConstraints);
 
-        jPanel7.setBackground(new java.awt.Color(255, 224, 227));
         jPanel7.setMinimumSize(new java.awt.Dimension(150, 100));
         jPanel7.setPreferredSize(new java.awt.Dimension(350, 175));
         jPanel7.setRequestFocusEnabled(false);
         jPanel7.setLayout(new java.awt.GridBagLayout());
 
-        btnFindRooms.setBackground(new java.awt.Color(156, 175, 214));
+        btnFindRooms.setBackground(new java.awt.Color(0, 102, 255));
         btnFindRooms.setForeground(new java.awt.Color(255, 255, 255));
         btnFindRooms.setText("🔎 Find Available Rooms");
         btnFindRooms.setMaximumSize(new java.awt.Dimension(275, 40));
@@ -319,8 +284,7 @@ public class ReservationPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel7.add(btnFindRooms, gridBagConstraints);
 
-        btnConfirm.setBackground(new java.awt.Color(184, 223, 187));
-        btnConfirm.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfirm.setBackground(new java.awt.Color(153, 255, 153));
         btnConfirm.setText("✅ Confirm Reservation");
         btnConfirm.setMaximumSize(new java.awt.Dimension(275, 40));
         btnConfirm.setMinimumSize(new java.awt.Dimension(159, 40));
@@ -335,7 +299,7 @@ public class ReservationPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel7.add(btnConfirm, gridBagConstraints);
 
-        lblTotal.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
+        lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTotal.setText("Total: ₱0.00");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -352,12 +316,9 @@ public class ReservationPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(jPanel7, gridBagConstraints);
 
-        jPanel4.setBackground(new java.awt.Color(190, 52, 85));
-        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(232, 194, 189), 1, true));
+        jPanel4.setBackground(new java.awt.Color(255, 153, 153));
         jPanel4.setMaximumSize(new java.awt.Dimension(1127, 410));
 
-        reservationTable.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        reservationTable.setForeground(new java.awt.Color(47, 32, 56));
         reservationTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -377,36 +338,20 @@ public class ReservationPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(reservationTable);
         reservationTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        btnCheckIn.setBackground(new java.awt.Color(255, 224, 227));
-        btnCheckIn.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        btnCheckIn.setForeground(new java.awt.Color(47, 32, 56));
         btnCheckIn.setText("Check In");
         btnCheckIn.addActionListener(this::btnCheckInActionPerformed);
 
-        btnCheckOut.setBackground(new java.awt.Color(255, 224, 227));
-        btnCheckOut.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        btnCheckOut.setForeground(new java.awt.Color(47, 32, 56));
         btnCheckOut.setText("Check Out");
         btnCheckOut.addActionListener(this::btnCheckOutActionPerformed);
 
-        jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 224, 227));
         jLabel4.setText("Filter:");
 
-        statusFilter.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        statusFilter.setForeground(new java.awt.Color(47, 32, 56));
         statusFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "CONFIRMED", "CHECKED_IN", "CHECKED_OUT", "CANCELLED" }));
         statusFilter.addActionListener(this::statusFilterActionPerformed);
 
-        btnCancel.setBackground(new java.awt.Color(255, 224, 227));
-        btnCancel.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        btnCancel.setForeground(new java.awt.Color(47, 32, 56));
         btnCancel.setText("Cancel Reservation");
         btnCancel.addActionListener(this::btnCancelActionPerformed);
 
-        btnRefresh.setBackground(new java.awt.Color(255, 224, 227));
-        btnRefresh.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        btnRefresh.setForeground(new java.awt.Color(47, 32, 56));
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(this::btnRefreshActionPerformed);
 
@@ -427,9 +372,9 @@ public class ReservationPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRefresh)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -437,15 +382,16 @@ public class ReservationPanel extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCheckIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4)
-                    .addComponent(statusFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCheckOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCheckIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addComponent(statusFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRefresh)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

@@ -10,7 +10,7 @@ CREATE TABLE Users (
     password VARCHAR(155) NOT NULL,
     phone VARCHAR(155) NOT NULL,
     email VARCHAR(155) NOT NULL UNIQUE,
-    role ENUM('Admin', 'Staaff') DEFAULT 'Staff',
+    role ENUM('Admin', 'Staff') DEFAULT 'Staff',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     is_deleted BOOLEAN DEFAULT FALSE
 );
@@ -33,7 +33,8 @@ CREATE TABLE Guests (
     email VARCHAR(155) NOT NULL UNIQUE,
     phone VARCHAR(20) DEFAULT NULL,
     address VARCHAR(200) DEFAULT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_deleted BOOLEAN DEFAULT FALSE
 );
 
 -- 4. Rooms Table

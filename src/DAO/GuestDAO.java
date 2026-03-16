@@ -82,7 +82,6 @@ public class GuestDAO extends GuestDAOTemplate{
                     guest.setEmail(rs.getString("email"));
                     guest.setPhone(rs.getString("phone"));
                     guest.setAddress(rs.getString("address"));
-                    guest.setStatus(rs.getString("status"));
                     
                     gst.add(guest);
                 }
@@ -120,7 +119,6 @@ public class GuestDAO extends GuestDAOTemplate{
                     guest.setEmail(rs.getString("email"));
                     guest.setPhone(rs.getString("phone"));
                     guest.setAddress(rs.getString("address"));
-                    guest.setStatus(rs.getString("status"));
                     
                     gst.add(guest);
                 }
@@ -144,7 +142,7 @@ public class GuestDAO extends GuestDAOTemplate{
         try(Connection dbconn = Db_Connector.getCOnnection()){
             if(dbconn == null) return null;
             
-            String query = "SELECT * FROM Guests WHERE guest_id = ? AND is_deleted = false";
+            String query = "SELECT * FROM Guests WHERE guest_id = ?";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setInt(1, guest_id);
                 ResultSet rs = pst.executeQuery();
@@ -156,7 +154,6 @@ public class GuestDAO extends GuestDAOTemplate{
                     guest.setEmail(rs.getString("email"));
                     guest.setPhone(rs.getString("phone"));
                     guest.setAddress(rs.getString("address"));
-                    guest.setStatus(rs.getString("status"));
                 }
             }
             catch(Exception e){
@@ -174,16 +171,15 @@ public class GuestDAO extends GuestDAOTemplate{
     public boolean UpdateGuestQuery(Guests guest){
         try(Connection dbconn = Db_Connector.getCOnnection()){
             String query = "UPDATE Guests SET first_name = ?, last_name = ?, "
-            + "phone = ?, email = ?, status = ?, address = ? WHERE guest_id = ?";
+            + "phone = ?, email = ?, address = ? WHERE guest_id = ?";
             
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setString(1, guest.getFirst_name());
                 pst.setString(2, guest.getLast_name());
                 pst.setString(3, guest.getPhone());
                 pst.setString(4, guest.getEmail());
-                pst.setString(5, guest.getStatus());
-                pst.setString(6, guest.getAddress());
-                pst.setInt(7, Integer.parseInt(guest.getGuest_id()));
+                pst.setString(5, guest.getAddress());
+                pst.setInt(6, Integer.parseInt(guest.getGuest_id()));
                 
                 int AffectedRow = pst.executeUpdate();
                 
@@ -204,12 +200,13 @@ public class GuestDAO extends GuestDAOTemplate{
         return false;
     }
     
+    
     @Override
     public boolean DeleteGuestQuery(int guestID){
         try(Connection dbconn = Db_Connector.getCOnnection()){
             if(dbconn == null) return false;
             
-            String query = "UPDATE Guests SET is_deleted = true, status = 'Inactive' WHERE guest_id = ?";
+            String query = "UPDATE Guests SET is_deleted = true WHERE guest_id = ?";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setInt(1, guestID);
                 
@@ -234,6 +231,7 @@ public class GuestDAO extends GuestDAOTemplate{
         return false;
     }
     
+    
     @Override
     public List<Guests> ListOfAllDeletedGuestsQuery(){
         List<Guests> ListOfDeletedGuests = new ArrayList<>();
@@ -252,7 +250,6 @@ public class GuestDAO extends GuestDAOTemplate{
                     guest.setLast_name(rs.getString("last_name"));
                     guest.setEmail(rs.getString("email"));
                     guest.setPhone(rs.getString("phone"));
-                    guest.setStatus(rs.getString("status"));
                     guest.setAddress(rs.getString("address"));
                     
                     ListOfDeletedGuests.add(guest);
@@ -292,7 +289,6 @@ public class GuestDAO extends GuestDAOTemplate{
                     guest.setLast_name(rs.getString("last_name"));
                     guest.setEmail(rs.getString("email"));
                     guest.setPhone(rs.getString("phone"));
-                    guest.setStatus(rs.getString("status"));
                     guest.setAddress(rs.getString("address"));
                     
                     ListOfDeletedGuests.add(guest);
@@ -321,7 +317,7 @@ public class GuestDAO extends GuestDAOTemplate{
                 return false;
             }
             
-            String query = "UPDATE Guests SET is_deleted = false, status = 'Active' WHERE guest_id = ?";
+            String query = "UPDATE Guests SET is_deleted = false WHERE guest_id = ?";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setInt(1, guestID);
                 

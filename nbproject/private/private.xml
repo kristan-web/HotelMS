@@ -3,9 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/HotelMS/src/Views/Dashboard/AdminDashBoardView.java</file>
-            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/HotelMS/src/Database/database.sql</file>
-            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/HotelMS/src/Database/Db_Connector.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Debugger/Debugger.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Views/AccountManagement/AccountAdministration/StaffAndAdminAccountView.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Views/AccountManagement/AccountAdministration/EditUserView.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Views/AccountManagement/AccountAdministration/DeletedUserView.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Views/GuestManagement/AddGuestView.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Views/GuestManagement/DeletedGuestsView.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Views/GuestManagement/EditGuestView.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Views/GuestManagement/GuestsView.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Views/ServiceManagement/AddServiceView.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Views/ServiceManagement/DeletedServicesView.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Views/ServiceManagement/EditServiceView.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Views/ServiceManagement/ServiceView.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Views/Dashboard/AdminDashBoardView.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Session/Session.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Controllers/DashboardControllers.java</file>
+            <file>file:/C:/Users/acer/OneDrive%20-%20Compliant%20Learning%20Resources/Desktop/CurrentLocalProject/src/Controllers/GuestControllers.java</file>
         </group>
     </open-files>
 </project-private>

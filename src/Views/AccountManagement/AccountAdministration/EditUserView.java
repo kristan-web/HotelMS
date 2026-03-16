@@ -1,10 +1,11 @@
 package Views.AccountManagement.AccountAdministration;
-import Views.GuestManagement.*;
 import Model.Users;
 import Controllers.UserControllers;
+import Session.Session;
 import javax.swing.JOptionPane;
 
 public class EditUserView extends javax.swing.JDialog {
+    private Users currentUser = Session.getCurrentUser();
     public static UserControllers control = new UserControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditUserView.class.getName());
     
@@ -50,7 +51,7 @@ public class EditUserView extends javax.swing.JDialog {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(47, 32, 56));
+        jPanel1.setBackground(new java.awt.Color(190, 52, 85));
 
         jPanel2.setBackground(new java.awt.Color(255, 224, 227));
 
@@ -75,7 +76,7 @@ public class EditUserView extends javax.swing.JDialog {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        CancelCustomerUpdate.setBackground(new java.awt.Color(190, 52, 85));
+        CancelCustomerUpdate.setBackground(new java.awt.Color(140, 38, 62));
         CancelCustomerUpdate.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         CancelCustomerUpdate.setForeground(new java.awt.Color(255, 224, 227));
         CancelCustomerUpdate.setText("Cancel");
@@ -199,7 +200,7 @@ public class EditUserView extends javax.swing.JDialog {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RoleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UpdateCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CancelCustomerUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -240,7 +241,14 @@ public class EditUserView extends javax.swing.JDialog {
         user.setPhone(PhoneField.getText().trim());
         user.setRole(RoleField.getSelectedItem().toString().trim());
         
+        
         if(control.UpdateUserByID(user)){
+            Users sessionUser = Session.getCurrentUser();
+
+            if(sessionUser.getUser_id().equals(user.getUser_id())){
+                Session.setCurrentUser(user);
+            }
+
             StaffAndAdminAccountView.getInstance().LoadUsersToTable();
             this.dispose();
         }
