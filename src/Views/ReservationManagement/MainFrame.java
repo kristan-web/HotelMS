@@ -134,7 +134,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
-
+        MainFrame MFrame = new MainFrame();
+        MFrame.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

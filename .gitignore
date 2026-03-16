@@ -1,0 +1,34 @@
+# =====================
+#  Java / Ant
+# =====================
+build/
+dist/
+*.class
+*.jar
+*.war
+nbproject/private/
+nbbuild/
+nb-configuration.xml
+
+# =====================
+#  IDE Files
+# =====================
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# =====================
+#  Database Credentials  ← most important
+# =====================
+src/java/config.properties
+src/java/db.properties
+*.env
+web/WEB-INF/db.properties
+
+# =====================
+#  OS Files
+# =====================
+.DS_Store
+Thumbs.db
