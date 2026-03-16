@@ -1,0 +1,2 @@
+DAO.GuestDAO
+DAO.GuestDAOTemplate
