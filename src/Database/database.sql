@@ -34,14 +34,23 @@ CREATE TABLE guests      (
     phone VARCHAR(155),
     email VARCHAR(155) NOT NULL UNIQUE,
     address VARCHAR(155) DEFAULT NULL,
-    status ENUM('Active', 'Inactive') DEFAULT 'ACTIVE',
-    is_deleted BOOLEAN DEFAULT FALSE
-    created_at timestamp not null defailt current_timestamp()
+    status ENUM('Active', 'Inactive') DEFAULT 'Active',
+    is_deleted BOOLEAN DEFAULT FALSE,
+    created_at timestamp not null default current_timestamp()
 );
 
+CREATE TABLE rooms (
+  room_id int NOT NULL primary key AUTO_INCREMENT,
+  room_number varchar(10) NOT NULL,
+  room_type enum('SINGLE','DOUBLE','SUITE','DELUXE') NOT NULL,
+  price decimal(10,2) NOT NULL,
+  capacity int NOT NULL DEFAULT 1,
+  status enum('AVAILABLE','OCCUPIED','MAINTENANCE') DEFAULT 'AVAILABLE',
+  description varchar(300) DEFAULT NULL
+);
 
 CREATE TABLE reservations (
-  reservation_id int NOT NULL,
+  reservation_id int NOT NULL primary key AUTO_INCREMENT,
   guest_id int NOT NULL,
   room_id int NOT NULL,
   check_in date NOT NULL,
@@ -49,15 +58,8 @@ CREATE TABLE reservations (
   status enum('CONFIRMED','CHECKED_IN','CHECKED_OUT','CANCELLED') DEFAULT 'CONFIRMED',
   total_amount decimal(10,2) DEFAULT NULL,
   notes text DEFAULT NULL,
-  created_at timestamp NOT NULL DEFAULT current_timestamp()
-) 
+  created_at timestamp NOT NULL DEFAULT current_timestamp(),
+  FOREIGN KEY (guest_id) REFERENCES guests(guest_id),
+  FOREIGN KEY (room_id) REFERENCES rooms(room_id)
+);
 
-CREATE TABLE rooms (
-  room_id int NOT NULL,
-  room_number varchar(10) NOT NULL,
-  room_type enum('SINGLE','DOUBLE','SUITE','DELUXE') NOT NULL,
-  price decimal(10,2) NOT NULL,
-  capacity int NOT NULL DEFAULT 1,
-  status enum('AVAILABLE','OCCUPIED','MAINTENANCE') DEFAULT 'AVAILABLE',
-  description varchar(300) DEFAULT NULL
-)
