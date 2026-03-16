@@ -1,13 +1,17 @@
 package Views.Dashboard;
+import Views.GuestManagement.GuestsView;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import Controllers.DashboardControllers;
-import Views.CustomerManagement.*;
 import Views.ServiceManagement.*;
 import Views.AccountManagement.AccountAdministration.*;
-import Views.ReservationManagement.MainFrame;
+import Views.AccountManagement.AccountCreation.*;
+import Session.Session;
+import Model.Users;
+import javax.swing.JOptionPane;
 
 public class AdminDashBoardView extends javax.swing.JFrame {
+    private Users currentUser = Session.getCurrentUser();
     private static final DashboardControllers control = new DashboardControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminDashBoardView.class.getName());
 
@@ -16,13 +20,13 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         OccupiedServicesLabel.setText(String.valueOf(control.getOccupiedServices()));
     }
     
-    public AdminDashBoardView(String int) {
-    initComponents();
-    setIcons(); // your custom method
-    this.setLocationRelativeTo(null);
-    
-    LoadDashboardStatistics();
-}
+    public AdminDashBoardView() {
+        initComponents();
+        setIcons(); // your custom method
+        this.setLocationRelativeTo(null);
+        SessionAdminLabel.setText("Welcome, " + currentUser.getFirst_name());
+        LoadDashboardStatistics();
+    }
 
     private void setIcons() {
    // Icon 1
@@ -89,7 +93,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        SessionAdminLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -154,10 +158,12 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 224, 227));
         jButton1.setText("Log out");
+        jButton1.setFocusPainted(false);
+        jButton1.setFocusable(false);
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
-        jLabel2.setForeground(new java.awt.Color(47, 32, 56));
-        jLabel2.setText("Welcome, Admin");
+        SessionAdminLabel.setForeground(new java.awt.Color(47, 32, 56));
+        SessionAdminLabel.setText("Welcome, Admin");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -167,7 +173,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(SessionAdminLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(20, 20, 20))
@@ -179,7 +185,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jButton1)
-                    .addComponent(jLabel2))
+                    .addComponent(SessionAdminLabel))
                 .addGap(10, 10, 10))
         );
 
@@ -226,11 +232,6 @@ public class AdminDashBoardView extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(156, 175, 214));
         jPanel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel11MouseClicked(evt);
-            }
-        });
 
         lblIcon1.setText("jLabel3");
 
@@ -678,7 +679,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel5.setText("   Customer");
+        jLabel5.setText("Guest");
 
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(242, 242, 242));
@@ -691,12 +692,13 @@ public class AdminDashBoardView extends javax.swing.JFrame {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(lblIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
                     .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel5)))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
@@ -768,11 +770,22 @@ public class AdminDashBoardView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", 
+            "Confirm Delete", 
+            JOptionPane.YES_OPTION,
+            JOptionPane.WARNING_MESSAGE
+            );
+            
+            if(choice == JOptionPane.YES_OPTION){
+                Session.clearSession();
+                AdminLoginView dialog = new AdminLoginView("setup");
+                dialog.setVisible(true);
+                this.dispose();
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPanel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseClicked
-        CustomersView customer_view = new CustomersView();
+        GuestsView customer_view = new GuestsView();
         customer_view.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jPanel17MouseClicked
@@ -788,10 +801,6 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         dialog.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jPanel16MouseClicked
-
-    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
-        MainFrame MFrame = new MainFrame();
-    }//GEN-LAST:event_jPanel11MouseClicked
 
     /**
      * @param args the command line arguments
@@ -821,6 +830,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AvailableServicesLabel;
     private javax.swing.JLabel OccupiedServicesLabel;
+    private javax.swing.JLabel SessionAdminLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -831,7 +841,6 @@ public class AdminDashBoardView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

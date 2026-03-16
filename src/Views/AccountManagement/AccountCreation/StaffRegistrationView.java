@@ -1,15 +1,18 @@
 package Views.AccountManagement.AccountCreation;
+import Views.AccountManagement.AccountAdministration.*;
 import java.awt.*;
 import Controllers.UserControllers;
 import javax.swing.JOptionPane;
 import Model.Users;
  
 public class StaffRegistrationView extends javax.swing.JFrame {
+    private String source;
     private static final UserControllers control = new UserControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StaffRegistrationView.class.getName());
 
-    public StaffRegistrationView() {
+    public StaffRegistrationView(String source) {
         initComponents();
+        this.source = source;
         this.setLocationRelativeTo(null);
     }
 
@@ -38,7 +41,12 @@ public class StaffRegistrationView extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(190, 52, 85));
 
@@ -78,7 +86,10 @@ public class StaffRegistrationView extends javax.swing.JFrame {
         StaffRegistrationButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         StaffRegistrationButton.setForeground(new java.awt.Color(255, 224, 227));
         StaffRegistrationButton.setText("Register");
+        StaffRegistrationButton.setBorderPainted(false);
         StaffRegistrationButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        StaffRegistrationButton.setFocusPainted(false);
+        StaffRegistrationButton.setFocusable(false);
         StaffRegistrationButton.setMinimumSize(new java.awt.Dimension(190, 42));
         StaffRegistrationButton.setPreferredSize(new java.awt.Dimension(190, 42));
         StaffRegistrationButton.addActionListener(this::StaffRegistrationButtonActionPerformed);
@@ -289,9 +300,14 @@ public class StaffRegistrationView extends javax.swing.JFrame {
         user.setConfpass(new String(ConfPassField.getPassword()));
         
         if(control.ValidateAndRegisterStaffAccount(user)){
-            StaffLoginView dialog = new StaffLoginView();
-            dialog.setVisible(true);
-            this.dispose();
+            if(source.equals("setup")){
+                this.dispose();
+            }
+            else if(source.equals("dashboard")){
+                StaffAndAdminAccountView dialog = new StaffAndAdminAccountView();
+                dialog.setVisible(true);
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_StaffRegistrationButtonActionPerformed
 
@@ -312,9 +328,18 @@ public class StaffRegistrationView extends javax.swing.JFrame {
     }//GEN-LAST:event_EmailFieldActionPerformed
 
     private void LoginFormButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginFormButtonMouseClicked
-        StaffLoginView dialog = new StaffLoginView();
-        dialog.setVisible(true);
-        this.dispose();
+        if(source.equals("setup")){
+            StaffLoginView dialog = new StaffLoginView(source);
+            dialog.setVisible(true);
+            this.dispose();
+        }
+        else if(source.equals("dashboard")){
+            JOptionPane.showMessageDialog(null, "You can't login from dashboard.");
+            StaffAndAdminAccountView dialog = new StaffAndAdminAccountView();
+            dialog.setVisible(true);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_LoginFormButtonMouseClicked
 
     private void LoginFormButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginFormButtonMouseEntered
@@ -326,6 +351,17 @@ public class StaffRegistrationView extends javax.swing.JFrame {
         Font f = LoginFormButton.getFont();
         LoginFormButton.setFont(new Font(f.getName(), Font.PLAIN, f.getSize()));
     }//GEN-LAST:event_LoginFormButtonMouseExited
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(source.equals("setup")){
+            this.dispose();
+        }
+        else if(source.equals("dashboard")){
+            StaffAndAdminAccountView dialog = new StaffAndAdminAccountView();
+            dialog.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -349,7 +385,7 @@ public class StaffRegistrationView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new StaffRegistrationView().setVisible(true));
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

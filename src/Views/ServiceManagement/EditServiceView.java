@@ -87,12 +87,16 @@ public class EditServiceView extends javax.swing.JDialog {
         CancelUpdateButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         CancelUpdateButton.setForeground(new java.awt.Color(255, 224, 227));
         CancelUpdateButton.setText("Cancel");
+        CancelUpdateButton.setFocusPainted(false);
+        CancelUpdateButton.setFocusable(false);
         CancelUpdateButton.addActionListener(this::CancelUpdateButtonActionPerformed);
 
         UpdateServiceButton.setBackground(new java.awt.Color(255, 224, 227));
         UpdateServiceButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         UpdateServiceButton.setForeground(new java.awt.Color(190, 52, 85));
         UpdateServiceButton.setText("Update");
+        UpdateServiceButton.setFocusPainted(false);
+        UpdateServiceButton.setFocusable(false);
         UpdateServiceButton.addActionListener(this::UpdateServiceButtonActionPerformed);
 
         ServiceStatusField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N

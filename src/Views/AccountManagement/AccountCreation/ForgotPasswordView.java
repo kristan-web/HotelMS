@@ -3,11 +3,13 @@ import Controllers.UserControllers;
 import javax.swing.JOptionPane;
 
 public class ForgotPasswordView extends javax.swing.JDialog {
+    private String source;
     private static final UserControllers control = new UserControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ForgotPasswordView.class.getName());
     
-    public ForgotPasswordView() {
+    public ForgotPasswordView(String source) {
         initComponents();
+        this.source = source;
         this.setLocationRelativeTo(null);
     }
 
@@ -53,6 +55,9 @@ public class ForgotPasswordView extends javax.swing.JDialog {
         jButton1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 224, 227));
         jButton1.setText("Submit");
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+        jButton1.setFocusable(false);
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 13)); // NOI18N
@@ -112,7 +117,7 @@ public class ForgotPasswordView extends javax.swing.JDialog {
             String generatedOTP = control.generateOTP();
             control.sendOTP(email, generatedOTP);
             
-            EnterOTPView dialog = new EnterOTPView(generatedOTP, email);
+            EnterOTPView dialog = new EnterOTPView(generatedOTP, email, source);
             dialog.setVisible(true);
             this.dispose();
         }
@@ -126,9 +131,16 @@ public class ForgotPasswordView extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        StaffLoginView dialog = new StaffLoginView();
-        dialog.setVisible(true);
-        this.dispose();
+        if(source.equals("staff")){
+            StaffLoginView dialog = new StaffLoginView("setup");
+            dialog.setVisible(true);
+            this.dispose();
+        }
+        else if(source.equals("admin")){
+            AdminLoginView dialog = new AdminLoginView("setup");
+            dialog.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_formWindowClosing
 
     /**

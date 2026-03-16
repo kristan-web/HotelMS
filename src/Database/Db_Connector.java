@@ -2,7 +2,7 @@ package Database;
 import java.sql.*;
 
 public class Db_Connector {
-    private static final String DB_HOST = "jdbc:mysql://localhost:3306/hotelreservationsystem";
+    private static final String DB_HOST = "jdbc:mysql://localhost:3306/hoteldb";
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "";
     

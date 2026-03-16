@@ -1,15 +1,18 @@
 package Views.AccountManagement.AccountCreation;
 import Controllers.UserControllers;
+import Views.AccountManagement.AccountAdministration.*;
 import javax.swing.JOptionPane;
 import java.awt.*;
 import Model.Users;
         
 public class AdminRegistrationView extends javax.swing.JFrame {
-    
+    private String source;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminRegistrationView.class.getName());
     private static final UserControllers control = new UserControllers();
-    public AdminRegistrationView() {
+    
+    public AdminRegistrationView(String source) {
         initComponents();
+        this.source = source;
         this.setLocationRelativeTo(null);
     }
 
@@ -38,7 +41,12 @@ public class AdminRegistrationView extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(47, 32, 56));
         jPanel1.setMinimumSize(new java.awt.Dimension(500, 500));
@@ -117,7 +125,10 @@ public class AdminRegistrationView extends javax.swing.JFrame {
         RegisterAdminButton.setForeground(new java.awt.Color(47, 32, 56));
         RegisterAdminButton.setText("Register");
         RegisterAdminButton.setAlignmentY(0.0F);
+        RegisterAdminButton.setBorderPainted(false);
         RegisterAdminButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        RegisterAdminButton.setFocusPainted(false);
+        RegisterAdminButton.setFocusable(false);
         RegisterAdminButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         RegisterAdminButton.setMinimumSize(new java.awt.Dimension(160, 35));
         RegisterAdminButton.setPreferredSize(new java.awt.Dimension(160, 35));
@@ -129,6 +140,7 @@ public class AdminRegistrationView extends javax.swing.JFrame {
         LoginFormButton.setText("Login Here");
         LoginFormButton.setAlignmentY(0.0F);
         LoginFormButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LoginFormButton.setFocusable(false);
         LoginFormButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         LoginFormButton.setMinimumSize(new java.awt.Dimension(80, 20));
         LoginFormButton.setPreferredSize(new java.awt.Dimension(80, 20));
@@ -316,9 +328,16 @@ public class AdminRegistrationView extends javax.swing.JFrame {
         user.setConfpass(new String(ConfPassField.getPassword()));
         
         if(control.ValidateAndRegisterAdminAccount(user)){
-            AdminLoginView dialog = new AdminLoginView();
-            dialog.setVisible(true);
-            this.dispose();
+            if(source.equals("setup")){
+                AdminLoginView dialog = new AdminLoginView(source);
+                dialog.setVisible(true);
+                this.dispose();
+            }
+            else if(source.equals("dashboard")){
+                StaffAndAdminAccountView dialog = new StaffAndAdminAccountView();
+                dialog.setVisible(true);
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_RegisterAdminButtonActionPerformed
 
@@ -333,10 +352,31 @@ public class AdminRegistrationView extends javax.swing.JFrame {
     }//GEN-LAST:event_LoginFormButtonMouseExited
 
     private void LoginFormButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginFormButtonMouseClicked
-        AdminLoginView dialog = new AdminLoginView();
-        dialog.setVisible(true);
-        this.dispose();
+        if(source.equals("setup")){
+            AdminLoginView dialog = new AdminLoginView(source);
+            dialog.setVisible(true);
+            this.dispose();
+        }
+        else if(source.equals("dashboard")){
+            JOptionPane.showMessageDialog(null, "You can't login from dashboard.");
+            StaffAndAdminAccountView dialog = new StaffAndAdminAccountView();
+            dialog.setVisible(true);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_LoginFormButtonMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(source.equals("setup")){
+            this.dispose();
+        }
+        else if(source.equals("dashboard")){
+            StaffAndAdminAccountView dialog = new StaffAndAdminAccountView();
+            dialog.setVisible(true);
+            this.dispose();
+        }
+        
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -358,9 +398,6 @@ public class AdminRegistrationView extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new AdminRegistrationView().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,16 +3,19 @@ import java.awt.*;
 import Model.Users;
 import Controllers.UserControllers;
 import Views.Dashboard.*;
+import Session.Session;
 
 public class AdminLoginView extends javax.swing.JFrame {
+    private String source;
     private static final UserControllers control = new UserControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminLoginView.class.getName());
 
     /**
      * Creates new form LoginView
      */
-    public AdminLoginView() {
+    public AdminLoginView(String source) {
         initComponents();
+        this.source = source;
         this.setLocationRelativeTo(null);
     }
 
@@ -47,6 +50,7 @@ public class AdminLoginView extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 224, 227));
 
         jPanel3.setBackground(new java.awt.Color(47, 32, 56));
+        jPanel3.setFocusable(false);
         jPanel3.setMinimumSize(new java.awt.Dimension(530, 500));
         jPanel3.setPreferredSize(new java.awt.Dimension(530, 500));
 
@@ -70,7 +74,10 @@ public class AdminLoginView extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(48, 24, 29));
         jButton1.setText("Login");
+        jButton1.setBorderPainted(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setFocusPainted(false);
+        jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setMinimumSize(new java.awt.Dimension(270, 42));
         jButton1.setPreferredSize(new java.awt.Dimension(270, 42));
@@ -84,7 +91,10 @@ public class AdminLoginView extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(47, 32, 56));
         jButton2.setText("Staff");
+        jButton2.setBorderPainted(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setFocusPainted(false);
+        jButton2.setFocusable(false);
         jButton2.addActionListener(this::jButton2ActionPerformed);
 
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
@@ -238,11 +248,8 @@ public class AdminLoginView extends javax.swing.JFrame {
         Users user = control.AuthenticateAdminLogin(email, password);
         
         if(user != null){
-            /*
-                PASS THE USER MODEL AS ARGUMENT LATER
-            */
-            String id = user.getUser_id();
-            AdminDashBoardView dialog = new AdminDashBoardView(id);
+            Session.setCurrentUser(user);
+            AdminDashBoardView dialog = new AdminDashBoardView();
             dialog.setVisible(true);
             this.dispose();
         }
@@ -253,7 +260,7 @@ public class AdminLoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_PasswordFieldActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        StaffLoginView dialog = new StaffLoginView();
+        StaffLoginView dialog = new StaffLoginView(source);
         dialog.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -269,7 +276,7 @@ public class AdminLoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_ForgotPasswordButtonMouseExited
 
     private void ForgotPasswordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ForgotPasswordButtonMouseClicked
-        ForgotPasswordView dialog = new ForgotPasswordView();
+        ForgotPasswordView dialog = new ForgotPasswordView("admin");
         dialog.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ForgotPasswordButtonMouseClicked
@@ -296,7 +303,6 @@ public class AdminLoginView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new AdminLoginView().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

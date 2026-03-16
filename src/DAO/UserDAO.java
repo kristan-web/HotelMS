@@ -25,6 +25,16 @@ abstract class UserDAOTemplate {
     abstract List<Users> ListOfAllUsersQuery();
     
     abstract List<Users> ListOfAllUsersQuery(String searchfield);
+    
+    abstract List<Users> ListOfAllDeletedUsersQuery();
+    
+    abstract List<Users> ListOfAllDeletedUsersQuery(String searchfield);
+    
+    abstract Users GetUserDetailsByIDQuery(int userID);
+    
+    abstract boolean DeleteUserByIDQuery(int userID);
+    
+    abstract boolean RestoreUserByIDQuery(int userID);
 }
 
 
@@ -40,8 +50,8 @@ public class UserDAO extends UserDAOTemplate{
                 return false;
             }
             
-            String query = "INSERT INTO users (first_name, last_name, password, phone, email, role)"
-                    + " VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO USERS (first_name, last_name, password, phone, email, role)"
+                    + "VALUES (?, ?, ?, ?, ?, ?)";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setString(1, user.getFirst_name());
                 pst.setString(2, user.getLast_name());
@@ -55,8 +65,7 @@ public class UserDAO extends UserDAOTemplate{
                 if(ReturnedRow > 0) return true;
             }
             catch(Exception e){
-                e.printStackTrace(); // ← add this
-                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage()); // ← shows real error
+                JOptionPane.showMessageDialog(null, "Registration failed. Email is already taken.");
                 return false;
             }
         }
@@ -82,7 +91,7 @@ public class UserDAO extends UserDAOTemplate{
             }
             
             String query = "INSERT INTO USERS (first_name, last_name, password, phone, email, role)"
-                    + " VALUES (?, ?, ?, ?, ?, ?)";
+                    + "VALUES (?, ?, ?, ?, ?, ?)";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 pst.setString(1, user.getFirst_name());
                 pst.setString(2, user.getLast_name());
@@ -165,7 +174,6 @@ public class UserDAO extends UserDAOTemplate{
                     return true;
                 }
                 
-                JOptionPane.showMessageDialog(null, "Email is not registered.");
                 return false;
             }
             catch(Exception e){
@@ -258,7 +266,7 @@ public class UserDAO extends UserDAOTemplate{
                 return false;
             }
             
-            String query = "SELECT * FROM Users WHERE role = 'Admin'";
+            String query = "SELECT * FROM Users WHERE role = 'Admin' AND is_deleted = false";
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
                 
                 ResultSet rs = pst.executeQuery();
@@ -358,5 +366,265 @@ public class UserDAO extends UserDAOTemplate{
         }
         
         return usersList;
+    }
+    
+    public List<Users> ListOfAllDeletedUsersQuery(){
+        List<Users> usersList = new ArrayList<>();
+        
+        try(Connection dbconn = Db_Connector.getCOnnection()){
+            if (dbconn == null) return null;
+            
+            String query = "SELECT * from Users WHERE is_deleted = true";
+            try(PreparedStatement pst = dbconn.prepareStatement(query)){
+                ResultSet rs = pst.executeQuery();
+                
+                while(rs.next()){
+                    Users user = new Users();
+                    
+                    user.setUser_id(rs.getString("user_id"));
+                    user.setFirst_name(rs.getString("first_name"));
+                    user.setLast_name(rs.getString("last_name"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPassword(rs.getString("password"));
+                    user.setRole(rs.getString("role"));
+                    
+                    usersList.add(user);
+                }
+            }
+            catch(Exception e){
+                return null;
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+        catch(Exception e){
+            return null;
+        }
+        
+        return usersList;        
+    }
+    
+    public List<Users> ListOfAllDeletedUsersQuery(String searchfield){
+        List<Users> usersList = new ArrayList<>();
+        
+        try(Connection dbconn = Db_Connector.getCOnnection()){
+            if (dbconn == null) return null;
+            
+            String query = "SELECT * from Users WHERE first_name LIKE ? AND is_deleted = true";
+            try(PreparedStatement pst = dbconn.prepareStatement(query)){
+                pst.setString(1, "%" + searchfield + "%");
+                
+                ResultSet rs = pst.executeQuery();
+                
+                while(rs.next()){
+                    Users user = new Users();
+                    
+                    user.setUser_id(rs.getString("user_id"));
+                    user.setFirst_name(rs.getString("first_name"));
+                    user.setLast_name(rs.getString("last_name"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPassword(rs.getString("password"));
+                    user.setRole(rs.getString("role"));
+                    
+                    usersList.add(user);
+                }
+            }
+            catch(Exception e){
+                return null;
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+        catch(Exception e){
+            return null;
+        }
+        
+        return usersList;        
+    }
+    
+    public Users GetUserDetailsByIDQuery(int userID){
+        Users user = null;
+        
+        try(Connection dbconn = Db_Connector.getCOnnection()){
+            if(dbconn == null) return null;
+            
+            String query = "SELECT * FROM Users WHERE user_id = ?";
+            try(PreparedStatement pst = dbconn.prepareStatement(query)){
+                pst.setInt(1, userID);
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    user = new Users();
+                    
+                    user.setUser_id(rs.getString("user_id"));
+                    user.setFirst_name(rs.getString("first_name"));
+                    user.setLast_name(rs.getString("last_name"));
+                    user.setPassword(rs.getString("password"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setRole(rs.getString("role"));
+                }
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Failed to get user details.");
+                return null;
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to get user details.");
+            return null;
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Failed to get user details.");
+            return null;
+        }
+        
+        return user;
+    }
+    
+    public boolean UpdateUserQuery(Users user){        
+        try(Connection dbconn = Db_Connector.getCOnnection()){
+           if(dbconn == null){
+               JOptionPane.showMessageDialog(null, "Can't connect to the database.");
+                return false;
+           }
+           
+           String query = "UPDATE Users SET first_name = ?, last_name = ?, phone = ?, email = ?,"
+                   + "role = ? WHERE user_id = ?";
+           
+           try(PreparedStatement pst = dbconn.prepareStatement(query)){
+               pst.setString(1, user.getFirst_name());
+               pst.setString(2, user.getLast_name());
+               pst.setString(3, user.getPhone());
+               pst.setString(4, user.getEmail());
+               pst.setString(5, user.getRole());
+               pst.setInt(6, Integer.parseInt(user.getUser_id()));
+                       
+               
+               int RowsAffected = pst.executeUpdate();
+               
+               if(RowsAffected > 0) return true;
+           }
+           catch(Exception e){
+               JOptionPane.showMessageDialog(null, "Failed to update user details.");
+                return false;
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to update user details.");
+            return false;
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Failed to update user details.");
+            return false;
+        }
+        JOptionPane.showMessageDialog(null, "Failed to update user details.");
+        return false;
+    }
+    
+    public boolean DeleteUserByIDQuery(int userID){
+        try(Connection dbconn = Db_Connector.getCOnnection()){
+            if(dbconn == null){
+                JOptionPane.showMessageDialog(null, "Can't connect to the database");
+                return false;
+            }
+            
+            String query = "UPDATE Users SET is_deleted = true WHERE user_id = ?";
+            try(PreparedStatement pst = dbconn.prepareStatement(query)){
+                pst.setInt(1, userID);
+                
+                int RowsAffected = pst.executeUpdate();
+                
+                if(RowsAffected > 0) return true;
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Failed to delete user.");
+                return false;
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to delete user.");
+            return false;
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Failed to delete user.");
+            return false;
+        }
+        JOptionPane.showMessageDialog(null, "Failed to delete user.");
+        return false;
+    }
+    
+    public boolean RestoreServiceByIDQuery(int userID){
+        try(Connection dbconn = Db_Connector.getCOnnection()){
+            if(dbconn == null){
+                JOptionPane.showMessageDialog(null, "Can't connect to the database");
+                return false;
+            }
+            
+            String query = "UPDATE Users SET is_deleted = false WHERE user_id = ?";
+            try(PreparedStatement pst = dbconn.prepareStatement(query)){
+                pst.setInt(1, userID);
+                
+                int RowsAffected = pst.executeUpdate();
+                
+                if(RowsAffected > 0) return true;
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Failed to restore user.");
+                return false;
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to restore user.");
+            return false;
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Failed to restore user.");
+            return false;
+        }
+        JOptionPane.showMessageDialog(null, "Failed to restore user.");
+        return false;
+    }
+    
+    public boolean RestoreUserByIDQuery(int userID){
+        try(Connection dbconn = Db_Connector.getCOnnection()){
+            if(dbconn == null){
+                JOptionPane.showMessageDialog(null, "Can't connect to the database");
+                return false;
+            }
+                
+            String query = "UPDATE Users SET is_deleted = false WHERE user_id = ?";
+            try(PreparedStatement pst = dbconn.prepareStatement(query)){
+                pst.setInt(1, userID);
+
+                int RowsAffected = pst.executeUpdate();
+
+                if(RowsAffected > 0) return true;
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Failed to restore user.");
+                return false;
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to restore user.");
+            return false;
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Failed to restore user.");
+            return false;
+        }
+        JOptionPane.showMessageDialog(null, "Failed to restore user.");
+        return false;           
     }
 }

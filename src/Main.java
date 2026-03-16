@@ -7,11 +7,11 @@ public class Main {
     
     public static void main(String[] args) {
         if(dao.CheckIfDatabaseHasAdminQuery()){
-            AdminLoginView dialog = new AdminLoginView();
+            AdminLoginView dialog = new AdminLoginView("setup");
             dialog.setVisible(true);
             return;
         }
-        AdminRegistrationView dialog = new AdminRegistrationView();
+        AdminRegistrationView dialog = new AdminRegistrationView("setup");
         dialog.setVisible(true);
     }
 }

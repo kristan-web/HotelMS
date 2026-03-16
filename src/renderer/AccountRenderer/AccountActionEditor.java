@@ -1,14 +1,15 @@
 package renderer.AccountRenderer;
+import Views.GuestManagement.GuestsView;
+import Views.AccountManagement.AccountAdministration.*;
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.net.URL;
-import Controllers.CustomerControllers;
-import Views.CustomerManagement.*;
-import Model.Customers;
+import Controllers.UserControllers;
+import Model.Users;
 
 public class AccountActionEditor extends AbstractCellEditor implements TableCellEditor {
-    private static CustomerControllers control = new CustomerControllers();
+    private static UserControllers control = new UserControllers();
     private JPanel panel = new JPanel();
     private JButton updateButton = new JButton();
     private JButton deleteButton = new JButton();
@@ -39,11 +40,11 @@ public class AccountActionEditor extends AbstractCellEditor implements TableCell
             int row = table.getEditingRow();
             fireEditingStopped();
             
-            int ServiceID = Integer.parseInt(table.getValueAt(row, 0).toString()); 
-            Customers customer = control.GetCustomerDetailsByID(ServiceID);
+            int userID = Integer.parseInt(table.getValueAt(row, 0).toString()); 
+            Users user = control.GetUserDetailsByID(userID);
             
-            EditCustomerView dialog = new EditCustomerView();
-            dialog.loadCustomerData(customer);
+            EditUserView dialog = new EditUserView();
+            dialog.loadUserData(user);
             dialog.setVisible(true);
         });
 
@@ -51,17 +52,17 @@ public class AccountActionEditor extends AbstractCellEditor implements TableCell
             int row = table.getEditingRow();
             fireEditingStopped();
             
-            int customerID = Integer.parseInt(table.getValueAt(row, 0).toString());
+            int userID = Integer.parseInt(table.getValueAt(row, 0).toString());
             
-            int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this service?", 
+            int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this user?", 
             "Confirm Delete", 
             JOptionPane.YES_OPTION,
             JOptionPane.WARNING_MESSAGE
             );
             
             if(choice == JOptionPane.YES_OPTION){
-                if(control.DeleteCustomerByID(customerID)){
-                    CustomersView.getInstance().LoadCustomerDetails();
+                if(control.DeleteUserByID(userID)){
+                    StaffAndAdminAccountView.getInstance().LoadUsersToTable();
                 }
             }
         });

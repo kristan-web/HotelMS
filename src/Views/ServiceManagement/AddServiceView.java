@@ -97,12 +97,16 @@ public class AddServiceView extends javax.swing.JDialog {
         AddServiceButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         AddServiceButton.setForeground(new java.awt.Color(255, 224, 227));
         AddServiceButton.setText("Save");
+        AddServiceButton.setFocusPainted(false);
+        AddServiceButton.setFocusable(false);
         AddServiceButton.addActionListener(this::AddServiceButtonActionPerformed);
 
         CancelAddButton.setBackground(new java.awt.Color(255, 239, 241));
         CancelAddButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         CancelAddButton.setForeground(new java.awt.Color(190, 52, 85));
         CancelAddButton.setText("Cancel");
+        CancelAddButton.setFocusPainted(false);
+        CancelAddButton.setFocusable(false);
         CancelAddButton.addActionListener(this::CancelAddButtonActionPerformed);
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N

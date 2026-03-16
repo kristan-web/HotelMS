@@ -36,19 +36,19 @@ abstract class UserControllersTemplate {
     abstract List<Users> ListOfAllUsers();
     
     abstract List<Users> ListOfAllUsers(String searchfield);
+    
+    abstract List<Users> ListOfAllDeletedUsers();
+    
+    abstract List<Users> ListOfAllDeletedUsers(String searchfield);
+    
+    abstract Users GetUserDetailsByID(int userID);
+    
+    abstract boolean UpdateUserByID(Users user);
+    
+    abstract boolean DeleteUserByID(int userID);
+    
+    abstract boolean RestoreUserByID(String userID);
 }
-
-
-
-
-
-//================================== DERIVED CLASS ======================================
-
-
-
-
-
-
 
 public class UserControllers extends UserControllersTemplate{
     private static final UserDAO dao = new UserDAO();
@@ -69,6 +69,11 @@ public class UserControllers extends UserControllersTemplate{
         || user.getPassword().isEmpty() || user.getEmail().isEmpty() || user.getPhone().isEmpty())
         {
             JOptionPane.showMessageDialog(null, "All fields should be filled.");
+            return false;
+        }
+        
+        if(CheckAllUsersIfEmailIsPresent(user.getEmail())){
+            JOptionPane.showMessageDialog(null, "Email is already taken.");
             return false;
         }
         
@@ -107,6 +112,11 @@ public class UserControllers extends UserControllersTemplate{
         
         if(!user.getPassword().equals(user.getConfpass())){
             JOptionPane.showMessageDialog(null, "Passwords do not match.");
+            return false;
+        }
+        
+        if(CheckAllUsersIfEmailIsPresent(user.getEmail())){
+            JOptionPane.showMessageDialog(null, "Email is already taken.");
             return false;
         }
         
@@ -167,10 +177,13 @@ public class UserControllers extends UserControllersTemplate{
 
             Transport.send(message);
 
-            System.out.println("OTP Sent!");
+            JOptionPane.showMessageDialog(null, "OTP has been sent!");
 
         } catch (MessagingException e) {
             e.printStackTrace();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Please enter registered email to receive OTP.");
         }
     }
     
@@ -259,5 +272,75 @@ public class UserControllers extends UserControllersTemplate{
     
     public List<Users> ListOfAllUsers(String searchfield){
         return dao.ListOfAllUsersQuery(searchfield);
+    }
+    
+    public List<Users> ListOfAllDeletedUsers(){
+        return dao.ListOfAllDeletedUsersQuery();
+    }
+    
+    public List<Users> ListOfAllDeletedUsers(String searchfield){
+        return dao.ListOfAllDeletedUsersQuery(searchfield);
+    }
+    
+    public Users GetUserDetailsByID(int userID){
+        Users user = dao.GetUserDetailsByIDQuery(userID);
+        
+        if(user == null){
+            JOptionPane.showMessageDialog(null, "Failed to get user details.");
+            return null;
+        }
+        
+        return user;
+    }
+    
+    public boolean UpdateUserByID(Users user){
+    
+        if(user.getFirst_name().isEmpty()|| user.getLast_name().isEmpty() || 
+        user.getEmail().isEmpty() || user.getPhone().isEmpty() || user.getRole().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "All fields should be filled.");
+            return false;
+        }
+        
+        try{
+           int user_ID = Integer.parseInt(user.getUser_id());
+           long phone = Long.parseLong(user.getPhone());
+            
+           if(dao.UpdateUserQuery(user)){
+               JOptionPane.showMessageDialog(null, "User updated successfully!");
+               return true;
+           }
+           
+           return false;
+        }
+        catch(Exception e){
+           JOptionPane.showMessageDialog(null, "Failed to update user details.");
+           return false; 
+        }
+    }
+    
+    public boolean DeleteUserByID(int userID){
+        if(dao.DeleteUserByIDQuery(userID)){
+            JOptionPane.showMessageDialog(null, "User is deleted.");
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean RestoreUserByID(String userID){
+        try{
+            int user_id = Integer.parseInt(userID);
+            if(dao.RestoreServiceByIDQuery(user_id)){
+                JOptionPane.showMessageDialog(null, "Service is restored.");
+                return true;
+            }
+            
+            return false;
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Failed to restore service.");
+            return false;
+        }
     }
 }

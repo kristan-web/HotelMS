@@ -1,5 +1,6 @@
-CREATE DATABASE IF NOT EXISTS HotelReservationSystem;
-USE HotelReservationSystem;
+DROP DATABASE IF EXISTS hoteldb;
+CREATE DATABASE IF NOT EXISTS hoteldb;
+USE hoteldb;
 
 -- 1. Users Table
 CREATE TABLE Users (
@@ -26,31 +27,37 @@ CREATE TABLE Services (
 );
 
 -- 3. Customer Table
-CREATE TABLE Customer (
-    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE guests      (
+    guest_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(155) NOT NULL,
     last_name VARCHAR(155) NOT NULL,
-    phone_number VARCHAR(155),
+    phone VARCHAR(155),
     email VARCHAR(155) NOT NULL UNIQUE,
+    address VARCHAR(155) DEFAULT NULL,
     status ENUM('Active', 'Inactive') DEFAULT 'ACTIVE',
     is_deleted BOOLEAN DEFAULT FALSE
+    created_at timestamp not null defailt current_timestamp()
 );
 
--- 4. Reservations Table
-CREATE TABLE Reservations (
-    reservation_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id INT,
-    service_id INT,
-    reservation_date DATE DEFAULT (CURRENT_DATE),
-    start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    end_time TIMESTAMP NOT NULL,
-    total_amount DECIMAL(10, 2) NOT NULL,
-    status ENUM('Pending', 'Confirmed', 'Cancelled', 'Completed') DEFAULT 'Pending',
-    is_deleted BOOLEAN DEFAULT FALSE,
 
-    -- Use RESTRICT to ensure data integrity in a soft-delete system
-    CONSTRAINT FK_Res_Customer FOREIGN KEY (customer_id) 
-        REFERENCES Customer(customer_id) ON UPDATE CASCADE ON DELETE RESTRICT,
-    CONSTRAINT FK_Res_Service FOREIGN KEY (service_id) 
-        REFERENCES Services(service_id) ON UPDATE CASCADE ON DELETE RESTRICT
-);
+CREATE TABLE reservations (
+  reservation_id int NOT NULL,
+  guest_id int NOT NULL,
+  room_id int NOT NULL,
+  check_in date NOT NULL,
+  check_out date NOT NULL,
+  status enum('CONFIRMED','CHECKED_IN','CHECKED_OUT','CANCELLED') DEFAULT 'CONFIRMED',
+  total_amount decimal(10,2) DEFAULT NULL,
+  notes text DEFAULT NULL,
+  created_at timestamp NOT NULL DEFAULT current_timestamp()
+) 
+
+CREATE TABLE rooms (
+  room_id int NOT NULL,
+  room_number varchar(10) NOT NULL,
+  room_type enum('SINGLE','DOUBLE','SUITE','DELUXE') NOT NULL,
+  price decimal(10,2) NOT NULL,
+  capacity int NOT NULL DEFAULT 1,
+  status enum('AVAILABLE','OCCUPIED','MAINTENANCE') DEFAULT 'AVAILABLE',
+  description varchar(300) DEFAULT NULL
+)
