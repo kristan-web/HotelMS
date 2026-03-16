@@ -51,6 +51,10 @@ public class NewPasswordView extends javax.swing.JDialog {
         EnterButton.setFocusable(false);
         EnterButton.addActionListener(this::EnterButtonActionPerformed);
 
+        NewPasswordField.setBackground(new java.awt.Color(255, 239, 241));
+        NewPasswordField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
+        NewPasswordField.setSelectionColor(new java.awt.Color(210, 90, 119));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -68,11 +72,11 @@ public class NewPasswordView extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(NewPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(EnterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

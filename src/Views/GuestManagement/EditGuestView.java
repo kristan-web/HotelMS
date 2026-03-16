@@ -99,7 +99,6 @@ public class EditGuestView extends javax.swing.JDialog {
         jLabel6.setForeground(new java.awt.Color(255, 224, 227));
         jLabel6.setText("Status: *");
 
-        PhoneField.setBackground(new java.awt.Color(255, 239, 241));
         PhoneField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         PhoneField.setForeground(new java.awt.Color(47, 32, 56));
         PhoneField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -109,6 +108,7 @@ public class EditGuestView extends javax.swing.JDialog {
         jLabel5.setForeground(new java.awt.Color(255, 224, 227));
         jLabel5.setText("Email Address: *");
 
+        EmailField.setBackground(new java.awt.Color(255, 239, 241));
         EmailField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         EmailField.setForeground(new java.awt.Color(47, 32, 56));
         EmailField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -119,7 +119,6 @@ public class EditGuestView extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(255, 224, 227));
         jLabel4.setText("Contact Number: *");
 
-        FirstNameField.setBackground(new java.awt.Color(255, 239, 241));
         FirstNameField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         FirstNameField.setForeground(new java.awt.Color(47, 32, 56));
         FirstNameField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -136,7 +135,6 @@ public class EditGuestView extends javax.swing.JDialog {
         jLabel7.setForeground(new java.awt.Color(255, 224, 227));
         jLabel7.setText("Last Name: *");
 
-        LastNameField.setBackground(new java.awt.Color(255, 239, 241));
         LastNameField.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         LastNameField.setForeground(new java.awt.Color(47, 32, 56));
         LastNameField.setHorizontalAlignment(javax.swing.JTextField.LEFT);

@@ -205,15 +205,18 @@ public class DeletedGuestsView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        RestoreCustomerButton.setBackground(new java.awt.Color(47, 32, 56));
         RestoreCustomerButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
+        RestoreCustomerButton.setForeground(new java.awt.Color(255, 224, 227));
         RestoreCustomerButton.setText("Restore Guest");
         RestoreCustomerButton.setFocusPainted(false);
         RestoreCustomerButton.setFocusable(false);
         RestoreCustomerButton.addActionListener(this::RestoreCustomerButtonActionPerformed);
 
-        BackToCustomerViewButton.setBackground(new java.awt.Color(204, 204, 204));
+        BackToCustomerViewButton.setBackground(new java.awt.Color(190, 52, 85));
         BackToCustomerViewButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        BackToCustomerViewButton.setText("Go Back");
+        BackToCustomerViewButton.setForeground(new java.awt.Color(255, 224, 227));
+        BackToCustomerViewButton.setText("Back");
         BackToCustomerViewButton.setFocusPainted(false);
         BackToCustomerViewButton.setFocusable(false);
         BackToCustomerViewButton.addActionListener(this::BackToCustomerViewButtonActionPerformed);
@@ -222,13 +225,13 @@ public class DeletedGuestsView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BackToCustomerViewButton))
+                        .addComponent(BackToCustomerViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,8 +240,8 @@ public class DeletedGuestsView extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RestoreCustomerButton)))))
-                .addGap(15, 15, 15))
+                                .addComponent(RestoreCustomerButton)))
+                        .addGap(15, 15, 15))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

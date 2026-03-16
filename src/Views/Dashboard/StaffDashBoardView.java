@@ -21,6 +21,7 @@ public class StaffDashBoardView extends javax.swing.JFrame {
     public StaffDashBoardView() {
         initComponents();
         
+        
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/resources/reserved.png"));
         Image scaled1 = icon1.getImage().getScaledInstance(lblIcon1.getWidth(), lblIcon1.getHeight(), Image.SCALE_SMOOTH);
         lblIcon1.setIcon(new ImageIcon(scaled1));
@@ -45,6 +46,10 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         Image scaled6 = icon6.getImage().getScaledInstance(lblIcon6.getWidth(), lblIcon6.getHeight(), Image.SCALE_SMOOTH);
         lblIcon6.setIcon(new ImageIcon(scaled6));
         
+        ImageIcon icon10 = new ImageIcon(getClass().getResource("/resources/admin_logo.jpg"));
+        Image scaled10 = icon10.getImage().getScaledInstance(lblIcon10.getWidth(), lblIcon10.getHeight(), Image.SCALE_SMOOTH);
+        lblIcon10.setIcon(new ImageIcon(scaled10));
+        
         
         
     }
@@ -64,6 +69,7 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        lblIcon10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -130,7 +136,9 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
+                .addComponent(lblIcon10, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
@@ -146,7 +154,8 @@ public class StaffDashBoardView extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jButton1)
                     .addComponent(jLabel3))
-                .addGap(10, 10, 10))
+                .addGap(9, 9, 9))
+            .addComponent(lblIcon10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -203,9 +212,9 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(242, 242, 242));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Total Revenue");
+        jLabel14.setText("Today's Revenue");
 
-        jSeparator7.setForeground(new java.awt.Color(242, 242, 242));
+        jSeparator7.setForeground(new java.awt.Color(250, 195, 187));
 
         jLabel16.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(242, 242, 242));
@@ -252,7 +261,7 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Occupied Services");
 
-        jSeparator6.setForeground(new java.awt.Color(242, 242, 242));
+        jSeparator6.setForeground(new java.awt.Color(252, 218, 206));
 
         OccupiedServicesLabel.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
         OccupiedServicesLabel.setForeground(new java.awt.Color(242, 242, 242));
@@ -297,7 +306,7 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Available Services");
 
-        jSeparator5.setForeground(new java.awt.Color(242, 242, 242));
+        jSeparator5.setForeground(new java.awt.Color(209, 234, 211));
 
         AvailableServicesLabel1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
         AvailableServicesLabel1.setForeground(new java.awt.Color(242, 242, 242));
@@ -345,7 +354,7 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("  Total Reservations");
 
-        jSeparator3.setForeground(new java.awt.Color(242, 242, 242));
+        jSeparator3.setForeground(new java.awt.Color(190, 238, 233));
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(242, 242, 242));
@@ -604,7 +613,7 @@ public class StaffDashBoardView extends javax.swing.JFrame {
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -692,6 +701,7 @@ public class StaffDashBoardView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JLabel lblIcon1;
+    private javax.swing.JLabel lblIcon10;
     private javax.swing.JLabel lblIcon2;
     private javax.swing.JLabel lblIcon3;
     private javax.swing.JLabel lblIcon4;
