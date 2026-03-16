@@ -2,7 +2,10 @@ package Controllers;
 
 import DAO.GuestDAO;
 import Model.Guests;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 import javax.swing.JOptionPane;
 
 abstract class GuestControllersTemplate {
@@ -139,6 +142,44 @@ public class GuestControllers extends GuestControllersTemplate{
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "Failed to restore guest.");
             return false;
+        }
+    }
+    public String addGuest(String firstName, String lastName, String email, String phone, String address) {
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty())
+            return "ERROR: First name, last name, and email are required.";
+        if (!email.matches("^[\\w.%+\\-]+@[\\w.\\-]+\\.[a-zA-Z]{2,}$"))
+            return "ERROR: Invalid email format.";
+        try {
+            if (dao.getGuestByEmail(email) != null)
+                return "ERROR: A guest with this email already exists.";
+            Guests g = new Guests(firstName.trim(), lastName.trim(), email.trim(), phone.trim(), address.trim());
+            dao.addGuest(g);
+            return "SUCCESS: Guest added successfully.";
+        } catch (SQLException e) {
+            return "ERROR: " + e.getMessage();
+        }
+    }
+    public List<Guests> getAllGuests() {
+        try { return dao.getAllGuests(); }
+        catch (SQLException e) { 
+            JOptionPane.showMessageDialog(null, "Failed to load guests: " + e.getMessage());
+            return new ArrayList<>(); 
+    }
+    }
+    public String deleteGuest(int id) {
+        try {
+            dao.deleteGuest(id);
+            return "SUCCESS: Guest deleted.";
+        } catch (SQLException e) {
+            return "ERROR: " + e.getMessage();
+        }
+    }
+    public String updateGuest(Guests g) {
+        try {
+            dao.updateGuest(g);
+            return "SUCCESS: Guest updated.";
+        } catch (SQLException e) {
+            return "ERROR: " + e.getMessage();
         }
     }
 }
