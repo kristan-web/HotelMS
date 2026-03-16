@@ -8,6 +8,16 @@ public class Guests {
     private String email;
     private String address;
 
+    public Guests() {}
+
+    public Guests(String firstName, String lastName, String email, String phone, String address) {
+        this.first_name = firstName;
+        this.last_name  = lastName;
+        this.email     = email;
+        this.phone     = phone;
+        this.address   = address;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -64,5 +74,8 @@ public class Guests {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getFullName(){
+        return first_name + " " + last_name;
     }
 }
