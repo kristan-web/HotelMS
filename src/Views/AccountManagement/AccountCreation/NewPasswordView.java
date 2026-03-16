@@ -3,13 +3,15 @@ import Controllers.UserControllers;
 import javax.swing.JOptionPane;
 
 public class NewPasswordView extends javax.swing.JDialog {
+    private String source;
     private String email;
     private static final UserControllers control = new UserControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NewPasswordView.class.getName());
 
-    public NewPasswordView(String email) {
-        this.email = email;
+    public NewPasswordView(String email, String source) {
         initComponents();
+        this.email = email;
+        this.source = source;
         this.setLocationRelativeTo(null);
     }
     
@@ -44,6 +46,9 @@ public class NewPasswordView extends javax.swing.JDialog {
         EnterButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         EnterButton.setForeground(new java.awt.Color(255, 224, 227));
         EnterButton.setText("Enter");
+        EnterButton.setBorderPainted(false);
+        EnterButton.setFocusPainted(false);
+        EnterButton.setFocusable(false);
         EnterButton.addActionListener(this::EnterButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -88,7 +93,7 @@ public class NewPasswordView extends javax.swing.JDialog {
         String password = new String(NewPasswordField.getPassword());
         
         if(control.ChangeUserPasswordThroughEmail(this.email, password)){
-            StaffLoginView dialog = new StaffLoginView();
+            StaffLoginView dialog = new StaffLoginView(source);
             dialog.setVisible(true);
             this.dispose();
         }
@@ -99,9 +104,16 @@ public class NewPasswordView extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        StaffLoginView dialog = new StaffLoginView();
-        dialog.setVisible(true);
-        this.dispose();
+        if(source.equals("staff")){
+            StaffLoginView dialog = new StaffLoginView("setup");
+            dialog.setVisible(true);
+            this.dispose();
+        }
+        else if(source.equals("admin")){
+            AdminLoginView dialog = new AdminLoginView("setup");
+            dialog.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_formWindowClosing
 
     /**

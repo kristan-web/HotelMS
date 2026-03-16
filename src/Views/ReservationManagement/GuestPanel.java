@@ -4,14 +4,14 @@
  */
 package Views.ReservationManagement;
 
-import Controllers.CustomerControllers;
-import Model.Customers;
+import Controllers.GuestControllers;
+import Model.Guests;
 import java.util.List;
 
 public class GuestPanel extends javax.swing.JPanel {
 
     // ── Controller & table model ──────────────────────────────────────────────
-    private final CustomerControllers ctrl = new CustomerControllers();
+    private final GuestControllers ctrl = new GuestControllers();
     private javax.swing.table.DefaultTableModel tableModel;
 
     public GuestPanel() {
@@ -50,15 +50,16 @@ public class GuestPanel extends javax.swing.JPanel {
     // ── Load all guests from DB into table ────────────────────────────────────
     private void loadGuests() {
         tableModel.setRowCount(0);
-        List<Customers> list = ctrl.ListOfAllCustomers();
-        for (Customers g : list) {
+        List<Guests> list = ctrl.getAllGuests();
+        if (list == null) return;
+        for (Guests g : list) {
             tableModel.addRow(new Object[]{
-                g.getCustomer_id(),
+                g.getGuest_id(),
                 g.getFirst_name(),
                 g.getLast_name(),
                 g.getEmail(),
-                g.getPhone_number(),
-                g.getCustomer_address()
+                g.getPhone(),
+                g.getAddress()
             });
         }
     }
@@ -74,7 +75,7 @@ public class GuestPanel extends javax.swing.JPanel {
         jTextField5.setText((String) tableModel.getValueAt(row, 4)); // Phone
 
         // Change button label to show we're in edit mode
-        jButton1.setText("Update Guest");
+        jButton1.setText("Update Guests");
     }
 
     // ── Clear all form fields and reset button ────────────────────────────────
@@ -85,7 +86,7 @@ public class GuestPanel extends javax.swing.JPanel {
         jTextField4.setText("");
         jTextField5.setText("");
         jTable1.clearSelection();
-        jButton1.setText("Add Guest"); // reset back to Add mode
+        jButton1.setText("Add Guests"); // reset back to Add mode
     }
 
     // ── Handle Delete button ──────────────────────────────────────────────────
@@ -93,7 +94,7 @@ public class GuestPanel extends javax.swing.JPanel {
         int row = jTable1.getSelectedRow();
         if (row < 0) {
             javax.swing.JOptionPane.showMessageDialog(this,
-                "Please select a guest from the table first.",
+                "Please select a Guests from the table first.",
                 "No Selection", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -101,15 +102,14 @@ public class GuestPanel extends javax.swing.JPanel {
         String name = tableModel.getValueAt(row, 1) + " " + tableModel.getValueAt(row, 2);
 
         int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
-            "Delete guest \"" + name + "\"?\nThis will also remove all their reservations.",
+            "Delete Guests \"" + name + "\"?\nThis will also remove all their reservations.",
             "Confirm Delete", javax.swing.JOptionPane.YES_NO_OPTION,
             javax.swing.JOptionPane.WARNING_MESSAGE);
 
         if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-            
-            boolean result = ctrl.DeleteCustomerByID(id);
+            String result = ctrl.deleteGuest(id);
             javax.swing.JOptionPane.showMessageDialog(this, result);
-            if (result) { loadGuests(); clearForm(); }
+            if (result.startsWith("SUCCESS")) { loadGuests(); clearForm(); }
         }
     }
 
@@ -385,17 +385,16 @@ public class GuestPanel extends javax.swing.JPanel {
         if (selectedRow >= 0) {
             // ── UPDATE mode: a row was selected ──────────────────────────────
             int id = (int) tableModel.getValueAt(selectedRow, 0);
-            String idString = String.valueOf(id);
-            Customers g = new Customers();
-            g.setCustomer_id(idString);
+            Guests g = new Guests();
+            g.setGuest_id(String.valueOf(id));
             g.setFirst_name(firstName);
             g.setLast_name(lastName);
             g.setEmail(email);
-            g.setPhone_number(phone);
-            g.setCustomer_address(address);
-            boolean result = ctrl.UpdateCustomerDetails(g);
+            g.setPhone(phone);
+            g.setAddress(address);
+            String result = ctrl.updateGuest(g);
             javax.swing.JOptionPane.showMessageDialog(this, result);
-            if (result) { loadGuests(); clearForm(); }
+            if (result.startsWith("SUCCESS")) { loadGuests(); clearForm(); }
         } else {
             // ── ADD mode: no row selected ─────────────────────────────────────
             String result = ctrl.addGuest(firstName, lastName, email, phone, address);

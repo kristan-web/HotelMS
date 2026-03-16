@@ -1,4 +1,5 @@
 package Views.AccountManagement.AccountAdministration;
+import Views.AccountManagement.AccountCreation.*;
 import java.util.List;
 import Model.*;
 import javax.swing.event.*;
@@ -13,7 +14,7 @@ public class StaffAndAdminAccountView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StaffAndAdminAccountView.class.getName());
     
-    public final void loadServicesToTable() {
+    public final void LoadUsersToTable() {
         List<Users> user = control.ListOfAllUsers();
     
         DefaultTableModel model = (DefaultTableModel) tblUsers.getModel();
@@ -26,13 +27,14 @@ public class StaffAndAdminAccountView extends javax.swing.JFrame {
                 u.getLast_name(),
                 u.getPhone(),
                 u.getEmail(),
+                u.getRole(),
                 "Edit/Delete" // placeholder for actions
             });
         }
     
     
 }
-    public final void loadServicesToTable(String text) {
+    public final void LoadUsersToTable(String text) {
         List<Users> user = control.ListOfAllUsers(text);
 
         javax.swing.table.DefaultTableModel model = 
@@ -60,7 +62,7 @@ public class StaffAndAdminAccountView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         instance = this;
         //Displays Values From the Database
-        loadServicesToTable();
+        StaffAndAdminAccountView.this.LoadUsersToTable();
         tblUsers.getColumn("Actions").setCellRenderer(new AccountActionRenderer());
         tblUsers.getColumn("Actions").setCellEditor(new AccountActionEditor(tblUsers));
         
@@ -68,19 +70,19 @@ public class StaffAndAdminAccountView extends javax.swing.JFrame {
             @Override
             public void insertUpdate(DocumentEvent e){
                 String searchfieldtext = serviceSearchField.getText();
-                StaffAndAdminAccountView.getInstance().loadServicesToTable(searchfieldtext);
+                StaffAndAdminAccountView.getInstance().LoadUsersToTable(searchfieldtext);
             }
             
             @Override
             public void changedUpdate(DocumentEvent e){
                 String searchfieldtext = serviceSearchField.getText();
-                StaffAndAdminAccountView.getInstance().loadServicesToTable(searchfieldtext);
+                StaffAndAdminAccountView.getInstance().LoadUsersToTable(searchfieldtext);
             }
             
             @Override
             public void removeUpdate(DocumentEvent e) {
                 String searchfieldtext = serviceSearchField.getText();
-                StaffAndAdminAccountView.getInstance().loadServicesToTable(searchfieldtext);
+                StaffAndAdminAccountView.getInstance().LoadUsersToTable(searchfieldtext);
             }
         });
       
@@ -118,6 +120,8 @@ public class StaffAndAdminAccountView extends javax.swing.JFrame {
 
         CreateStaffAccountButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         CreateStaffAccountButton.setText("Create New Staff Account");
+        CreateStaffAccountButton.setFocusPainted(false);
+        CreateStaffAccountButton.setFocusable(false);
         CreateStaffAccountButton.setMinimumSize(new java.awt.Dimension(206, 27));
         CreateStaffAccountButton.setPreferredSize(new java.awt.Dimension(206, 27));
         CreateStaffAccountButton.addActionListener(this::CreateStaffAccountButtonActionPerformed);
@@ -140,22 +144,22 @@ public class StaffAndAdminAccountView extends javax.swing.JFrame {
         tblUsers.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
         tblUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "User ID", "First Name", "Last Name", "Contact No.", "Email", "Actions"
+                "User ID", "First Name", "Last Name", "Contact No.", "Email", "Role", "Actions"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -175,6 +179,8 @@ public class StaffAndAdminAccountView extends javax.swing.JFrame {
             tblUsers.getColumnModel().getColumn(0).setMinWidth(0);
             tblUsers.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblUsers.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblUsers.getColumnModel().getColumn(6).setMinWidth(120);
+            tblUsers.getColumnModel().getColumn(6).setPreferredWidth(120);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -201,10 +207,14 @@ public class StaffAndAdminAccountView extends javax.swing.JFrame {
         DeletedAccountsButton.setBackground(new java.awt.Color(204, 204, 204));
         DeletedAccountsButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         DeletedAccountsButton.setText("View Deleted Accounts");
+        DeletedAccountsButton.setFocusPainted(false);
+        DeletedAccountsButton.setFocusable(false);
         DeletedAccountsButton.addActionListener(this::DeletedAccountsButtonActionPerformed);
 
         CreateAdminAccountButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         CreateAdminAccountButton.setText("Create New Admin Account");
+        CreateAdminAccountButton.setFocusPainted(false);
+        CreateAdminAccountButton.setFocusable(false);
         CreateAdminAccountButton.addActionListener(this::CreateAdminAccountButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -263,7 +273,9 @@ public class StaffAndAdminAccountView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CreateStaffAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateStaffAccountButtonActionPerformed
-        
+        StaffRegistrationView dialog = new StaffRegistrationView("dashboard");
+        dialog.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_CreateStaffAccountButtonActionPerformed
 
     private void serviceSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviceSearchFieldActionPerformed
@@ -275,7 +287,9 @@ public class StaffAndAdminAccountView extends javax.swing.JFrame {
     }//GEN-LAST:event_serviceSearchFieldKeyTyped
 
     private void DeletedAccountsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletedAccountsButtonActionPerformed
-        
+        DeletedUserView dialog = new DeletedUserView();
+        dialog.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_DeletedAccountsButtonActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -285,7 +299,9 @@ public class StaffAndAdminAccountView extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void CreateAdminAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateAdminAccountButtonActionPerformed
-        // TODO add your handling code here:
+        AdminRegistrationView dialog = new AdminRegistrationView("dashboard");
+        dialog.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_CreateAdminAccountButtonActionPerformed
 
     /**

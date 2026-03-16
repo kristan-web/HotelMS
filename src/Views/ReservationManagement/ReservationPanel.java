@@ -1,14 +1,11 @@
 
 package Views.ReservationManagement;
-import Controllers.ReservationManagement.*;
-import Controllers.CustomerControllers;
-import Model.ReservationManagement.Reservation;
-import Model.ReservationManagement.Room;
-import Model.Customers;
+import Controllers.*;
+import Model.*;
 public class ReservationPanel extends javax.swing.JPanel {
 
     private final ReservationController resCtrl   = new ReservationController();
-    private final CustomerControllers       guestCtrl = new CustomerControllers();
+    private final GuestControllers       guestCtrl = new GuestControllers();
     private final RoomController        roomCtrl  = new RoomController();
     private java.time.LocalDate checkInDate, checkOutDate;
     private javax.swing.table.DefaultTableModel tableModel;
@@ -25,7 +22,7 @@ public class ReservationPanel extends javax.swing.JPanel {
 
     private void setupTable() {
         tableModel = new javax.swing.table.DefaultTableModel(
-            new String[]{"ID","Guest","Room","Check-In","Check-Out","Nights","Total (₱)","Status"}, 0) {
+            new String[]{"ID","Guests","Room","Check-In","Check-Out","Nights","Total (₱)","Status"}, 0) {
             public boolean isCellEditable(int r, int c) { return false; }
         };
         reservationTable.setModel(tableModel);
@@ -39,7 +36,7 @@ public class ReservationPanel extends javax.swing.JPanel {
 
     private void loadGuestsAndRooms() {
         javax.swing.DefaultComboBoxModel guestModel = new javax.swing.DefaultComboBoxModel();
-        guestCtrl.ListOfAllCustomers().forEach(guestModel::addElement);
+        guestCtrl.getAllGuests().forEach(guestModel::addElement);
         guestCombo.setModel(guestModel);
 
         javax.swing.DefaultComboBoxModel roomModel = new javax.swing.DefaultComboBoxModel();
@@ -473,12 +470,12 @@ public class ReservationPanel extends javax.swing.JPanel {
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         Object guestObj = guestCombo.getSelectedItem();
         Object roomObj  = roomCombo.getSelectedItem();
-        if (!(guestObj instanceof Customers) || !(roomObj instanceof Room)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please select a valid guest and room.");
+        if (!(guestObj instanceof Guests) || !(roomObj instanceof Room)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a valid Guests and room.");
             return;
         }
         String result = resCtrl.makeReservation(
-            (Customers) guestObj, (Room) roomObj,
+            (Guests) guestObj, (Room) roomObj,
             checkInDate, checkOutDate, notesArea.getText());
         javax.swing.JOptionPane.showMessageDialog(this, result);
         if (result.startsWith("SUCCESS")) {

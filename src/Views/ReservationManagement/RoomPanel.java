@@ -1,6 +1,6 @@
 
 package Views.ReservationManagement;
-import Controllers.ReservationManagement.RoomController;
+import Controllers.RoomController;
 
 
 public class RoomPanel extends javax.swing.JPanel {

@@ -111,6 +111,8 @@ public class DeletedServicesView extends javax.swing.JFrame {
 
         RestoreServiceButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         RestoreServiceButton.setText("Restore Service");
+        RestoreServiceButton.setFocusPainted(false);
+        RestoreServiceButton.setFocusable(false);
         RestoreServiceButton.addActionListener(this::RestoreServiceButtonActionPerformed);
 
         jPanel2.setBackground(new java.awt.Color(243, 223, 220));
@@ -192,6 +194,8 @@ public class DeletedServicesView extends javax.swing.JFrame {
         ServiceViewButton.setBackground(new java.awt.Color(204, 204, 204));
         ServiceViewButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         ServiceViewButton.setText("Go Back");
+        ServiceViewButton.setFocusPainted(false);
+        ServiceViewButton.setFocusable(false);
         ServiceViewButton.addActionListener(this::ServiceViewButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

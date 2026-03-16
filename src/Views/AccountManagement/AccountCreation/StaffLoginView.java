@@ -2,14 +2,17 @@ package Views.AccountManagement.AccountCreation;
 import java.awt.*;
 import Controllers.UserControllers;
 import Model.Users;
+import Session.Session;
 import Views.Dashboard.StaffDashBoardView;
 
 public class StaffLoginView extends javax.swing.JFrame {
+    private String source;
     private static final UserControllers control = new UserControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StaffLoginView.class.getName());
 
-    public StaffLoginView() {
+    public StaffLoginView(String source) {
         initComponents();
+        this.source = source;
         this.setLocationRelativeTo(null);
     }
 
@@ -65,7 +68,10 @@ public class StaffLoginView extends javax.swing.JFrame {
         LoginButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         LoginButton.setForeground(new java.awt.Color(48, 24, 29));
         LoginButton.setText("Login");
+        LoginButton.setBorderPainted(false);
         LoginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LoginButton.setFocusPainted(false);
+        LoginButton.setFocusable(false);
         LoginButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         LoginButton.setMinimumSize(new java.awt.Dimension(270, 42));
         LoginButton.setPreferredSize(new java.awt.Dimension(270, 42));
@@ -79,7 +85,10 @@ public class StaffLoginView extends javax.swing.JFrame {
         SwitchToAdminLoginButton.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
         SwitchToAdminLoginButton.setForeground(new java.awt.Color(255, 224, 227));
         SwitchToAdminLoginButton.setText("Admin");
+        SwitchToAdminLoginButton.setBorderPainted(false);
         SwitchToAdminLoginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        SwitchToAdminLoginButton.setFocusPainted(false);
+        SwitchToAdminLoginButton.setFocusable(false);
         SwitchToAdminLoginButton.addActionListener(this::SwitchToAdminLoginButtonActionPerformed);
 
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
@@ -92,6 +101,7 @@ public class StaffLoginView extends javax.swing.JFrame {
         ForgotPasswordButton.setText("Forgot Password");
         ForgotPasswordButton.setAlignmentY(0.0F);
         ForgotPasswordButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ForgotPasswordButton.setFocusable(false);
         ForgotPasswordButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ForgotPasswordButton.setMinimumSize(new java.awt.Dimension(80, 20));
         ForgotPasswordButton.setPreferredSize(new java.awt.Dimension(80, 20));
@@ -183,7 +193,7 @@ public class StaffLoginView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -193,12 +203,12 @@ public class StaffLoginView extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(402, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(407, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73))
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -233,9 +243,7 @@ public class StaffLoginView extends javax.swing.JFrame {
         Users user = control.AuthenticateStaffLogin(email, password);
         
         if(user != null){
-            /*
-                PASS THE USER MODEL AS ARGUMENT LATER
-            */
+            Session.setCurrentUser(user);
             StaffDashBoardView dialog = new StaffDashBoardView();
             dialog.setVisible(true);
             this.dispose();
@@ -247,7 +255,7 @@ public class StaffLoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_PasswordFieldActionPerformed
 
     private void SwitchToAdminLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SwitchToAdminLoginButtonActionPerformed
-        AdminLoginView dialog = new AdminLoginView();
+        AdminLoginView dialog = new AdminLoginView(source);
         dialog.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_SwitchToAdminLoginButtonActionPerformed
@@ -263,7 +271,7 @@ public class StaffLoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_ForgotPasswordButtonMouseExited
 
     private void ForgotPasswordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ForgotPasswordButtonMouseClicked
-        ForgotPasswordView dialog = new ForgotPasswordView();
+        ForgotPasswordView dialog = new ForgotPasswordView("staff");
         dialog.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ForgotPasswordButtonMouseClicked
@@ -294,7 +302,6 @@ public class StaffLoginView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new StaffLoginView().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,2 +1,0 @@
-DAO.CustomerDAO
-DAO.CustomerDAOTemplate
