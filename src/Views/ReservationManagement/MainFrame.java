@@ -15,12 +15,14 @@ public class MainFrame extends javax.swing.JFrame {
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/resources/staff_logo.jpg"));
         Image scaled1 = icon1.getImage().getScaledInstance(lblIcon1.getWidth(), lblIcon1.getHeight(), Image.SCALE_SMOOTH);
         lblIcon1.setIcon(new ImageIcon(scaled1));
-        
-        
+
         mainTabs.addTab("Reservations", new ReservationPanel());
         mainTabs.addTab("Guests", new GuestPanel());
-        mainTabs.addTab("Rooms", new RoomPanel());
         mainTabs.addTab("Services", new ServicesPanel());
+        System.out.println(Session.getCurrentUser());
+        if(Session.getUserRole().equals("Admin")){
+            mainTabs.addTab("Rooms", new RoomPanel());
+        } 
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -138,9 +140,15 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        StaffDashBoardView dialog = new StaffDashBoardView();
-        dialog.setVisible(true);
-        this.dispose();
+        if(Session.getUserRole().equals("Admin")){
+            AdminDashBoardView dialog = new AdminDashBoardView();
+            dialog.setVisible(true);
+            this.dispose();
+        }else{
+            StaffDashBoardView dialog = new StaffDashBoardView();
+            dialog.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
