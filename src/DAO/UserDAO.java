@@ -5,6 +5,7 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.ArrayList;
+import Debugger.Debugger;
 
 abstract class UserDAOTemplate {
     
@@ -226,15 +227,22 @@ public class UserDAO extends UserDAOTemplate{
     
     @Override
     public Users AuthenticateAdminLoginQuery(String email){
+        Debugger.Debugger("I AM INSIDE AUTHENTICATE ADMIN LOGIN QUERY");
         try(Connection dbconn = Db_Connector.getCOnnection()){
-            if(dbconn == null) return null;
+            if(dbconn == null){
+                Debugger.Debugger("DBCONN IS NULL");
+                return null;
+            }
             
             String query = "SELECT * FROM Users WHERE email = ? AND role = 'Admin'"; 
             try(PreparedStatement pst = dbconn.prepareStatement(query)){
+                Debugger.Debugger("I AM INSIDE PREPARED STATEMENT");
                 pst.setString(1, email);
                 
                 ResultSet rs = pst.executeQuery();
                 Users user = new Users();
+                
+                Debugger.Debugger("QUERY EXECUTED. STILL HERE.");
                 
                 while(rs.next()){
                     user.setUser_id(rs.getString("user_id"));
@@ -244,6 +252,7 @@ public class UserDAO extends UserDAOTemplate{
                     user.setPhone(rs.getString("phone"));
                     user.setEmail(rs.getString("email"));
                     
+                    Debugger.Debugger("I AM INSIDE RS.NEXT()");
                     return user;
                 }
             }
@@ -256,6 +265,7 @@ public class UserDAO extends UserDAOTemplate{
             e.printStackTrace();
             return null;
         }
+        Debugger.Debugger("I AM THE RETURN NULL OUTSIDE EVERY CONDITION");
         return null;
     }
     

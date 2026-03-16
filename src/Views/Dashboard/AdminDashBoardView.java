@@ -9,6 +9,7 @@ import Views.AccountManagement.AccountCreation.*;
 import Session.Session;
 import Model.Users;
 import javax.swing.JOptionPane;
+import Debugger.Debugger;
 
 public class AdminDashBoardView extends javax.swing.JFrame {
     private Users currentUser = Session.getCurrentUser();
@@ -16,8 +17,12 @@ public class AdminDashBoardView extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminDashBoardView.class.getName());
 
     void LoadDashboardStatistics(){
+        Debugger.Debugger("I AM Inside Load Dashboard Statistics");
         AvailableServicesLabel.setText(String.valueOf(control.getAvailableServices()));
+       /*
         OccupiedServicesLabel.setText(String.valueOf(control.getOccupiedServices()));
+        */
+        Debugger.Debugger("I am still here");
     }
     
     public AdminDashBoardView() {

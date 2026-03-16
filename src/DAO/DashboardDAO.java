@@ -5,8 +5,9 @@ import javax.swing.JOptionPane;
 
 abstract class DashboardDAOTemplate {
     abstract int getAvailableServicesQuery();
-    
+    /*
     abstract int getOccupiedServicesQuery();
+    */
 }
 
 public class DashboardDAO extends DashboardDAOTemplate{
@@ -42,7 +43,7 @@ public class DashboardDAO extends DashboardDAOTemplate{
     return -1;
     }
     
-    public int getOccupiedServicesQuery(){
+ /*   public int getOccupiedServicesQuery(){
         try(Connection dbconn = Db_Connector.getCOnnection()){
             if(dbconn == null) return -1;
             
@@ -71,6 +72,7 @@ public class DashboardDAO extends DashboardDAOTemplate{
         }
     return -1;        
     }
+*/
 }
 
 

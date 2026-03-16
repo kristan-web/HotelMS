@@ -4,7 +4,7 @@ import DAO.DashboardDAO;
 abstract class DashboardControllersTemplate {
     abstract int getAvailableServices();
     
-    abstract int getOccupiedServices();
+  //  abstract int getOccupiedServices();
 }
 
 public class DashboardControllers extends DashboardControllersTemplate{
@@ -14,8 +14,8 @@ public class DashboardControllers extends DashboardControllersTemplate{
     public int getAvailableServices(){
         return dao.getAvailableServicesQuery();
     }
-    
+    /*
     public int getOccupiedServices(){
         return dao.getOccupiedServicesQuery();
-    }
+    }*/
 }

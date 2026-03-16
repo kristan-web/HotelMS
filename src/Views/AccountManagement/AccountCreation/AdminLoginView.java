@@ -4,6 +4,7 @@ import Model.Users;
 import Controllers.UserControllers;
 import Views.Dashboard.*;
 import Session.Session;
+import Debugger.Debugger;
 
 public class AdminLoginView extends javax.swing.JFrame {
     private String source;
@@ -14,6 +15,7 @@ public class AdminLoginView extends javax.swing.JFrame {
      * Creates new form LoginView
      */
     public AdminLoginView(String source) {
+        Debugger.Debugger("I AM INSIDE ADMIN LOGIN VIEW");
         initComponents();
         this.source = source;
         this.setLocationRelativeTo(null);
@@ -242,13 +244,19 @@ public class AdminLoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Debugger.Debugger("LOGIN BUTTON IS CLICKED");
         String email = EmailField.getText().trim();
+        Debugger.Debugger(email);
         String password = new String(PasswordField.getPassword());
-        
+        Debugger.Debugger(password);
         Users user = control.AuthenticateAdminLogin(email, password);
         
         if(user != null){
+            Debugger.Debugger("USER IS NOT NULL.");
             Session.setCurrentUser(user);
+            Debugger.Debugger("I AM STILL HERE");
+            Debugger.Debugger(user.getEmail());
+            Debugger.Debugger(user.getFirst_name());
             AdminDashBoardView dialog = new AdminDashBoardView();
             dialog.setVisible(true);
             this.dispose();

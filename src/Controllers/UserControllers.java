@@ -8,6 +8,7 @@ import javax.mail.internet.*;
 import javax.swing.JOptionPane;
 import org.mindrot.jbcrypt.BCrypt;
 import java.util.List;
+import Debugger.Debugger;
 
 abstract class UserControllersTemplate {
     
@@ -246,11 +247,17 @@ public class UserControllers extends UserControllersTemplate{
     
     
     public Users AuthenticateAdminLogin(String email, String password){
+        Debugger.Debugger("I AM INSIDE CONTROLLER AUTHENTICATE ADMIN LOGIN");
+        Debugger.Debugger("WILL CHECK IF FIELDS ARE EMPTY");
         if(email.isEmpty() || password.isEmpty()){
             JOptionPane.showMessageDialog(null, "Enter username and password.");
             return null;
         }
         
+        Debugger.Debugger("ALL FIELDS ARE NOT EMPTY");
+        Debugger.Debugger(email);
+        Debugger.Debugger(password);
+        Debugger.Debugger("WILL GO TO AUTHENTICATE ADMIN QUERY NOW");
         Users user = dao.AuthenticateAdminLoginQuery(email);
         
         if(user == null){
