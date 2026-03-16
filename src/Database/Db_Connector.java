@@ -5,7 +5,7 @@ import Session.Session;
 public class Db_Connector {
     private static final String DB_HOST = "jdbc:mysql://localhost:3306/hoteldb";
     private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "a.vill1110";
+    private static final String DB_PASSWORD = "";
     public static Connection getCOnnection(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");

@@ -209,6 +209,7 @@ public class UserDAO extends UserDAOTemplate{
                     user.setPassword(rs.getString("password"));
                     user.setPhone(rs.getString("phone"));
                     user.setEmail(rs.getString("email"));
+                    user.setRole(rs.getString("role"));
                     
                     return user;
                 }
@@ -251,6 +252,7 @@ public class UserDAO extends UserDAOTemplate{
                     user.setPassword(rs.getString("password"));
                     user.setPhone(rs.getString("phone"));
                     user.setEmail(rs.getString("email"));
+                    user.setRole(rs.getString("role"));
                     
                     Debugger.Debugger("I AM INSIDE RS.NEXT()");
                     return user;
