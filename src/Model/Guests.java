@@ -65,6 +65,10 @@ public class Guests {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public String toString(){
+        return first_name + " " + last_name;
+    }
 
     public String getFullName(){
         return first_name + " " + last_name;

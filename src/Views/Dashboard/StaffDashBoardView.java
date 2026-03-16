@@ -4,6 +4,8 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import Model.Users;
 import Views.ReservationManagement.*;
+import Views.AccountManagement.AccountCreation.*;
+import javax.swing.JOptionPane;
 
 public class StaffDashBoardView extends javax.swing.JFrame {
     private Users currentUser = Session.getCurrentUser();
@@ -17,6 +19,8 @@ public class StaffDashBoardView extends javax.swing.JFrame {
     public StaffDashBoardView() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        refreshSessionLabel();
         
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/resources/reserved.png"));
         Image scaled1 = icon1.getImage().getScaledInstance(lblIcon1.getWidth(), lblIcon1.getHeight(), Image.SCALE_SMOOTH);
@@ -37,10 +41,6 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         ImageIcon icon5 = new ImageIcon(getClass().getResource("/resources/calendar.png"));
         Image scaled5 = icon5.getImage().getScaledInstance(lblIcon5.getWidth(), lblIcon5.getHeight(), Image.SCALE_SMOOTH);
         lblIcon5.setIcon(new ImageIcon(scaled5));
-        
-        ImageIcon icon6 = new ImageIcon(getClass().getResource("/resources/amenities.png"));
-        Image scaled6 = icon6.getImage().getScaledInstance(lblIcon6.getWidth(), lblIcon6.getHeight(), Image.SCALE_SMOOTH);
-        lblIcon6.setIcon(new ImageIcon(scaled6));
         
         ImageIcon icon10 = new ImageIcon(getClass().getResource("/resources/admin_logo.jpg"));
         Image scaled10 = icon10.getImage().getScaledInstance(lblIcon10.getWidth(), lblIcon10.getHeight(), Image.SCALE_SMOOTH);
@@ -91,13 +91,6 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        ManageServiceButton = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        lblIcon6 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jSeparator8 = new javax.swing.JSeparator();
-        jLabel20 = new javax.swing.JLabel();
         ManageReservationsButton = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         lblIcon5 = new javax.swing.JLabel();
@@ -106,7 +99,12 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jLabel19 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 224, 227));
 
@@ -122,6 +120,11 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(190, 52, 85));
         jButton1.setText("Log out");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
         SessionStaffLabel.setForeground(new java.awt.Color(255, 224, 227));
@@ -255,7 +258,7 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(242, 242, 242));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Occupied Services");
+        jLabel12.setText("Today's Check-ins");
 
         jSeparator6.setForeground(new java.awt.Color(252, 218, 206));
 
@@ -300,7 +303,7 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(242, 242, 242));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Available Services");
+        jLabel11.setText("Today's Check-outs");
 
         jSeparator5.setForeground(new java.awt.Color(209, 234, 211));
 
@@ -348,7 +351,7 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(242, 242, 242));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("  Total Reservations");
+        jLabel9.setText("Today's Reservations");
 
         jSeparator3.setForeground(new java.awt.Color(190, 238, 233));
 
@@ -423,95 +426,9 @@ public class StaffDashBoardView extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        ManageServiceButton.setBackground(new java.awt.Color(255, 224, 227));
-        ManageServiceButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 194, 189)));
-        ManageServiceButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ManageServiceButtonMouseClicked(evt);
-            }
-        });
-
-        jPanel10.setBackground(new java.awt.Color(233, 105, 114));
-
-        jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Service");
-
-        jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Management");
-
-        jSeparator8.setForeground(new java.awt.Color(238, 143, 150));
-
-        jLabel20.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 10)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(238, 143, 150));
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Manage Services and Pricing");
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(lblIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel10Layout.createSequentialGroup()
-                                        .addGap(7, 7, 7)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
-                                    .addGroup(jPanel10Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6))
-                    .addComponent(lblIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel20)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout ManageServiceButtonLayout = new javax.swing.GroupLayout(ManageServiceButton);
-        ManageServiceButton.setLayout(ManageServiceButtonLayout);
-        ManageServiceButtonLayout.setHorizontalGroup(
-            ManageServiceButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ManageServiceButtonLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(11, 11, 11))
-        );
-        ManageServiceButtonLayout.setVerticalGroup(
-            ManageServiceButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ManageServiceButtonLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(11, 11, 11))
-        );
-
         ManageReservationsButton.setBackground(new java.awt.Color(255, 224, 227));
         ManageReservationsButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 194, 189)));
+        ManageReservationsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ManageReservationsButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ManageReservationsButtonMouseClicked(evt);
@@ -601,11 +518,9 @@ public class StaffDashBoardView extends javax.swing.JFrame {
                 .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ManageReservationsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ManageServiceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(36, 36, 36))
+                .addGap(30, 30, 30)
+                .addComponent(ManageReservationsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -613,13 +528,12 @@ public class StaffDashBoardView extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ManageReservationsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ManageServiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(ManageReservationsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -647,9 +561,35 @@ public class StaffDashBoardView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ManageReservationsButtonMouseClicked
 
-    private void ManageServiceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ManageServiceButtonMouseClicked
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", 
+            "Confirm Delete", 
+            JOptionPane.YES_OPTION,
+            JOptionPane.WARNING_MESSAGE
+            );
+            
+            if(choice == JOptionPane.YES_OPTION){
+                Session.clearSession();
+                StaffLoginView dialog = new StaffLoginView("setup");
+                dialog.setVisible(true);
+                this.dispose();
+            }
+    }//GEN-LAST:event_jButton1MouseClicked
 
-    }//GEN-LAST:event_ManageServiceButtonMouseClicked
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", 
+            "Confirm Delete", 
+            JOptionPane.YES_OPTION,
+            JOptionPane.WARNING_MESSAGE
+            );
+            
+            if(choice == JOptionPane.YES_OPTION){
+                Session.clearSession();
+                AdminLoginView dialog = new AdminLoginView("setup");
+                dialog.setVisible(true);
+                this.dispose();
+            }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -679,7 +619,6 @@ public class StaffDashBoardView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AvailableServicesLabel1;
     private javax.swing.JPanel ManageReservationsButton;
-    private javax.swing.JPanel ManageServiceButton;
     private javax.swing.JLabel OccupiedServicesLabel;
     private javax.swing.JLabel SessionStaffLabel;
     private javax.swing.JButton jButton1;
@@ -691,13 +630,9 @@ public class StaffDashBoardView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel14;
@@ -715,13 +650,11 @@ public class StaffDashBoardView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JLabel lblIcon1;
     private javax.swing.JLabel lblIcon10;
     private javax.swing.JLabel lblIcon2;
     private javax.swing.JLabel lblIcon3;
     private javax.swing.JLabel lblIcon4;
     private javax.swing.JLabel lblIcon5;
-    private javax.swing.JLabel lblIcon6;
     // End of variables declaration//GEN-END:variables
 }

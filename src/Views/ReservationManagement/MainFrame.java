@@ -1,7 +1,10 @@
 package Views.ReservationManagement;
 import Model.Users;
+import Session.Session;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import Views.Dashboard.*;
+import javax.swing.JOptionPane;
 
 public class MainFrame extends javax.swing.JFrame {
     
@@ -34,6 +37,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1400, 800));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         MainPanel.setLayout(new java.awt.BorderLayout());
 
@@ -130,11 +138,29 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        StaffDashBoardView dialog = new StaffDashBoardView();
+        dialog.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public static void main(String args[]) {
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", 
+            "Confirm Delete", 
+            JOptionPane.YES_OPTION,
+            JOptionPane.WARNING_MESSAGE
+            );
+            
+            if(choice == JOptionPane.YES_OPTION){
+                Session.clearSession();
+                StaffDashBoardView dialog = new StaffDashBoardView();
+                dialog.setVisible(true);
+                this.dispose();
+            }
+    }//GEN-LAST:event_formWindowClosing
 
+    public static void main(String args[]) {
+        MainFrame dialog = new MainFrame();
+        dialog.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

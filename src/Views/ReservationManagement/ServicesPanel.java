@@ -41,7 +41,11 @@ public class ServicesPanel extends javax.swing.JPanel {
 
         javax.swing.DefaultComboBoxModel<Services> servicesModel = new javax.swing.DefaultComboBoxModel<>();
         List<Services> services = serviceCtrl.ListOfAllServices();
-        if (services != null) services.forEach(servicesModel::addElement);
+        if (services != null) {
+            services.stream()
+                    .filter(s -> "Active".equals(s.getStatus()))  // only active
+                    .forEach(servicesModel::addElement);
+        }
         serviceCombo.setModel(servicesModel);
 
         updateInfo();
@@ -75,7 +79,8 @@ public class ServicesPanel extends javax.swing.JPanel {
         }
         Services s = (Services) sel;
         jTextField6.setText(s.getDurationMinutes() + " min");
-        jLabel8.setText("Total: ₱" + String.format("%.2f", s.getPrice()));
+        double price = Double.parseDouble(s.getPrice()); // convert String to double
+        jLabel8.setText("Total: ₱" + String.format("%.2f", price));
     }
 
     // ── Book button handler ───────────────────────────────────────────────────

@@ -5,7 +5,9 @@ import Debugger.Debugger;
 abstract class DashboardControllersTemplate {
     abstract int getAvailableServices();
     
-  //  abstract int getOccupiedServices();
+    abstract int getInactiveServices();
+    
+    abstract double getTotalRevenue();
 }
 
 public class DashboardControllers extends DashboardControllersTemplate{
@@ -13,12 +15,18 @@ public class DashboardControllers extends DashboardControllersTemplate{
     
     @Override
     public int getAvailableServices(){
-        Debugger.Debugger("I AM INSIDE GET AVAILABLE SERVICES");
-        Debugger.Debugger(dao.getAvailableServicesQuery());
         return dao.getAvailableServicesQuery();
     }
-    /*
-    public int getOccupiedServices(){
-        return dao.getOccupiedServicesQuery();
-    }*/
+    
+    public int getInactiveServices(){
+        return dao.getInactiveServicesQuery();
+    }
+    
+    public double getTotalRevenue(){
+        return dao.getTotalRevenueQuery();
+    }
+    
+    public int getTotalReservations(){
+        return dao.getTotalReservationsQuery();
+    }
 }
