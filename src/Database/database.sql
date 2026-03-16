@@ -54,8 +54,8 @@ CREATE TABLE Reservations (
     created_at timestamp NOT NULL DEFAULT current_timestamp()
 
     -- Use RESTRICT to ensure data integrity in a soft-delete system
-    CONSTRAINT FK_Res_Customer FOREIGN KEY (customer_id) 
-        REFERENCES Customer(customer_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    CONSTRAINT FK_Res_Guests FOREIGN KEY (guest_id) 
+        REFERENCES guests(guest_id) ON UPDATE CASCADE ON DELETE RESTRICT,
     CONSTRAINT FK_Res_Rooms FOREIGN KEY (room_id) 
         REFERENCES rooms(room_id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
