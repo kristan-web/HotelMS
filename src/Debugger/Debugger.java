@@ -16,7 +16,7 @@ public class Debugger {
     
     public static void Debugger(boolean message){
         if(DEBUG_MODE){
-            System.out.println("[BOOLEAN]: " + message);
+            System.out.println("[BOOL]: " + message);
         }
     }
 }

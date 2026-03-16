@@ -9,27 +9,31 @@ import Views.AccountManagement.AccountCreation.*;
 import Session.Session;
 import Model.Users;
 import javax.swing.JOptionPane;
-import Debugger.Debugger;
 
 public class AdminDashBoardView extends javax.swing.JFrame {
     private Users currentUser = Session.getCurrentUser();
     private static final DashboardControllers control = new DashboardControllers();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminDashBoardView.class.getName());
 
+    public void refreshSessionLabel(){
+        currentUser = Session.getCurrentUser();
+        SessionAdminLabel.setText("Welcome, " + currentUser.getFirst_name());
+    }
+    
+    
     void LoadDashboardStatistics(){
-        Debugger.Debugger("I AM Inside Load Dashboard Statistics");
         AvailableServicesLabel.setText(String.valueOf(control.getAvailableServices()));
-       /*
-        OccupiedServicesLabel.setText(String.valueOf(control.getOccupiedServices()));
-        */
-        Debugger.Debugger("I am still here");
+        TotalStaffLabel.setText(String.valueOf(control.getTotalStaff()));
+        TotalRevenueLabel.setText("₱ " + String.valueOf(control.getTotalRevenue()));
+        TotalReservationLabel.setText(String.valueOf(control.getTotalReservations()));
     }
     
     public AdminDashBoardView() {
         initComponents();
+        
         setIcons(); // your custom method
         this.setLocationRelativeTo(null);
-        SessionAdminLabel.setText("Welcome, " + currentUser.getFirst_name());
+        refreshSessionLabel();
         LoadDashboardStatistics();
     }
 
@@ -79,7 +83,9 @@ public class AdminDashBoardView extends javax.swing.JFrame {
     Image scaled9 = icon9.getImage().getScaledInstance(lblIcon9.getWidth(), lblIcon9.getHeight(), Image.SCALE_SMOOTH);
     lblIcon9.setIcon(new ImageIcon(scaled9));
     
-    
+    ImageIcon icon10 = new ImageIcon(getClass().getResource("/resources/admin_logo.jpg"));
+    Image scaled10 = icon10.getImage().getScaledInstance(lblIcon10.getWidth(), lblIcon10.getHeight(), Image.SCALE_SMOOTH);
+    lblIcon10.setIcon(new ImageIcon(scaled10));
     
     
     }
@@ -99,6 +105,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         SessionAdminLabel = new javax.swing.JLabel();
+        lblIcon10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -116,17 +123,17 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         lblIcon8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
-        OccupiedServicesLabel = new javax.swing.JLabel();
+        TotalStaffLabel = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         lblIcon9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
-        jLabel16 = new javax.swing.JLabel();
+        TotalRevenueLabel = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         lblIcon6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel13 = new javax.swing.JLabel();
+        TotalReservationLabel = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         lblIcon5 = new javax.swing.JLabel();
@@ -147,7 +154,12 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(47, 32, 56));
 
@@ -175,7 +187,9 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
+                .addComponent(lblIcon10, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SessionAdminLabel)
@@ -192,6 +206,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(SessionAdminLabel))
                 .addGap(10, 10, 10))
+            .addComponent(lblIcon10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -289,7 +304,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Available Services");
 
-        jSeparator4.setForeground(new java.awt.Color(242, 242, 242));
+        jSeparator4.setForeground(new java.awt.Color(209, 234, 211));
 
         AvailableServicesLabel.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
         AvailableServicesLabel.setForeground(new java.awt.Color(242, 242, 242));
@@ -339,14 +354,14 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 10)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(242, 242, 242));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Occupied Services");
+        jLabel11.setText("Total Staff");
 
-        jSeparator5.setForeground(new java.awt.Color(242, 242, 242));
+        jSeparator5.setForeground(new java.awt.Color(252, 218, 206));
 
-        OccupiedServicesLabel.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
-        OccupiedServicesLabel.setForeground(new java.awt.Color(242, 242, 242));
-        OccupiedServicesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        OccupiedServicesLabel.setText("0");
+        TotalStaffLabel.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
+        TotalStaffLabel.setForeground(new java.awt.Color(242, 242, 242));
+        TotalStaffLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TotalStaffLabel.setText("0");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -363,7 +378,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(OccupiedServicesLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TotalStaffLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
                         .addGap(17, 17, 17))))
         );
@@ -380,7 +395,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(OccupiedServicesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TotalStaffLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24))))
         );
 
@@ -393,12 +408,12 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Total Revenue");
 
-        jSeparator6.setForeground(new java.awt.Color(242, 242, 242));
+        jSeparator6.setForeground(new java.awt.Color(250, 195, 187));
 
-        jLabel16.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("₱0");
+        TotalRevenueLabel.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
+        TotalRevenueLabel.setForeground(new java.awt.Color(242, 242, 242));
+        TotalRevenueLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TotalRevenueLabel.setText("₱0");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -409,7 +424,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
                 .addComponent(lblIcon9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TotalRevenueLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -427,7 +442,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(lblIcon9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, 0)
-                .addComponent(jLabel16)
+                .addComponent(TotalRevenueLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -440,12 +455,12 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Total Reservations");
 
-        jSeparator3.setForeground(new java.awt.Color(242, 242, 242));
+        jSeparator3.setForeground(new java.awt.Color(190, 238, 233));
 
-        jLabel13.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("0");
+        TotalReservationLabel.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
+        TotalReservationLabel.setForeground(new java.awt.Color(242, 242, 242));
+        TotalReservationLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TotalReservationLabel.setText("0");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -460,7 +475,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(TotalReservationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -475,7 +490,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TotalReservationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -518,7 +533,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(242, 242, 242));
         jLabel18.setText("Reports and Analytics");
 
-        jSeparator8.setForeground(new java.awt.Color(242, 242, 242));
+        jSeparator8.setForeground(new java.awt.Color(155, 165, 175));
 
         jLabel20.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 10)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(141, 153, 164));
@@ -569,7 +584,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(242, 242, 242));
         jLabel17.setText("Account Management");
 
-        jSeparator7.setForeground(new java.awt.Color(242, 242, 242));
+        jSeparator7.setForeground(new java.awt.Color(198, 155, 212));
 
         jLabel19.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 10)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(193, 148, 208));
@@ -807,6 +822,21 @@ public class AdminDashBoardView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jPanel16MouseClicked
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", 
+            "Confirm Delete", 
+            JOptionPane.YES_OPTION,
+            JOptionPane.WARNING_MESSAGE
+            );
+            
+            if(choice == JOptionPane.YES_OPTION){
+                Session.clearSession();
+                AdminLoginView dialog = new AdminLoginView("setup");
+                dialog.setVisible(true);
+                this.dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -834,15 +864,15 @@ public class AdminDashBoardView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AvailableServicesLabel;
-    private javax.swing.JLabel OccupiedServicesLabel;
     private javax.swing.JLabel SessionAdminLabel;
+    private javax.swing.JLabel TotalReservationLabel;
+    private javax.swing.JLabel TotalRevenueLabel;
+    private javax.swing.JLabel TotalStaffLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -878,6 +908,7 @@ public class AdminDashBoardView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JLabel lblIcon1;
+    private javax.swing.JLabel lblIcon10;
     private javax.swing.JLabel lblIcon2;
     private javax.swing.JLabel lblIcon3;
     private javax.swing.JLabel lblIcon4;

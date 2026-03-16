@@ -25,8 +25,6 @@ public class Guests {
     public void setAddress(String address) {
         this.address = address;
     }
-    private String status;
-    //SETTERS AND GETTERS
 
     public String getGuest_id() {
         return guest_id;
@@ -67,14 +65,11 @@ public class Guests {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getStatus() {
-        return status;
+    
+    public String toString(){
+        return first_name + " " + last_name;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
     public String getFullName(){
         return first_name + " " + last_name;
     }

@@ -41,7 +41,11 @@ public class ServicesPanel extends javax.swing.JPanel {
 
         javax.swing.DefaultComboBoxModel<Services> servicesModel = new javax.swing.DefaultComboBoxModel<>();
         List<Services> services = serviceCtrl.ListOfAllServices();
-        if (services != null) services.forEach(servicesModel::addElement);
+        if (services != null) {
+            services.stream()
+                    .filter(s -> "Active".equals(s.getStatus()))  // only active
+                    .forEach(servicesModel::addElement);
+        }
         serviceCombo.setModel(servicesModel);
 
         updateInfo();
@@ -75,7 +79,8 @@ public class ServicesPanel extends javax.swing.JPanel {
         }
         Services s = (Services) sel;
         jTextField6.setText(s.getDurationMinutes() + " min");
-        jLabel8.setText("Total: ₱" + String.format("%.2f", s.getPrice()));
+        double price = Double.parseDouble(s.getPrice()); // convert String to double
+        jLabel8.setText("Total: ₱" + String.format("%.2f", price));
     }
 
     // ── Book button handler ───────────────────────────────────────────────────
@@ -159,32 +164,38 @@ public class ServicesPanel extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(190, 52, 85));
         jPanel1.setMinimumSize(new java.awt.Dimension(100, 100));
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 224, 227));
         jPanel2.setMaximumSize(new java.awt.Dimension(1113, 200));
         jPanel2.setMinimumSize(new java.awt.Dimension(100, 100));
         jPanel2.setPreferredSize(new java.awt.Dimension(1115, 163));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
+        jPanel3.setBackground(new java.awt.Color(255, 224, 227));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 194, 189)));
         jPanel3.setMinimumSize(new java.awt.Dimension(150, 100));
         jPanel3.setPreferredSize(new java.awt.Dimension(350, 175));
         jPanel3.setRequestFocusEnabled(false);
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
+        jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
         jLabel6.setText("Guest");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel3.add(jLabel6, gridBagConstraints);
 
+        guestCombo.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
+        guestCombo.setForeground(new java.awt.Color(47, 32, 56));
         guestCombo.setModel(new javax.swing.DefaultComboBoxModel<>());
         guestCombo.setPreferredSize(new java.awt.Dimension(250, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel3.add(guestCombo, gridBagConstraints);
 
+        jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
         jLabel7.setText("Service");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -193,6 +204,8 @@ public class ServicesPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel3.add(jLabel7, gridBagConstraints);
 
+        serviceCombo.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
+        serviceCombo.setForeground(new java.awt.Color(47, 32, 56));
         serviceCombo.setModel(new javax.swing.DefaultComboBoxModel<>());
         serviceCombo.setPreferredSize(new java.awt.Dimension(250, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -208,15 +221,20 @@ public class ServicesPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(jPanel3, gridBagConstraints);
 
+        jPanel6.setBackground(new java.awt.Color(255, 224, 227));
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 194, 189)));
         jPanel6.setMinimumSize(new java.awt.Dimension(150, 100));
         jPanel6.setPreferredSize(new java.awt.Dimension(350, 175));
         jPanel6.setRequestFocusEnabled(false);
         jPanel6.setLayout(new java.awt.GridBagLayout());
 
+        jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
         jLabel9.setText("Time Duration");
         jPanel6.add(jLabel9, new java.awt.GridBagConstraints());
 
         jTextField6.setEditable(false);
+        jTextField6.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
+        jTextField6.setForeground(new java.awt.Color(47, 32, 56));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -229,15 +247,20 @@ public class ServicesPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(jPanel6, gridBagConstraints);
 
+        jPanel7.setBackground(new java.awt.Color(255, 224, 227));
+        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 194, 189)));
         jPanel7.setMinimumSize(new java.awt.Dimension(150, 100));
         jPanel7.setPreferredSize(new java.awt.Dimension(350, 175));
         jPanel7.setRequestFocusEnabled(false);
         jPanel7.setLayout(new java.awt.GridBagLayout());
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(47, 32, 56));
         jLabel8.setText("Total: ");
         jPanel7.add(jLabel8, new java.awt.GridBagConstraints());
 
+        jButton5.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(47, 32, 56));
         jButton5.setText("Book");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -252,9 +275,12 @@ public class ServicesPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(jPanel7, gridBagConstraints);
 
-        jPanel4.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel4.setBackground(new java.awt.Color(255, 224, 227));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 194, 189)));
         jPanel4.setMinimumSize(new java.awt.Dimension(100, 100));
 
+        ServicesTable.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
+        ServicesTable.setForeground(new java.awt.Color(47, 32, 56));
         ServicesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -274,10 +300,10 @@ public class ServicesPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(ServicesTable);
         ServicesTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
+        btnRefresh.setBackground(new java.awt.Color(219, 158, 154));
+        btnRefresh.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
+        btnRefresh.setForeground(new java.awt.Color(255, 224, 227));
         btnRefresh.setText("Refresh");
-        
-
-        
         btnRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRefreshMouseClicked(evt);
@@ -288,7 +314,7 @@ public class ServicesPanel extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1127, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1125, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,7 +324,7 @@ public class ServicesPanel extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                .addComponent(btnRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

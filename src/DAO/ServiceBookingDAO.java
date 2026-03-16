@@ -56,7 +56,8 @@ public class ServiceBookingDAO extends ServiceBookingDAOTemplate {
                 "  s.service_name " +
                 "FROM service_bookings sb " +
                 "JOIN guests   g ON sb.guest_id   = g.guest_id " +
-                "JOIN services s ON sb.service_id = s.service_id " +
+                "JOIN services s ON sb.service_id = s.service_id " + 
+                "WHERE TRIM(s.status) = 'Active' " +
                 "ORDER BY sb.scheduled_at DESC";
  
             try (PreparedStatement pst = dbconn.prepareStatement(query)) {
