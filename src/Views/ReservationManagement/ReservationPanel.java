@@ -73,80 +73,6 @@ public class ReservationPanel extends javax.swing.JPanel {
             lblTotal.setText("Total: ₱0.00");
         }
     }
-    
-    private String getSelectedStatus() {
-        int row = reservationTable.getSelectedRow();
-        if (row < 0) return null;
-        Object val = tableModel.getValueAt(row, 7);
-        return val != null ? val.toString() : null;
-    }
-    
-     private Views.Receipt.ReceiptViewCopy buildReceiptForSelectedRow() {
-        int row = reservationTable.getSelectedRow();
-        if (row < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "Please select a reservation first.",
-                "No Selection", javax.swing.JOptionPane.WARNING_MESSAGE);
-            return null;
-        }
-        String status = getSelectedStatus();
-        if (!"CHECKED_OUT".equals(status)) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "Receipt is only available for CHECKED_OUT reservations.\n"
-                + "Selected reservation status: " + status,
-                "Invalid Status", javax.swing.JOptionPane.WARNING_MESSAGE);
-            return null;
-        }
- 
-        int    reservationId = ((Number) tableModel.getValueAt(row, 0)).intValue();
-        String guestName     = (String) tableModel.getValueAt(row, 1);
-        String roomNumber    = tableModel.getValueAt(row, 2).toString().replace("Room ", "");
-        String checkIn       = (String) tableModel.getValueAt(row, 3);
-        String checkOut      = (String) tableModel.getValueAt(row, 4);
-        int    nights        = ((Number) tableModel.getValueAt(row, 5)).intValue();
-        String totalStr      = tableModel.getValueAt(row, 6).toString();
-        double totalAmount   = Double.parseDouble(totalStr);
-        double roomPrice     = nights > 0 ? totalAmount / nights : 0;
- 
-        // Fetch notes from DB for the selected reservation
-        String notes = "";
-        try (java.sql.Connection conn = Database.Db_Connector.getCOnnection();
-             java.sql.PreparedStatement ps = conn.prepareStatement(
-                     "SELECT notes FROM reservations WHERE reservation_id = ?")) {
-            ps.setInt(1, reservationId);
-            try (java.sql.ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) notes = rs.getString("notes");
-            }
-        } catch (Exception ex) {
-            // notes stays empty — not a blocking error
-        }
- 
-        // Fetch guest address from DB
-        String guestAddress = "";
-        try (java.sql.Connection conn = Database.Db_Connector.getCOnnection();
-             java.sql.PreparedStatement ps = conn.prepareStatement(
-                     "SELECT g.address FROM guests g "
-                   + "JOIN reservations r ON r.guest_id = g.guest_id "
-                   + "WHERE r.reservation_id = ?")) {
-            ps.setInt(1, reservationId);
-            try (java.sql.ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) guestAddress = rs.getString("address");
-            }
-        } catch (Exception ex) {
-            // address stays empty
-        }
- 
-        Views.Receipt.ReceiptViewCopy receipt = new Views.Receipt.ReceiptViewCopy(
-            reservationId, guestName, guestAddress,
-            roomNumber, checkIn, checkOut,
-            nights, roomPrice, totalAmount, notes);
- 
-        receipt.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        receipt.setTitle("Receipt – Reservation #" + reservationId);
-        return receipt;
-    }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -188,8 +114,6 @@ public class ReservationPanel extends javax.swing.JPanel {
         statusFilter = new javax.swing.JComboBox<>();
         btnCancel = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
-        SavePDF = new javax.swing.JButton();
-        ViewReceipt = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setMinimumSize(new java.awt.Dimension(100, 100));
@@ -486,18 +410,6 @@ public class ReservationPanel extends javax.swing.JPanel {
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(this::btnRefreshActionPerformed);
 
-        SavePDF.setBackground(new java.awt.Color(255, 224, 227));
-        SavePDF.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        SavePDF.setForeground(new java.awt.Color(47, 32, 56));
-        SavePDF.setText("Save PDF");
-        SavePDF.addActionListener(this::SavePDFActionPerformed);
-
-        ViewReceipt.setBackground(new java.awt.Color(255, 224, 227));
-        ViewReceipt.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
-        ViewReceipt.setForeground(new java.awt.Color(47, 32, 56));
-        ViewReceipt.setText("View Receipt");
-        ViewReceipt.addActionListener(this::ViewReceiptActionPerformed);
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -505,9 +417,7 @@ public class ReservationPanel extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -520,11 +430,8 @@ public class ReservationPanel extends javax.swing.JPanel {
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRefresh)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ViewReceipt)
-                        .addGap(18, 18, 18)
-                        .addComponent(SavePDF)
-                        .addGap(29, 29, 29))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -536,9 +443,7 @@ public class ReservationPanel extends javax.swing.JPanel {
                     .addComponent(statusFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCheckOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SavePDF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ViewReceipt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCheckOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
                 .addContainerGap())
@@ -657,28 +562,8 @@ public class ReservationPanel extends javax.swing.JPanel {
         loadReservations();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
-    private void SavePDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavePDFActionPerformed
-        Views.Receipt.ReceiptViewCopy receipt = buildReceiptForSelectedRow();
-        if (receipt != null) {
-            // Must be visible so Swing has valid component sizes for rendering
-            receipt.setLocationRelativeTo(this);
-            receipt.setVisible(true);
-            receipt.saveAsPDF();
-        }
-    }//GEN-LAST:event_SavePDFActionPerformed
-
-    private void ViewReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewReceiptActionPerformed
-        Views.Receipt.ReceiptViewCopy receipt = buildReceiptForSelectedRow();
-        if (receipt != null) {
-            receipt.setLocationRelativeTo(this);
-            receipt.setVisible(true);
-        }
-    }//GEN-LAST:event_ViewReceiptActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton SavePDF;
-    private javax.swing.JButton ViewReceipt;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCheckIn;
     private javax.swing.JButton btnCheckOut;

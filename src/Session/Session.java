@@ -15,4 +15,7 @@ public class Session {
     public static void clearSession(){
         currentUser = null;
     }
+    public static String getUserRole(){
+        return currentUser.getRole();
+    }
 }
